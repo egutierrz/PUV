@@ -16,8 +16,4 @@
     <ProjectReference Include="..\Nop.Services\Puv.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="SD-WAN\Certificate\" />
-  </ItemGroup>
-
 </Project>
