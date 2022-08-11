@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{B09156FB-8291-46A2-AF37-67CE97CFB5A6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Puv.Web", "Presentation\Nop.Web\Puv.Web.csproj", "{4F1F649C-1020-45BE-A487-F416D9297FF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nop.Web", "Presentation\Nop.Web\Nop.Web.csproj", "{4F1F649C-1020-45BE-A487-F416D9297FF3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Puv.Core", "Libraries\Nop.Core\Puv.Core.csproj", "{6BDA8332-939F-45B7-A25E-7A797260AE59}"
 EndProject
@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Puv.Data", "Libraries\Nop.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Puv.Services", "Libraries\Nop.Services\Puv.Services.csproj", "{210541AD-F659-47DA-8763-16F36C5CD2F4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Puv.Web.Framework", "Presentation\Nop.Web.Framework\Puv.Web.Framework.csproj", "{75FD4163-333C-4DD5-854D-2EF294E45D94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nop.Web.Framework", "Presentation\Nop.Web.Framework\Nop.Web.Framework.csproj", "{75FD4163-333C-4DD5-854D-2EF294E45D94}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Puv.Api", "Presentation\Nop.Api\Puv.Api.csproj", "{A7A0FF4E-AAC0-4B7C-8512-4AEED224E513}"
 EndProject

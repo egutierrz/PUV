@@ -1,0 +1,1148 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Puv.Web
+build_property.RootNamespace = Puv.Web
+build_property.ProjectDir = C:\Users\APP-EGUTIERREZ\Documents\GitHub\PUV\Presentation\Nop.Web\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = true
+build_property.MSBuildProjectDirectory = C:\Users\APP-EGUTIERREZ\Documents\GitHub\PUV\Presentation\Nop.Web
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ActivityLog/ActivityLogs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWN0aXZpdHlMb2dcQWN0aXZpdHlMb2dzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ActivityLog/ActivityTypes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWN0aXZpdHlMb2dcQWN0aXZpdHlUeXBlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/AddressAttribute/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRkcmVzc0F0dHJpYnV0ZVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/AddressAttribute/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRkcmVzc0F0dHJpYnV0ZVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/AddressAttribute/ListBlock.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRkcmVzc0F0dHJpYnV0ZVxMaXN0QmxvY2suY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/AddressAttribute/ValueCreatePopup.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRkcmVzc0F0dHJpYnV0ZVxWYWx1ZUNyZWF0ZVBvcHVwLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/AddressAttribute/ValueEditPopup.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRkcmVzc0F0dHJpYnV0ZVxWYWx1ZUVkaXRQb3B1cC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/AddressAttribute/_CreateOrUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRkcmVzc0F0dHJpYnV0ZVxfQ3JlYXRlT3JVcGRhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/AddressAttribute/_CreateOrUpdate.Info.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRkcmVzc0F0dHJpYnV0ZVxfQ3JlYXRlT3JVcGRhdGUuSW5mby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/AddressAttribute/_CreateOrUpdate.Values.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRkcmVzc0F0dHJpYnV0ZVxfQ3JlYXRlT3JVcGRhdGUuVmFsdWVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/AddressAttribute/_CreateOrUpdateValue.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRkcmVzc0F0dHJpYnV0ZVxfQ3JlYXRlT3JVcGRhdGVWYWx1ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Authentication/ExternalMethods.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQXV0aGVudGljYXRpb25cRXh0ZXJuYWxNZXRob2RzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Authentication/MultiFactorMethods.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQXV0aGVudGljYXRpb25cTXVsdGlGYWN0b3JNZXRob2RzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Common/Maintenance.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29tbW9uXE1haW50ZW5hbmNlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Common/SeNames.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29tbW9uXFNlTmFtZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Common/SystemInfo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29tbW9uXFN5c3RlbUluZm8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Common/Warnings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29tbW9uXFdhcm5pbmdzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Common/_Maintenance.DBBackups.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29tbW9uXF9NYWludGVuYW5jZS5EQkJhY2t1cHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Common/_Maintenance.DeleteAbandonedCarts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29tbW9uXF9NYWludGVuYW5jZS5EZWxldGVBYmFuZG9uZWRDYXJ0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Common/_Maintenance.DeleteAlreadySentQueuedEmails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29tbW9uXF9NYWludGVuYW5jZS5EZWxldGVBbHJlYWR5U2VudFF1ZXVlZEVtYWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Common/_Maintenance.DeleteFiles.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29tbW9uXF9NYWludGVuYW5jZS5EZWxldGVGaWxlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Common/_Maintenance.DeleteGuests.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29tbW9uXF9NYWludGVuYW5jZS5EZWxldGVHdWVzdHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Common/_Maintenance.ReindexDatabaseTables.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29tbW9uXF9NYWludGVuYW5jZS5SZWluZGV4RGF0YWJhc2VUYWJsZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ComponentSetting/AllSettings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29tcG9uZW50U2V0dGluZ1xBbGxTZXR0aW5ncy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ControlPanel/AlarmsList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29udHJvbFBhbmVsXEFsYXJtc0xpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ControlPanel/EventsList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29udHJvbFBhbmVsXEV2ZW50c0xpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ControlPanel/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29udHJvbFBhbmVsXExpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ControlPanel/StatusList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29udHJvbFBhbmVsXFN0YXR1c0xpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Country/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ291bnRyeVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Country/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ291bnRyeVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Country/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ291bnRyeVxMaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Country/StateCreatePopup.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ291bnRyeVxTdGF0ZUNyZWF0ZVBvcHVwLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Country/StateEditPopup.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ291bnRyeVxTdGF0ZUVkaXRQb3B1cC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Country/_CreateOrUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ291bnRyeVxfQ3JlYXRlT3JVcGRhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Country/_CreateOrUpdate.Info.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ291bnRyeVxfQ3JlYXRlT3JVcGRhdGUuSW5mby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Country/_CreateOrUpdate.States.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ291bnRyeVxfQ3JlYXRlT3JVcGRhdGUuU3RhdGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Country/_CreateOrUpdateState.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ291bnRyeVxfQ3JlYXRlT3JVcGRhdGVTdGF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Currency/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VycmVuY3lcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Currency/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VycmVuY3lcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Currency/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VycmVuY3lcTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Currency/_CreateOrUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VycmVuY3lcX0NyZWF0ZU9yVXBkYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/CustomerAttribute/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJBdHRyaWJ1dGVcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/CustomerAttribute/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJBdHRyaWJ1dGVcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/CustomerAttribute/ListBlock.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJBdHRyaWJ1dGVcTGlzdEJsb2NrLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/CustomerAttribute/ValueCreatePopup.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJBdHRyaWJ1dGVcVmFsdWVDcmVhdGVQb3B1cC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/CustomerAttribute/ValueEditPopup.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJBdHRyaWJ1dGVcVmFsdWVFZGl0UG9wdXAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/CustomerAttribute/_CreateOrUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJBdHRyaWJ1dGVcX0NyZWF0ZU9yVXBkYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/CustomerAttribute/_CreateOrUpdate.Info.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJBdHRyaWJ1dGVcX0NyZWF0ZU9yVXBkYXRlLkluZm8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/CustomerAttribute/_CreateOrUpdate.Values.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJBdHRyaWJ1dGVcX0NyZWF0ZU9yVXBkYXRlLlZhbHVlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/CustomerAttribute/_CreateOrUpdateValue.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJBdHRyaWJ1dGVcX0NyZWF0ZU9yVXBkYXRlVmFsdWUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/CustomerRole/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJSb2xlXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/CustomerRole/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJSb2xlXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/CustomerRole/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJSb2xlXExpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/CustomerRole/_CreateOrUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJSb2xlXF9DcmVhdGVPclVwZGF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Customer/AddressCreate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJcQWRkcmVzc0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Customer/AddressEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJcQWRkcmVzc0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Customer/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Customer/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Customer/GdprLog.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJcR2RwckxvZy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Customer/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJcTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Customer/_CreateOrUpdate.ActivityLog.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJcX0NyZWF0ZU9yVXBkYXRlLkFjdGl2aXR5TG9nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Customer/_CreateOrUpdate.Addresses.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJcX0NyZWF0ZU9yVXBkYXRlLkFkZHJlc3Nlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Customer/_CreateOrUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJcX0NyZWF0ZU9yVXBkYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Customer/_CreateOrUpdate.Impersonate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJcX0NyZWF0ZU9yVXBkYXRlLkltcGVyc29uYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Customer/_CreateOrUpdate.Info.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJcX0NyZWF0ZU9yVXBkYXRlLkluZm8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Customer/_CreateOrUpdateAddress.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJcX0NyZWF0ZU9yVXBkYXRlQWRkcmVzcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Customer/_CustomerAttributes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3VzdG9tZXJcX0N1c3RvbWVyQXR0cmlidXRlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/EmailAccount/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRW1haWxBY2NvdW50XENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/EmailAccount/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRW1haWxBY2NvdW50XEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/EmailAccount/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRW1haWxBY2NvdW50XExpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/EmailAccount/_CreateOrUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRW1haWxBY2NvdW50XF9DcmVhdGVPclVwZGF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Home/_ConfigurationSteps.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxfQ29uZmlndXJhdGlvblN0ZXBzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Home/_CustomerStatistics.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxfQ3VzdG9tZXJTdGF0aXN0aWNzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Home/_PopularSearchTermsReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxfUG9wdWxhclNlYXJjaFRlcm1zUmVwb3J0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/InformationRepository/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSW5mb3JtYXRpb25SZXBvc2l0b3J5XEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/InformationRepository/_AuthRejectModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSW5mb3JtYXRpb25SZXBvc2l0b3J5XF9BdXRoUmVqZWN0TW9kYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/InformationRepository/_CreateFolderModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSW5mb3JtYXRpb25SZXBvc2l0b3J5XF9DcmVhdGVGb2xkZXJNb2RhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/InformationRepository/_DetailFileModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSW5mb3JtYXRpb25SZXBvc2l0b3J5XF9EZXRhaWxGaWxlTW9kYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/InformationRepository/_UpdateFolderModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSW5mb3JtYXRpb25SZXBvc2l0b3J5XF9VcGRhdGVGb2xkZXJNb2RhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/InformationRepository/_UploadFileModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSW5mb3JtYXRpb25SZXBvc2l0b3J5XF9VcGxvYWRGaWxlTW9kYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Language/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTGFuZ3VhZ2VcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Language/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTGFuZ3VhZ2VcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Language/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTGFuZ3VhZ2VcTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Language/_CreateOrUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTGFuZ3VhZ2VcX0NyZWF0ZU9yVXBkYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Language/_CreateOrUpdate.Info.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTGFuZ3VhZ2VcX0NyZWF0ZU9yVXBkYXRlLkluZm8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Language/_CreateOrUpdate.Resources.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTGFuZ3VhZ2VcX0NyZWF0ZU9yVXBkYXRlLlJlc291cmNlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Log/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTG9nXExpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Log/View.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTG9nXFZpZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/MessageTemplate/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTWVzc2FnZVRlbXBsYXRlXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/MessageTemplate/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTWVzc2FnZVRlbXBsYXRlXExpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/MessageTemplate/TestTemplate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTWVzc2FnZVRlbXBsYXRlXFRlc3RUZW1wbGF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/MessageTemplate/_CreateOrUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTWVzc2FnZVRlbXBsYXRlXF9DcmVhdGVPclVwZGF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/OnlineCustomer/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcT25saW5lQ3VzdG9tZXJcTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/OnlineReports/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcT25saW5lUmVwb3J0c1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Plugin/EditPopup.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUGx1Z2luXEVkaXRQb3B1cC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Plugin/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUGx1Z2luXExpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Plugin/OfficialFeed.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUGx1Z2luXE9mZmljaWFsRmVlZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Plugin/_CreateOrUpdatePlugin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUGx1Z2luXF9DcmVhdGVPclVwZGF0ZVBsdWdpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/QueuedEmail/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUXVldWVkRW1haWxcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/QueuedEmail/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUXVldWVkRW1haWxcTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/QueuedEmail/_CreateOrUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUXVldWVkRW1haWxcX0NyZWF0ZU9yVXBkYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ScheduleTask/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2NoZWR1bGVUYXNrXExpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/SecurityDisplay/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2VjdXJpdHlEaXNwbGF5XEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Security/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2VjdXJpdHlcQWNjZXNzRGVuaWVkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Security/Permissions.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2VjdXJpdHlcUGVybWlzc2lvbnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ServiceDesk/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2VydmljZURlc2tcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ServiceLevel/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2VydmljZUxldmVsXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ServiceMonitoring/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2VydmljZU1vbml0b3JpbmdcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ServiceMonitoring/_ApplicationAwareRouting.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2VydmljZU1vbml0b3JpbmdcX0FwcGxpY2F0aW9uQXdhcmVSb3V0aW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ServiceMonitoring/_Certificate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2VydmljZU1vbml0b3JpbmdcX0NlcnRpZmljYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ServiceMonitoring/_ControlStatus.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2VydmljZU1vbml0b3JpbmdcX0NvbnRyb2xTdGF0dXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ServiceMonitoring/_EdgeInventory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2VydmljZU1vbml0b3JpbmdcX0VkZ2VJbnZlbnRvcnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ServiceMonitoring/_Reboot.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2VydmljZU1vbml0b3JpbmdcX1JlYm9vdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ServiceMonitoring/_SiteHealth.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2VydmljZU1vbml0b3JpbmdcX1NpdGVIZWFsdGguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ServiceMonitoring/_SiteHealthModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2VydmljZU1vbml0b3JpbmdcX1NpdGVIZWFsdGhNb2RhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ServiceMonitoring/_TransportHealth.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2VydmljZU1vbml0b3JpbmdcX1RyYW5zcG9ydEhlYWx0aC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ServiceMonitoring/_TransportInterfaceDistribution.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2VydmljZU1vbml0b3JpbmdcX1RyYW5zcG9ydEludGVyZmFjZURpc3RyaWJ1dGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ServiceMonitoring/_TransportInterfaceDistributionModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2VydmljZU1vbml0b3JpbmdcX1RyYW5zcG9ydEludGVyZmFjZURpc3RyaWJ1dGlvbk1vZGFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ServiceMonitoring/_VManage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2VydmljZU1vbml0b3JpbmdcX1ZNYW5hZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ServiceMonitoring/_WANEdgeHealth.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2VydmljZU1vbml0b3JpbmdcX1dBTkVkZ2VIZWFsdGguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ServiceMonitoring/_Widgets.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2VydmljZU1vbml0b3JpbmdcX1dpZGdldHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/ServiceMonitoring/_WidgetsModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2VydmljZU1vbml0b3JpbmdcX1dpZGdldHNNb2RhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/AllSettings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xBbGxTZXR0aW5ncy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/AppSettings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xBcHBTZXR0aW5ncy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/CreateGdprConsent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xDcmVhdGVHZHByQ29uc2VudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/CustomerUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xDdXN0b21lclVzZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/EditGdprConsent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xFZGl0R2RwckNvbnNlbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/Gdpr.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xHZHByLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/GeneralCommon.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xHZW5lcmFsQ29tbW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/Media.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xNZWRpYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_AppSettings.AzureBlob.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfQXBwU2V0dGluZ3MuQXp1cmVCbG9iLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_AppSettings.Cache.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfQXBwU2V0dGluZ3MuQ2FjaGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_AppSettings.Common.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfQXBwU2V0dGluZ3MuQ29tbW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_AppSettings.Data.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfQXBwU2V0dGluZ3MuRGF0YS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_AppSettings.DistributedCache.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfQXBwU2V0dGluZ3MuRGlzdHJpYnV0ZWRDYWNoZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_AppSettings.Hosting.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfQXBwU2V0dGluZ3MuSG9zdGluZy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_AppSettings.Installation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfQXBwU2V0dGluZ3MuSW5zdGFsbGF0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_AppSettings.Plugin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfQXBwU2V0dGluZ3MuUGx1Z2luLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_AppSettings.WebOptimizer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfQXBwU2V0dGluZ3MuV2ViT3B0aW1pemVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_CreateOrUpdateGdprConsent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfQ3JlYXRlT3JVcGRhdGVHZHByQ29uc2VudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_CustomerUser.Account.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfQ3VzdG9tZXJVc2VyLkFjY291bnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_CustomerUser.AddressFormFields.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfQ3VzdG9tZXJVc2VyLkFkZHJlc3NGb3JtRmllbGRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_CustomerUser.Common.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfQ3VzdG9tZXJVc2VyLkNvbW1vbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_CustomerUser.CustomerFormFields.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfQ3VzdG9tZXJVc2VyLkN1c3RvbWVyRm9ybUZpZWxkcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_CustomerUser.Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfQ3VzdG9tZXJVc2VyLlByb2ZpbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_CustomerUser.Security.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfQ3VzdG9tZXJVc2VyLlNlY3VyaXR5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_Gdpr.Common.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfR2Rwci5Db21tb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_Gdpr.Consents.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfR2Rwci5Db25zZW50cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_GeneralCommon.AdminArea.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfR2VuZXJhbENvbW1vbi5BZG1pbkFyZWEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_GeneralCommon.Captcha.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfR2VuZXJhbENvbW1vbi5DYXB0Y2hhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_GeneralCommon.Common.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfR2VuZXJhbENvbW1vbi5Db21tb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_GeneralCommon.Favicon.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfR2VuZXJhbENvbW1vbi5GYXZpY29uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_GeneralCommon.FooterItems.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfR2VuZXJhbENvbW1vbi5Gb290ZXJJdGVtcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_GeneralCommon.Localization.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfR2VuZXJhbENvbW1vbi5Mb2NhbGl6YXRpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_GeneralCommon.Minification.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfR2VuZXJhbENvbW1vbi5NaW5pZmljYXRpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_GeneralCommon.Pdf.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfR2VuZXJhbENvbW1vbi5QZGYuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_GeneralCommon.Security.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfR2VuZXJhbENvbW1vbi5TZWN1cml0eS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_GeneralCommon.Seo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfR2VuZXJhbENvbW1vbi5TZW8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_GeneralCommon.Sitemap.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfR2VuZXJhbENvbW1vbi5TaXRlbWFwLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_GeneralCommon.SocialMedia.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfR2VuZXJhbENvbW1vbi5Tb2NpYWxNZWRpYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_GeneralCommon.TopMenuItems.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfR2VuZXJhbENvbW1vbi5Ub3BNZW51SXRlbXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_Media.Common.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfTWVkaWEuQ29tbW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_Media.OtherPages.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfTWVkaWEuT3RoZXJQYWdlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Setting/_Media.Product.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2V0dGluZ1xfTWVkaWEuUHJvZHVjdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/Alert.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXEFsZXJ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/Components/AclDisabledWarning/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXENvbXBvbmVudHNcQWNsRGlzYWJsZWRXYXJuaW5nXERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/Components/AdminLanguageSelector/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXENvbXBvbmVudHNcQWRtaW5MYW5ndWFnZVNlbGVjdG9yXERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/Components/AdminWidget/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXENvbXBvbmVudHNcQWRtaW5XaWRnZXRcRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/Components/CommonStatistics/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ29tbW9uU3RhdGlzdGljc1xEZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/Components/MultistoreDisabledWarning/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXENvbXBvbmVudHNcTXVsdGlzdG9yZURpc2FibGVkV2FybmluZ1xEZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/Components/NopCommerceNews/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXENvbXBvbmVudHNcTm9wQ29tbWVyY2VOZXdzXERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/Components/SettingMode/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXENvbXBvbmVudHNcU2V0dGluZ01vZGVcRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/Components/StoreScopeConfiguration/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXENvbXBvbmVudHNcU3RvcmVTY29wZUNvbmZpZ3VyYXRpb25cRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/Confirm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXENvbmZpcm0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/EditorTemplates/Address.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXEVkaXRvclRlbXBsYXRlc1xBZGRyZXNzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/EditorTemplates/Date.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXEVkaXRvclRlbXBsYXRlc1xEYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/EditorTemplates/DateNullable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXEVkaXRvclRlbXBsYXRlc1xEYXRlTnVsbGFibGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/EditorTemplates/DateTime.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXEVkaXRvclRlbXBsYXRlc1xEYXRlVGltZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/EditorTemplates/DateTimeNullable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXEVkaXRvclRlbXBsYXRlc1xEYXRlVGltZU51bGxhYmxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/EditorTemplates/Decimal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXEVkaXRvclRlbXBsYXRlc1xEZWNpbWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/EditorTemplates/DecimalNullable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXEVkaXRvclRlbXBsYXRlc1xEZWNpbWFsTnVsbGFibGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/EditorTemplates/Double.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXEVkaXRvclRlbXBsYXRlc1xEb3VibGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/EditorTemplates/Download.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXEVkaXRvclRlbXBsYXRlc1xEb3dubG9hZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/EditorTemplates/Int32.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXEVkaXRvclRlbXBsYXRlc1xJbnQzMi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/EditorTemplates/Int32Nullable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXEVkaXRvclRlbXBsYXRlc1xJbnQzMk51bGxhYmxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/EditorTemplates/MultiSelect.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXEVkaXRvclRlbXBsYXRlc1xNdWx0aVNlbGVjdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/EditorTemplates/MultiSelectString.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXEVkaXRvclRlbXBsYXRlc1xNdWx0aVNlbGVjdFN0cmluZy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/EditorTemplates/Picture.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXEVkaXRvclRlbXBsYXRlc1xQaWN0dXJlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/EditorTemplates/RichEditor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXEVkaXRvclRlbXBsYXRlc1xSaWNoRWRpdG9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/Menu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXE1lbnUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/Notifications.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXE5vdGlmaWNhdGlvbnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/RestartApplication.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXFJlc3RhcnRBcHBsaWNhdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/Table.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXFRhYmxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/_AddressAttributes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9BZGRyZXNzQXR0cmlidXRlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/_AdminLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9BZG1pbkxheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/_AdminPopupLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9BZG1pblBvcHVwTGF5b3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/_AdminScripts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9BZG1pblNjcmlwdHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/_AdminTour.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9BZG1pblRvdXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/_ConfigurePlugin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9Db25maWd1cmVQbHVnaW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/_GridLocalization.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9HcmlkTG9jYWxpemF0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/_MenuItem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9NZW51SXRlbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Shared/_Table.Definition.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9UYWJsZS5EZWZpbml0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Store/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU3RvcmVcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Store/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU3RvcmVcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Store/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU3RvcmVcTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Store/_CreateOrUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU3RvcmVcX0NyZWF0ZU9yVXBkYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Template/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVGVtcGxhdGVcTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Template/_List.Topic.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVGVtcGxhdGVcX0xpc3QuVG9waWMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Topic/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVG9waWNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Topic/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVG9waWNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Topic/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVG9waWNcTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Topic/_CreateOrUpdate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVG9waWNcX0NyZWF0ZU9yVXBkYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Topic/_CreateOrUpdate.Display.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVG9waWNcX0NyZWF0ZU9yVXBkYXRlLkRpc3BsYXkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Topic/_CreateOrUpdate.Info.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVG9waWNcX0NyZWF0ZU9yVXBkYXRlLkluZm8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Topic/_CreateOrUpdate.Seo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVG9waWNcX0NyZWF0ZU9yVXBkYXRlLlNlby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/Widget/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcV2lkZ2V0XExpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Areas/Admin/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Common/ContactUs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tbW9uXENvbnRhY3RVcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Common/ContactVendor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tbW9uXENvbnRhY3RWZW5kb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Common/PageNotFound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tbW9uXFBhZ2VOb3RGb3VuZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Common/Sitemap.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tbW9uXFNpdGVtYXAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Common/StoreClosed.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tbW9uXFN0b3JlQ2xvc2VkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Customer/AccountActivation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQWNjb3VudEFjdGl2YXRpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Customer/AddressAdd.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQWRkcmVzc0FkZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Customer/AddressEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQWRkcmVzc0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Customer/Addresses.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQWRkcmVzc2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Customer/Avatar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQXZhdGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Customer/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQ2hhbmdlUGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Customer/ConfigureMultiFactorAuthenticationProvider.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQ29uZmlndXJlTXVsdGlGYWN0b3JBdXRoZW50aWNhdGlvblByb3ZpZGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Customer/EmailRevalidation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcRW1haWxSZXZhbGlkYXRpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Customer/GdprTools.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcR2RwclRvb2xzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Customer/Info.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcSW5mby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Customer/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Customer/MultiFactorAuthentication.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcTXVsdGlGYWN0b3JBdXRoZW50aWNhdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Customer/MultiFactorVerification.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcTXVsdGlGYWN0b3JWZXJpZmljYXRpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Customer/PasswordRecovery.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcUGFzc3dvcmRSZWNvdmVyeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Customer/PasswordRecoveryConfirm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcUGFzc3dvcmRSZWNvdmVyeUNvbmZpcm0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Customer/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcUmVnaXN0ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Customer/RegisterResult.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcUmVnaXN0ZXJSZXN1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Customer/UserAgreement.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcVXNlckFncmVlbWVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Customer/_CheckUsernameAvailability.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcX0NoZWNrVXNlcm5hbWVBdmFpbGFiaWxpdHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Customer/_CustomerAttributes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcX0N1c3RvbWVyQXR0cmlidXRlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Customer/_ExternalAuthentication.Errors.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcX0V4dGVybmFsQXV0aGVudGljYXRpb24uRXJyb3JzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Customer/_MultiFactorAuthenticationProviders.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcX011bHRpRmFjdG9yQXV0aGVudGljYXRpb25Qcm92aWRlcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Install/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5zdGFsbFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Install/_Install.ConnectionString.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5zdGFsbFxfSW5zdGFsbC5Db25uZWN0aW9uU3RyaW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Install/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5zdGFsbFxfVmlld0ltcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Profile/Components/ProfileInfo/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxDb21wb25lbnRzXFByb2ZpbGVJbmZvXERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Profile/Components/ProfilePosts/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxDb21wb25lbnRzXFByb2ZpbGVQb3N0c1xEZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Profile/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/Components/AdminHeaderLinks/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQWRtaW5IZWFkZXJMaW5rc1xEZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/Components/CurrencySelector/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VycmVuY3lTZWxlY3RvclxEZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/Components/CustomerNavigation/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VzdG9tZXJOYXZpZ2F0aW9uXERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/Components/EuCookieLaw/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcRXVDb29raWVMYXdcRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/Components/ExternalMethods/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcRXh0ZXJuYWxNZXRob2RzXERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/Components/Favicon/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcRmF2aWNvblxEZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/Components/Footer/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcRm9vdGVyXERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/Components/LanguageSelector/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTGFuZ3VhZ2VTZWxlY3RvclxEZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/Components/Logo/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTG9nb1xEZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/Components/StoreThemeSelector/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcU3RvcmVUaGVtZVNlbGVjdG9yXERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/Components/TopicBlock/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcVG9waWNCbG9ja1xEZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/Components/Widget/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcV2lkZ2V0XERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/Head.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEhlYWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/_AddressAttributes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BZGRyZXNzQXR0cmlidXRlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/_ColumnsOne.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Db2x1bW5zT25lLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/_ColumnsTwo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Db2x1bW5zVHdvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/_CreateOrUpdateAddress.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9DcmVhdGVPclVwZGF0ZUFkZHJlc3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/_Header.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9IZWFkZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/_JavaScriptDisabledWarning.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9KYXZhU2NyaXB0RGlzYWJsZWRXYXJuaW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/_Notifications.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Ob3RpZmljYXRpb25zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/_OldInternetExplorerWarning.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9PbGRJbnRlcm5ldEV4cGxvcmVyV2FybmluZy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/_Print.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QcmludC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/_Root.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Sb290LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Shared/_Root.Head.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Sb290LkhlYWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/Topic/TopicDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNcVG9waWNEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Themes/DefaultClean/Views/Shared/Head.cshtml]
+build_metadata.AdditionalFiles.TargetPath = VGhlbWVzXERlZmF1bHRDbGVhblxWaWV3c1xTaGFyZWRcSGVhZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/APP-EGUTIERREZ/Documents/GitHub/PUV/Presentation/Nop.Web/Themes/DefaultClean/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = VGhlbWVzXERlZmF1bHRDbGVhblxWaWV3c1xfVmlld0ltcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
