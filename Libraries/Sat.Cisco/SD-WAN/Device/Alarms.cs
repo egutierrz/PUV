@@ -12,12 +12,6 @@ using RestSharp;
 
 namespace Sat.Cisco.SD_WAN.Device
 {
-    public interface IAlarms
-    {
-        Task<string?> AlarmsAsync(string jsessionid, string token, int hours);
-
-        Task<string?> AggregationAsync(string jsessionid, string token, int hours);
-    }
     public class Alarms : IAlarms
     {
         private readonly INotificationService _notificationService;

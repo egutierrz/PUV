@@ -12,11 +12,6 @@ using RestSharp;
 
 namespace Sat.Cisco.SD_WAN.Device
 {
-    public interface IEvents
-    {
-        Task<string?> EventsAsync(string jsessionid, string token, int hours);
-        Task<string?> AggregationAsync(string jsessionid, string token, int hours);
-    }
     public class Events : IEvents
     {
         private readonly INotificationService _notificationService;

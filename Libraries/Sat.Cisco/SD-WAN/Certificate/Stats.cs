@@ -11,11 +11,7 @@ using Nop.Services.Messages;
 using RestSharp;
 
 namespace Sat.Cisco.SD_WAN.Certificate
-{
-    public interface IStats
-    {
-        Task<string?> SummaryAsync(string jsessionid);
-    }
+{    
     public class Stats : IStats
     {
         private readonly INotificationService _notificationService;

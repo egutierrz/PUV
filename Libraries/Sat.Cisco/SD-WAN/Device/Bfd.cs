@@ -12,10 +12,6 @@ using RestSharp;
 
 namespace Sat.Cisco.SD_WAN.Network
 {
-    public interface IBfd
-    {
-        Task<string?> Sites_SummaryAsync(string jsessionid);
-    }
     public class Bfd : IBfd
     {
         private readonly INotificationService _notificationService;

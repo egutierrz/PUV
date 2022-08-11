@@ -12,10 +12,6 @@ using RestSharp;
 
 namespace Sat.Cisco.SD_WAN.ClusterManagement
 {
-    public interface IHealth
-    {
-        Task<string?> SummaryAsync(string jsessionid);
-    }
     public class Health : IHealth
     {
         private readonly INotificationService _notificationService;

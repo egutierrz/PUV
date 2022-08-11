@@ -12,10 +12,6 @@ using RestSharp;
 
 namespace Sat.Cisco.SD_WAN.Device
 {
-    public interface IVEdgeInventory
-    {
-        Task<string?> SummaryAsync(string jsessionid);
-    }
     public class VEdgeInventory : IVEdgeInventory
     {
         private readonly INotificationService _notificationService;

@@ -12,10 +12,6 @@ using RestSharp;
 
 namespace Sat.Cisco.SD_WAN.Network
 {
-    public interface IControl
-    {
-        Task<string?> CountAsync(string jsessionid);
-    }
     public class Control : IControl
     {
         private readonly INotificationService _notificationService;

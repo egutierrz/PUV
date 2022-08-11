@@ -12,10 +12,6 @@ using RestSharp;
 
 namespace Sat.Cisco.SD_WAN.Detail
 {
-    public interface IDetail
-    {
-        Task<string?> Get_DetailAsync(string jsessionid, string url);
-    }
     public class Detail : IDetail
     {
         private readonly INotificationService _notificationService;

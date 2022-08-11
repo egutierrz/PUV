@@ -12,10 +12,6 @@ using RestSharp;
 
 namespace Sat.Cisco.SD_WAN.Device
 {
-    public interface IDevice
-    {
-        Task<string?> DeviceAsync(string jsessionid);
-    }
     public class Device : IDevice
     {
         private readonly INotificationService _notificationService;

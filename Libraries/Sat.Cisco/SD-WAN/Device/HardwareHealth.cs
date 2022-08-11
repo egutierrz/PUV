@@ -12,10 +12,6 @@ using RestSharp;
 
 namespace Sat.Cisco.SD_WAN.Network
 {
-    public interface IHardwareHealth
-    {
-        Task<string?> SummaryAsync(string jsessionid);
-    }
     public class HardwareHealth : IHardwareHealth
     {
         private readonly INotificationService _notificationService;
