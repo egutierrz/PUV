@@ -1,0 +1,32 @@
+﻿@model Nop.Web.Areas.Admin.Models.InformationRepository.InfoRepositoryFolderModel
+<div asp-validation-summary="All"></div>
+    <form asp-controller="InformationRepository" asp-action="AddFolder" method="post">
+        <div class="modal fade" tabindex="-1" role="dialog" id="folder-create">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <a href="#" class="close" data-dismiss="modal"><i class="fas fa-times"></i></a>
+                <br/>
+                    <div class="modal-body modal-body-md">
+                        <div class="nk-upload-form card-body">
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <nop-label asp-for="Name" />
+                                </div>
+                                <div class="col-md-9">
+                                    <nop-editor asp-for="Name" asp-required="true" />
+                                    <span asp-validation-for="Name"></span>
+                                    <input asp-for="IdParent" style="display:none" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nk-modal-action justify-end">
+                            <ul class="btn-toolbar g-4 align-center">
+                                <li><button type="button" class="link link-primary" data-dismiss="modal">@T("Admin.Common.Cancel")</button></li>
+                                <li><button class="btn btn-primary" type="submit">@T("Admin.Common.Save")</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!-- .modal-content -->
+            </div><!-- .modla-dialog -->
+        </div><!-- .modal -->
+    </form>

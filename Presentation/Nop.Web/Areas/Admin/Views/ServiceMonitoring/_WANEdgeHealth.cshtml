@@ -1,0 +1,64 @@
+﻿@model String
+
+<script type="text/javascript">
+    var myobj = @Html.Raw(Json.Serialize(Model));
+    var json = JSON.parse(myobj);
+	var htmlTxt='';
+	var classTxt='';
+    var count = 0;
+	json.data.forEach(element=>{
+        count = element.count;
+		element.statusList.forEach(
+            e => {
+
+				switch(e.status){
+			case "up":{
+				classTxt='success-borderColor';
+			}break;
+			case "warning":{
+				classTxt='warning-borderColor';
+			}break;
+			case "down":{
+				classTxt='false-borderColor';
+			}break;
+		}
+                    htmlTxt += '<div class="col-4"><a href="#" class="a-link-dashboard"><div class="progress1 mx-auto" data-value="'+((e.count/count)*100)+'">'+
+					'<span class="progress-left"><span class="progress-bar '+classTxt+'"></span></span>'+
+					'<span class="progress-right"><span class="progress-bar '+classTxt+'"></span></span>'+
+					'<div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">'+
+					'<div class="h2 font-weight-bold">'+e.count+'</div></div></div><div class="text-center">'+e.name+'</div></a></div>';
+            }
+        )
+	});
+	$("#wan-edge-health-body").append(htmlTxt);
+    $("#spn-wan-edge-health").append(count);
+
+	$(function() {
+
+  $(".progress1").each(function() {
+
+    var value = $(this).attr('data-value');
+    var left = $(this).find('.progress-left .progress-bar');
+    var right = $(this).find('.progress-right .progress-bar');
+
+    if (value > 0) {
+      if (value <= 50) {
+        right.css('transform', 'rotate(' + percentageToDegrees(value) + 'deg)')
+      } else {
+        right.css('transform', 'rotate(180deg)')
+        left.css('transform', 'rotate(' + percentageToDegrees(value - 50) + 'deg)')
+      }
+    }
+
+  })
+
+  function percentageToDegrees(percentage) {
+
+    return percentage / 100 * 360
+
+  }
+
+});
+</script>
+<div><h5>WAN Edge Health (Total <span id="spn-wan-edge-health"></span>) </h5></div>
+<div id="wan-edge-health-body"class="row"></div>

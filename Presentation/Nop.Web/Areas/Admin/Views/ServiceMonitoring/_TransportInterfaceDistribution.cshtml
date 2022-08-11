@@ -1,0 +1,115 @@
+﻿@model ServiceMonitoringModel
+
+@using Nop.Web.Areas.Admin.Model.ServiceMonitoring
+
+<script type="text/javascript">
+    var myobj = @Html.Raw(Json.Serialize(Model.TransportInterfaceDist));
+    var json = JSON.parse(myobj);
+	var htmlTxt='';
+	json.data.forEach(element=>{
+		htmlTxt+='<a href="#" class="a-link-dashboard"><div>'+element.percentageDistribution+'<span class="float-right">'+element.value+'</span></div></a>';
+	});
+	$("#transport-interface-body").append(htmlTxt);
+</script>
+<h5>Transport Interface Distribution</h5>
+<div id="transport-interface-body"></div>
+<div class="text-center">
+	<a onclick="viewPercentUtilization()" href="#">View Percent Utilization</a>
+</div>
+@await Html.PartialAsync("_TransportInterfaceDistributionModal")
+<script type="text/javascript">
+    
+    function viewPercentUtilization(){
+         var session = '@Model.JSessionId';
+        console.log(session);
+         var token = '@Model.Token';
+        console.log(token);
+		$('#Transport-Distribucion-Modal').modal("show");
+
+
+        $.ajax({
+            cache: false,
+            type: "GET",
+            data : {
+                "jSessionId": session,
+                 "token": token
+            }, 
+            url: "@(Url.Action("ViewPercentUtilization", "ServiceMonitoring"))",
+
+            success: function (data, textStatus, jqXHR) {
+                console.log(data);
+                console.log(data.data.distribution.uncategorized);
+                var values = [];
+                values.push(data.data.distribution[">100"]);
+                values.push(data.data.distribution["75-100"]);
+                values.push(data.data.distribution["50-75"]);
+                values.push(data.data.distribution["25-50"]);
+                values.push(data.data.distribution["0-25"]);
+                values.push(data.data.distribution.uncategorized);
+                console.log(values);
+
+                var list = [];
+                data.data.data.forEach(e => {
+                    var upstream = '--';
+                    
+                    if (e.avg_up_capacity_percentage !== undefined) {
+                        upstream = 'Average: ' + parseFloat(e.avg_up_capacity_percentage).toFixed(2) +
+                            ' | Low: ' + parseFloat(e.min_up_capacity_percentage).toFixed(2) +
+                            ', High: ' + parseFloat(e.max_up_capacity_percentage).toFixed(2);
+                    }
+                    var downstream = '--';
+                    if (e.avg_up_capacity_percentage !== undefined) {
+                       downstream = 'Average: ' + parseFloat(e.avg_down_capacity_percentage).toFixed(2) +
+                            ' | Low: ' + parseFloat(e.min_down_capacity_percentage).toFixed(2) +
+                            ', High: ' + parseFloat(e.max_down_capacity_percentage).toFixed(2);
+                    }
+                    list.push(['site', e.interface, upstream, downstream, 'up']);
+                });
+                $('#Transport-Distribucion-Tbl').DataTable({
+                    data: list,
+		            sort: false,
+                    columns: [
+                        { title: 'Hostname' },
+                        { title: 'Interface' },
+                        { title: 'Upstream (%)' },
+                        { title: 'Downstream (%)' },
+                        { title: 'Bandwith utilization' }
+                    ],
+                });
+
+
+                  var xValues = [">100", "75-100", "50-75", "25-50", "0-25", "uncategorized"];
+                    var yValues = values;
+                    var barColors = ["rgb(255, 110, 86)", "rgb(255,157, 86)","rgb(255, 200, 86)","rgb(167, 190, 95)","rgb(107, 172, 94)","rgb(194, 195, 198)"];
+
+                    new Chart("myChart", {
+                        type: "bar",
+                        data: {
+                        labels: xValues,
+                        datasets: [{
+                            backgroundColor: barColors,
+                            data: yValues
+                        }]
+                        },
+                        options: {
+                        legend: {display: true,
+                                position: "right"},
+                        title: {
+                            display: false,
+                            text: "World Wine Production 2018"
+                        }
+
+                        }
+                    });
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+               console.log(textStatus +' '+errorThrown);
+            }
+        });
+
+
+
+        
+        
+	}
+</script>

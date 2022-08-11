@@ -1,0 +1,12 @@
+﻿@model ServiceMonitoringModel.WidgetModel
+
+@using Nop.Web.Areas.Admin.Model.ServiceMonitoring
+<div class="col-6 ">
+    <div class="img-square">
+        <img src="@Model.Image" />
+    </div>
+</div>
+<div class="col-6 text-center">
+    <h3>@Model.Counting<i class="fas fa-arrow-up success-icon"></i></h3>
+    <span>@Model.Name</span>
+</div>

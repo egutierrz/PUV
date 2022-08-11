@@ -1,0 +1,185 @@
+﻿<!-- @@ File Details Modal-->
+<div class="modal fade" tabindex="-1" role="dialog" id="file-details">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header align-center">
+                <div class="nk-file-title">
+                    <div class="nk-file-name">
+                        <div class="nk-file-name-text"><span class="title" id="fileNameTitle"></span></div>
+                        <div class="nk-file-name-sub" id="folderTitle"></div>
+                    </div>
+                </div>
+                <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+            </div>
+            <div class="modal-body">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="true">@T("common.fileuploader.details")</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="version-tab" data-toggle="tab" href="#version" role="tab" aria-controls="version" aria-selected="false" onclick="checkVerionsFile()">@T("common.fileuploader.version")</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
+
+                        <div class="nk-file-details">
+                            <div class="nk-file-details-row">
+                                <div class="nk-file-details-col">@T("Admin.Informationrepository.UploadFile.FileType")</div>
+                                <div class="nk-file-details-col" id="fileType"></div>
+                            </div>
+                            <div class="nk-file-details-row">
+                                <div class="nk-file-details-col">@T("Admin.Informationrepository.UploadFile.Size")</div>
+                                <div class="nk-file-details-col" id="fileSize"></div>
+                            </div>
+                            <div class="nk-file-details-row">
+                                <div class="nk-file-details-col">@T("Admin.Informationrepository.UploadFile.ParentFolderName")</div>
+                                <div class="nk-file-details-col">
+                                    <ul class="breadcrumb breadcrumb-sm breadcrumb-alt breadcrumb-arrow">
+                                        <li class="breadcrumb-item" id="fileLocation"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="nk-file-details-row">
+                                <div class="nk-file-details-col">@T("Admin.Informationrepository.UploadFile.OwnerName")</div>
+                                <div class="nk-file-details-col" id="fileAuthor"></div>
+                            </div>
+                            <div class="nk-file-details-row">
+                                <div class="nk-file-details-col">@T("Admin.Informationrepository.UploadFile.CreatedOn")</div>
+                                <div class="nk-file-details-col" id="fileCreatedOn"></div>
+                            </div>
+                            <div class="nk-file-details-row">
+                                <div class="nk-file-details-col">@T("Admin.Informationrepository.UploadFile.UpdatedOn")</div>
+                                <div class="nk-file-details-col" id="fileUpdatedOn"></div>
+                            </div>
+                            <div class="nk-file-details-row">
+                                <div class="nk-file-details-col">@T("Admin.Informationrepository.UploadFile.Tags")</div>
+                                <input type="text" id="fileTags" />
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="g">
+                                <ul class="g-3">
+                                    <li><a href="#" class="btn btn-primary float-right" onclick="downloadFile(fileId)">@T("common.fileuploader.downloaduploadedfile")</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="version" role="tabpanel" aria-labelledby="version-tab">
+                        Lista de versiones
+                        @await Html.PartialAsync("Table", new DataTablesModel
+                                    {
+                                        Name = "version-grid",
+                                        Data = "versions_source",
+                                        ServerSide = false,
+                                        Paging = false,
+                                        Length = 10,
+                                        LengthMenu = "1,5,10",
+                                        ColumnCollection = new List<ColumnProperty>
+                                        {
+                                            new ColumnProperty(nameof(Nop.Web.Areas.Admin.Models.InformationRepository.FileVersionInfoModel.Version))
+                                            {
+                                                Title = T("common.fileuploader.version").Text,
+                                                Width = "100"
+                                            },
+                                            new ColumnProperty(nameof(Nop.Web.Areas.Admin.Models.InformationRepository.FileVersionInfoModel.Status))
+                                            {
+                                                Title = T("Admin.Informationrepository.UploadFile.FileStatus").Text,
+                                                Width = "300"
+                                            },
+                                            new ColumnProperty(nameof(Nop.Web.Areas.Admin.Models.InformationRepository.FileVersionInfoModel.FileId))
+                                            {
+                                                Title = T("admin.download.downloaduploadedfile").Text,
+                                                Width = "100",
+                                                ClassName = NopColumnClassDefaults.Button,
+                                                Render = new RenderCustom("renderColumnDownloadFile")
+                                            }
+                                        }
+                                    })
+                    </div>
+                </div>
+            </div><!-- .modal-body -->
+            <div class="modal-footer modal-footer-stretch bg-light">
+
+            </div><!-- .modal-footer -->
+        </div><!-- .modal-content -->
+    </div><!-- .modla-dialog -->
+</div><!-- .modal -->
+<script>
+    //tags
+    $(document).ready(function() {
+        $("#fileTags").tagEditor({
+            autocomplete: {
+                delay: 0,
+                position: { collision: 'flip' },
+                source: $("#fileTags").val()
+            },
+            delimiter: ',',
+            placeholder: '@T("Admin.Catalog.Products.Fields.ProductTags.Placeholder")'
+        });
+    });
+
+    var versions_source = [];
+    var tagsList = "";
+    var fileId = 0;
+    function getFileDetails(id) {
+        fileId = id;
+        $.ajax({
+            cache: false,
+            type: "GET",
+            url: "@(Url.Action("GetFileInfoById", "InformationRepository"))",
+            data: {
+                "idFile": id
+            },
+            success: function (data, textStatus, jqXHR) {
+                $("#fileNameTitle").text(data.fileInfo.FileName);
+                $("#folderTitle").text(data.fileInfo.ParentFolderName);
+                $("#fileType").text(data.fileInfo.FileExtention);
+                $("#fileSize").text(data.fileInfo.Size);
+                $("#fileLocation").text(data.fileInfo.ParentFolderName);
+                $("#fileAuthor").text(data.fileInfo.OwnerName);
+                $("#fileCreatedOn").text(data.fileInfo.FileCreated);
+                $("#fileUpdatedOn").text(data.fileInfo.FileLastUpdate);
+                $("#fileTags").val(data.fileInfo.Tags);
+                tagsList = data.fileInfo.Tags;
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                location.reload();
+            }
+        });
+    }
+
+    function checkVerionsFile() {
+        if (versions_source.length == 0) {
+            $.ajax({
+            cache: false,
+            type: "GET",
+            url: "@(Url.Action("GetFileVersionById", "InformationRepository"))",
+            data: {
+                "idFile": fileId
+            },
+                success: function (data, textStatus, jqXHR) {
+                    data.fileInfo.forEach(elm => {
+                        versions_source.push({
+                            Version: elm.Version,
+                            Status: elm.Status,
+                            FileId: elm.FileId
+                        });
+                    });
+
+                var dtable = $('#version-grid').DataTable();
+                dtable.clear();
+                dtable.rows.add(versions_source);
+                dtable.draw();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                location.reload();
+            }
+        });
+        }
+    }
+    function renderColumnDownloadFile(data, type, row, meta) {
+        return '<a href="#"><i class="fas fa-download" onclick="downloadFile(' + data +')"></i></a>';
+    }
+</script>

@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>SAT.PUV.API</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="app.publish\**" />
+    <Compile Remove="Factories\**" />
+    <Compile Remove="Model\**" />
+    <Compile Remove="Security\**" />
+    <Content Remove="app.publish\**" />
+    <Content Remove="Factories\**" />
+    <Content Remove="Model\**" />
+    <Content Remove="Security\**" />
+    <EmbeddedResource Remove="app.publish\**" />
+    <EmbeddedResource Remove="Factories\**" />
+    <EmbeddedResource Remove="Model\**" />
+    <EmbeddedResource Remove="Security\**" />
+    <None Remove="app.publish\**" />
+  </ItemGroup>  
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.16.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Nop.Web.Framework\Puv.Web.Framework.csproj" />
+  </ItemGroup>
+
+</Project>

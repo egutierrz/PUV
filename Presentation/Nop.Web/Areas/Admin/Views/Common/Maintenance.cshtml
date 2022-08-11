@@ -1,0 +1,55 @@
+﻿@model MaintenanceModel
+
+@{
+    //page title
+    ViewBag.PageTitle = T("Admin.System.Maintenance").Text;
+    //active menu item (system name)
+    NopHtml.SetActiveMenuItemSystemName("Maintenance");
+}
+
+@{
+    const string hideDeleteGuestsBlockAttributeName = "MaintenancePage.HideDeleteGuestsBlock";
+    var customer = await workContext.GetCurrentCustomerAsync();
+    var hideDeleteGuestsBlock = await genericAttributeService.GetAttributeAsync<bool>(customer, hideDeleteGuestsBlockAttributeName);
+
+    const string hideDeleteFilesBlockAttributeName = "MaintenancePage.HideDeleteFilesBlock";
+    var hideDeleteFilesBlock = await genericAttributeService.GetAttributeAsync<bool>(customer, hideDeleteFilesBlockAttributeName);
+
+    const string hideDeleteCartsBlockAttributeName = "MaintenancePage.HideDeleteCartsBlock";
+    var hideDeleteCartsBlock = await genericAttributeService.GetAttributeAsync<bool>(customer, hideDeleteCartsBlockAttributeName);
+
+    const string hideReindexBlockAttributeName = "MaintenancePage.HideReindexBlock";
+    var hideReindexBlock = await genericAttributeService.GetAttributeAsync<bool>(customer, hideReindexBlockAttributeName);
+
+    const string hideBackupsBlockAttributeName = "MaintenancePage.HideBackupsBlock";
+    var hideBackupsBlock = await genericAttributeService.GetAttributeAsync<bool>(customer, hideBackupsBlockAttributeName);
+
+    const string hideDeleteAlreadySentQueuedEmailsBlockAttributeName = "MaintenancePage.HideDeleteAlreadySentQueuedEmailsBlock";
+    var hideDeleteAlreadySentQueuedEmailsBlock = await genericAttributeService.GetAttributeAsync<bool>(customer, hideDeleteAlreadySentQueuedEmailsBlockAttributeName);
+}
+
+<div class="content-header clearfix">
+    <h1 class="float-left">
+        @T("Admin.System.Maintenance")
+    </h1>
+    <div class="float-right">
+        &nbsp;
+        @await Component.InvokeAsync("AdminWidget", new { widgetZone = AdminWidgetZones.MaintenanceButtons, additionalData = Model })
+    </div>
+</div>
+
+<form asp-controller="Common" asp-action="Maintenance" method="post">
+	<input type="hidden" asp-for="BackupSupported" />
+    <section class="content">
+        <div class="container-fluid">
+            <div class="form-horizontal">               
+                <nop-cards id="maintenance-cards">                   
+                    <div class="row">                       
+                        <nop-card class="col-md-6 col-xs-12 margin-t-5" asp-name="maintenance-delete-already-sent-queued-emails" asp-icon="fas fa-trash-alt" asp-title="@T("Admin.System.Maintenance.DeleteAlreadySentQueuedEmails")" asp-hide-block-attribute-name="@hideDeleteAlreadySentQueuedEmailsBlockAttributeName" asp-hide="@hideDeleteAlreadySentQueuedEmailsBlock" asp-advanced="false">@await Html.PartialAsync("_Maintenance.DeleteAlreadySentQueuedEmails", Model)</nop-card>
+                    </div>
+                    @await Component.InvokeAsync("AdminWidget", new { widgetZone = AdminWidgetZones.MaintenanceDetailsBlock, additionalData = Model })
+                </nop-cards>
+            </div>
+        </div>
+    </section>
+</form>

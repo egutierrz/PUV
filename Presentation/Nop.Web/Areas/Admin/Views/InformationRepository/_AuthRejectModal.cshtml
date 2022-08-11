@@ -1,0 +1,45 @@
+﻿<!-- POR AUTORIZAR -->
+<div class="modal fade" tabindex="-1" role="dialog" id="file-authorized">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@T("Admin.Informationrepository.UploadFile.Auth")</h5>
+                <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+            </div>
+            <div class="modal-body modal-body-md">
+                <div>@T("Admin.Informationrepository.UploadFile.AuthQuestion")</div>
+                <div class="nk-modal-action justify-end">
+                    <ul class="btn-toolbar g-4 align-center">
+                        <li><button type="button" class="link link-primary" data-dismiss="modal">@T("Admin.Common.Cancel")</button></li>
+                        <li><button class="btn btn-primary" onclick="authRejectFile(1)">@T("Admin.Common.Save")</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div><!-- .modal-content -->
+    </div><!-- .modla-dialog -->
+</div><!-- .modal -->
+<input id="fileAuthRejectId" hidden/>
+<!-- POR RECHAZAR -->
+<div class="modal fade" tabindex="-1" role="dialog" id="file-rejected">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@T("Admin.Informationrepository.UploadFile.Reject")</h5>
+                <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+            </div>
+            <div class="modal-body modal-body-md">
+                <div>@T("Admin.Informationrepository.UploadFile.RejectQuestion")</div>
+                <div class="inputs">
+                    <label></label>
+                    <textarea id="commentsReject" class="form-control form-control-simple no-resize ex-large" placeholder="@T("news.comments")"></textarea>
+                </div>
+                <div class="nk-modal-action justify-end">
+                    <ul class="btn-toolbar g-4 align-center">
+                        <li><button type="button" class="link link-primary" data-dismiss="modal">@T("Admin.Common.Cancel")</button></li>
+                        <li><button class="btn btn-primary" onclick="authRejectFile(2)">@T("Admin.Common.Save")</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div><!-- .modal-content -->
+    </div><!-- .modla-dialog -->
+</div><!-- .modal -->

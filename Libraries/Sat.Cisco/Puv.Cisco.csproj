@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="RestSharp" Version="108.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Nop.Core\Puv.Core.csproj" />
+    <ProjectReference Include="..\Nop.Data\Puv.Data.csproj" />
+    <ProjectReference Include="..\Nop.Services\Puv.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="SD-WAN\Certificate\" />
+  </ItemGroup>
+
+</Project>

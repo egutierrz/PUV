@@ -1,0 +1,14 @@
+﻿@model String
+
+<script type="text/javascript">
+    var myobj = @Html.Raw(Json.Serialize(Model));
+    var json = JSON.parse(myobj);
+	var htmlTxt='';
+    var title = json.header.title;
+    title = title.substr(title.indexOf('last'), title.count);
+	json.data.forEach(element=>{
+		htmlTxt+=  '<div class="col-6 text-center"><h5>'+element.name+'</h5><span>'+title+'</span></div><div class="col-6 text-center"><h3>'+element.count+'</h3></div>';
+	});
+	$("#reboot-body").append(htmlTxt);
+</script>
+<div id="reboot-body" class="card-body row"></div>

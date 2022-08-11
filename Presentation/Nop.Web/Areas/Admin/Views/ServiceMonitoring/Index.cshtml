@@ -1,0 +1,122 @@
+﻿@model ServiceMonitoringModel
+
+@using Nop.Web.Areas.Admin.Model.ServiceMonitoring
+
+@{
+    //page title
+    ViewBag.PageTitle = T("SAT.PUV.ServiceMonitoring.Dashboard").Text;
+    //active menu item (system name)
+    NopHtml.SetActiveMenuItemSystemName("Service monitoring dashboard");
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="form-horizontal">
+            <div class="cards-group">
+                <!--TOP-->
+                <div class="row">
+                    <!--GADGETS-->
+                    <div class="col-6">
+                        <div class="card card-default">
+                            <div class="card-body">
+                                @await Html.PartialAsync("_Widgets", Model)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <!--VMANAGE-->
+                        <div class="card card-default">
+                            <div class="card-body row">
+                                @await Html.PartialAsync("_VManage", Model.VManage)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <!--REBOOT-->
+                        <div class="card card-default">
+                               @await Html.PartialAsync("_Reboot", Model.Reboot)
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <!--WARNING-->
+                        <div class="card card-default">
+                            @await Html.PartialAsync("_Certificate", Model.Certificate)
+                        </div>
+                    </div>
+                </div>
+                <!--BODY-->
+                <div class="row">
+                    <!--CONTROL STATUS-->
+                    <div class="col-4">
+                        <div class="card card-default">
+                            <div class="card-body">
+                                @await Html.PartialAsync("_ControlStatus", Model.ControlStatus)
+                            </div>
+                        </div>
+                    </div>
+                    <!--SITE HEALTH-->
+                    <div class="col-4">
+                        <div class="card card-default">
+                            <div class="card-body">
+                                @await Html.PartialAsync("_SiteHealth", Model.SiteHealth)
+                            </div>
+                        </div>
+                    </div>
+                    <!--TRANSPORT INTERFACE DISTRIBUTION-->
+                    <div class="col-4">
+                        <div class="card card-default">
+                            <div class="card-body">
+                                @await Html.PartialAsync("_TransportInterfaceDistribution", Model)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!--WAN EDGE INVENTORY-->
+                    <div class="col-4">
+                        <div class="card card-default">
+                            <div class="card-body">
+                                @await Html.PartialAsync("_EdgeInventory", Model.WANEdgeInventory)
+                            </div>
+                        </div>
+                    </div>
+                    <!--WAN EDGE HEALTH-->
+                    <div class="col-4">
+                        <div class="card card-default">
+                            <div class="card-body">
+                                @await Html.PartialAsync("_WANEdgeHealth", Model.WANEdgeHealth)
+                            </div>
+                        </div>
+                    </div>
+                    <!--TRANSPORT HEALTH-->
+                    <div class="col-4">
+                        <div class="card card-default">
+                            <div class="card-body">
+                                @await Html.PartialAsync("_TransportHealth", Model.SiteHealth)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <!--TOP APPLICATIONS-->
+                    <div class="col-4">
+                        <div class="card card-default">
+                            <div class="card-body">
+                                <!-- VISTA PARCIAL -->
+                            </div>
+                        </div>
+                    </div>
+                    <!--APPLICATION-AWARE ROUTING-->
+                    <div class="col-8">
+                        <div class="card card-default">
+                            <div class="card-body">
+                                @await Html.PartialAsync("_ApplicationAwareRouting", Model.SiteHealth)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

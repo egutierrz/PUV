@@ -1,0 +1,26 @@
+﻿@model Nop.Web.Areas.Admin.Models.InformationRepository.InfoRepositoryModel.FileInfoModel
+<script>
+</script>
+<div class="modal fade" tabindex="-1" role="dialog" id="file-upload">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <a href="#" class="close" data-dismiss="modal"><i class="fas fa-times"></i></a>
+            <div class="modal-body modal-body-md">
+                <div class="nk-upload-form">
+                    <h5 class="title mb-3">@T("Admin.Informationrepository.UploadFile")</h5>
+                    <div class="upload-zone small bg-lighter">
+                        <div class="dz-message" data-dz-message>
+                            <span class="dz-message-text"><span>@T("Admin.Informationrepository.DragDropFiles")</span></span>
+                        </div>
+                        <input asp-for="ParentFolderId" style = "display:none" />
+                    </div>
+                </div>
+                <div class="nk-modal-action justify-end">
+                    <ul class="btn-toolbar g-4 align-center">
+                        <li><button type="button" class="link link-primary" data-dismiss="modal">@T("Admin.Common.Close")</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div><!-- .modal-content -->
+    </div><!-- .modla-dialog -->
+</div><!-- .modal -->

@@ -1,0 +1,166 @@
+﻿@{
+	//page title
+	ViewBag.PageTitle = T("SAT.PUV.ControlPanel.DevicesEvents").Text;
+
+	//active menu item (system name)
+	NopHtml.SetActiveMenuItemSystemName("Devices Events");
+}
+<script src="~/lib_npm/chart.js/Chart.min.js" asp-location="Head"></script>
+<script>
+		function getInfoChart(){
+			$.ajax({
+				cache: false,
+				type: "GET",
+				url: "@(Url.Action("GetTransportHealthChart", "ServiceMonitoring"))",
+				data: {
+					"idFile": 1
+				},
+				success: function (data, textStatus, jqXHR) {
+
+					console.log(data);
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					location.reload();
+				}
+			});
+		}
+	var ctx = document.getElementById('myChart').getContext('2d');
+
+	var myChart = new Chart(ctx, {
+		type: 'bar',
+	  data: {
+		labels: ['Votes'],
+		datasets: [{
+		  label: '# of Votes',
+		  backgroundColor: "#000080",
+		  data: [80]
+		}, {
+		  label: '# of Votes2',
+		  backgroundColor: "#d3d3d3",
+		  data: [90]
+		}, {
+		  label: '# of Votes3',
+		  backgroundColor: "#add8e6",
+		  data: [45]
+		}]
+	  },
+
+	  options: {
+		legend: {
+		  display: true,
+		  position: 'right',
+		  labels: {
+			fontColor: "#000080",
+		  }
+		},
+		scales: {
+		  yAxes: [{
+			ticks: {
+			  beginAtZero: true
+			}
+		  }]
+		}
+	  }
+	});
+
+	function filtrar(){
+		var ctx = document.getElementById('myChart').getContext('2d');
+	myChart.destroy();
+	myChart = new Chart(ctx, {
+		type: 'bar',
+	  data: {
+		labels: ['1hr','2hr','3hr'],
+		datasets: [{
+		  label: 'Critical',
+		  backgroundColor: "#FF6E56",
+		  data: [80, 50,65]
+		}, {
+		  label: 'Major',
+		  backgroundColor: "#FFD562",
+		  data: [90,56,48]
+		}, {
+		  label: 'Minor',
+		  backgroundColor: "#90CC84",
+		  data: [0,7,47]
+		}]
+	  },
+
+	  options: {
+		legend: {
+		  display: true,
+		  position: 'right',
+		  labels: {
+			fontColor: "#000080",
+		  }
+		},
+		scales: {
+		  yAxes: [{
+			ticks: {
+			  beginAtZero: true
+			}
+		  }]
+		}
+	  }
+	});
+	myChart.update();
+	}
+
+
+		$(document).ready(function() {
+			getTableInfo(1);
+			getInfoChart();
+		});
+
+		function getTableInfo(op)
+		{
+			var dataLst=[];
+			$.ajax({
+				cache: false,
+				type: "GET",
+				url: "@(Url.Action("GetEventsList", "ControlPanel"))",
+				success: function (data, textStatus, jqXHR) {
+					console.log(data);
+					$('#applicationAwareRoutingTbl').DataTable({
+							dataSrc: data.dataLst.data,
+							language: @await Html.PartialAsync("_GridLocalization"),
+							sort: false,
+							columns: data.dataLst.header.columns,
+							buttons: [{
+							name: 'refresh',
+							text: '<i class="fas fa-sync-alt" style="padding-left: 5px"></i>',
+							action: function() {
+								$('#applicationAwareRoutingTbl').DataTable().ajax.reload();
+							}
+						}],
+					});
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					console.log(textStatus);
+					console.log(errorThrown);
+					//location.reload();
+				}
+			});
+		}
+</script>
+<div class="content-header clearfix">
+	<h1 class="float-left">
+		@T("SAT.PUV.ControlPanel.DevicesEvents")
+	</h1>
+</div>
+<section class="content">
+	<div class="container-fluid">
+		<div class="form-horizontal">
+			<div class="cards-group">
+				<div class="card card-default">
+					<div class="card-body">
+						<button onclick="filtrar()">Filtrar</button>
+						<canvas id="myChart" width="400" height="100"></canvas>
+					</div>
+					<div class="card-body">
+						<table id="applicationAwareRoutingTbl" class="display" style="width:100%"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

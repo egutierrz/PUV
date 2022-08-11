@@ -1,0 +1,79 @@
+﻿@model ServiceMonitoringModel
+
+@using Nop.Web.Areas.Admin.Model.ServiceMonitoring
+@if (Model.WidgetModelList.Count > 0)
+{
+    <div class="row">
+        @for (var i = 0; i < Model.WidgetModelList.Count; i++)
+        {
+            var gadgetM = Model.WidgetModelList[i];
+            var detail = @Html.Raw(Json.Serialize(gadgetM.Detail));
+            <div  class="col-4 row">
+                <div class="col-6 text-center">
+                    <div class="img-square">
+                        <img src="@gadgetM.Image" />
+                    </div>
+                </div>
+                <div class="col-6 text-center">
+                   <a href="#" onclick="checkWidgetDetail('@gadgetM.Link')"> <h3 >@gadgetM.Counting<i class="fas fa-arrow-up success-icon"></i></h3> </a>
+
+                    <span>@gadgetM.Name</span>
+                </div>
+            </div>
+        }
+    </div>
+}
+@await Html.PartialAsync("_WidgetsModal")
+
+<script type="text/javascript">
+
+    
+    function checkWidgetDetail(url){
+       console.log(url);
+        var session = '@Model.JSessionId';
+        console.log(session);
+
+
+		$('#widgetModal').modal("show");
+  
+         $.ajax({
+            cache: false,
+            type: "GET",
+            data : {
+                "url": url,
+                "jSessionId": session
+            }, 
+            url: "@(Url.Action("ViewDetail", "ServiceMonitoring"))",
+
+            success: function (data, textStatus, jqXHR) {
+                var detail = data.data;
+                console.log(detail);
+                var list = []
+                var list2 = []
+                var titles = []
+                detail.header.columns.forEach(e =>  {
+            
+                    titles.push({ title:  e.title });
+                    if(e.title=='Hostname'){ list.push("<img src='/images/serviceMonitoring/"+detail.data[0]["device-type"]+"_table.png'>" + e.property ); }
+                    else
+                    list.push( e.property );
+                })
+                list2.push(list)
+        
+                $('#widgetTbl').DataTable({
+                    data: list2,
+		            sort: false,
+                    columns: titles, 
+                    bDestroy: true
+                });
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+               console.log(textStatus +' '+errorThrown);
+            }
+        });
+
+
+
+        
+	}
+</script>

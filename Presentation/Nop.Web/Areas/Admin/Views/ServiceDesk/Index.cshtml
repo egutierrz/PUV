@@ -1,0 +1,330 @@
+﻿@model ServiceDeskSearchModel
+
+@using Nop.Core.Domain.Media
+@using Nop.Web.Areas.Admin.Models.ServiceDesk
+
+@inject MediaSettings _mediaSettings
+
+@{
+    //page title
+    ViewBag.PageTitle = T("SAT.PUV.ServiceDesk").Text;
+    //active menu item (system name)
+    NopHtml.SetActiveMenuItemSystemName("Service desk");
+}
+
+@{
+    const string hideSearchBlockAttributeName = "ServiceDeskListPage.HideSearchBlock";
+    var hideSearchBlock = await genericAttributeService.GetAttributeAsync<bool>(await workContext.GetCurrentCustomerAsync(), hideSearchBlockAttributeName);
+}
+<script src="~/lib_npm/chart.js/Chart.min.js" asp-location="Head"></script>
+
+<div class="content-header clearfix">
+    <h1 class="float-left">
+        @T("SAT.PUV.ServiceDesk")
+    </h1>
+    <div class="float-right">
+        <div class="btn-group">
+            <button type="button" class="btn btn-success">
+                <i class="fas fa-download"></i>
+                @T("Admin.Common.Export")
+            </button>
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">&nbsp;</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li class="dropdown-item">
+                    <form asp-controller="ServiceDesk" asp-action="ExportXML" method="post">
+                        <button type="submit" name="exportxml-all">
+                            <i class="far fa-file-code"></i>
+                            @T("Admin.Common.ExportToXml.All")
+                        </button>
+                    </form>
+                </li>
+                <li class="dropdown-item">
+                    <button type="button" id="exportxml-selected">
+                        <i class="far fa-file-code"></i>
+                        @T("Admin.Common.ExportToXml.Selected")
+                    </button>
+                </li>
+            </ul>
+
+        </div>
+        @await Component.InvokeAsync("AdminWidget", new { widgetZone = AdminWidgetZones.ServiceDeskListButtons, additionalData = Model })
+    </div>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="form-horizontal">
+            <div class="cards-group">
+                <div class="card card-default card-search">
+                    <div class="card-body">
+                        <div class="row search-row @(!hideSearchBlock ? "opened" : "")" data-hideAttribute="@hideSearchBlockAttributeName">
+                            <div class="search-text">@T("Admin.Common.Search")</div>
+                            <div class="icon-search"><i class="fas fa-search" aria-hidden="true"></i></div>
+                            <div class="icon-collapse"><i class="far fa-angle-@(!hideSearchBlock ? "up" : "down")" aria-hidden="true"></i></div>
+                        </div>
+                        <div class="search-body @(hideSearchBlock ? "closed" : "")">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <nop-label asp-for="TicketNumber" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <nop-editor asp-for="TicketNumber" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <nop-label asp-for="SatNumber" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <nop-editor asp-for="SatNumber" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <nop-label asp-for="ReportTypeId" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <nop-select asp-for="ReportTypeId" asp-items="Model.AvailableReportType" asp-multiple="false" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <nop-label asp-for="EventTypeId" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <nop-select asp-for="EventTypeId" asp-items="Model.AvailableEventType" asp-multiple="false" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <nop-label asp-for="CauseEvent" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <nop-editor asp-for="CauseEvent" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <nop-label asp-for="StatusId" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <nop-select asp-for="StatusId" asp-items="Model.AvailableStatus" asp-multiple="false" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <nop-label asp-for="CreatedOnFrom" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <nop-editor asp-for="CreatedOnFrom" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <nop-label asp-for="CreatedOnTo" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <nop-editor asp-for="CreatedOnTo" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="text-center col-12">
+                                    <button type="button" id="search-ServiceDesk" class="btn btn-primary btn-search">
+                                        <i class="fas fa-search"></i>
+                                        @T("Admin.Common.Search")
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-default">
+                    <div class="card-body">
+                        <canvas id="myChart" width="400" height="100"></canvas>
+                        @await Html.PartialAsync("Table", new DataTablesModel
+                        {
+                            Name = "ServiceDesk-grid",
+                            UrlRead = new DataUrl("ListRemedyRegister", "ServiceDesk", null),
+                            SearchButtonId = "search-ServiceDesk",
+                            Length = Model.PageSize,
+                            LengthMenu = Model.AvailablePageSizes,
+                            Filters = new List<FilterParameter>
+                            {
+                                new FilterParameter(nameof(Model.TicketNumber)),
+                                new FilterParameter(nameof(Model.SatNumber)),
+                                new FilterParameter(nameof(Model.ReportTypeId)),
+                                new FilterParameter(nameof(Model.EventTypeId)),
+                                new FilterParameter(nameof(Model.CauseEvent)),
+                                new FilterParameter(nameof(Model.StatusId)),
+                                new FilterParameter(nameof(Model.CreatedOnFrom)),
+                                new FilterParameter(nameof(Model.CreatedOnTo)),
+                            },
+                            ColumnCollection = new List<ColumnProperty>
+                            {
+                                new ColumnProperty(nameof(ServiceDeskModel.Id))
+                                {
+                                    IsMasterCheckBox = true,
+                                    Render = new RenderCheckBox("checkbox_records"),
+                                    ClassName = NopColumnClassDefaults.CenterAll,
+                                    Width = "30"
+                                },
+                                new ColumnProperty(nameof(ServiceDeskModel.TicketNumber))
+                                {
+                                    Title = T("Admin.ServiceDesk.Remedy.Fields.TicketNumber").Text,
+                                    Width = "200"
+                                },
+                                new ColumnProperty(nameof(ServiceDeskModel.SatNumber))
+                                {
+                                    Title = T("Admin.ServiceDesk.Remedy.Fields.SatNumber").Text,
+                                    Width = "200"
+                                },
+                                new ColumnProperty(nameof(ServiceDeskModel.ReportType))
+                                {
+                                    Title = T("Admin.ServiceDesk.Remedy.Fields.ReportType").Text,
+                                    Width = "200"
+                                },
+                                new ColumnProperty(nameof(ServiceDeskModel.EventType))
+                                {
+                                    Title = T("Admin.ServiceDesk.Remedy.Fields.EventType").Text,
+                                    Width = "200"
+                                },
+                                new ColumnProperty(nameof(ServiceDeskModel.CauseEvent))
+                                {
+                                    Title = T("Admin.ServiceDesk.Remedy.Fields.CauseEvent").Text,
+                                    Width = "200"
+                                },
+                                new ColumnProperty(nameof(ServiceDeskModel.Status))
+                                {
+                                    Title = T("Admin.ServiceDesk.Remedy.Fields.Status").Text,
+                                    Width = "200"
+                                },
+                                new ColumnProperty(nameof(ServiceDeskModel.EventDate))
+                                {
+                                    Title = T("Admin.ServiceDesk.Remedy.Fields.EventDate").Text,
+                                    Width = "200"
+                                },
+                                new ColumnProperty(nameof(ServiceDeskModel.CreatedOn))
+                                {
+                                    Title = T("Admin.ServiceDesk.Remedy.Fields.CreatedOn").Text,
+                                    Width = "200",
+                                    Render = new RenderDate()
+                                }
+                            }
+                        })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@*export selected (XML). We don't use GET approach because it's limited to 2K-4K chars and won't work for large number of entities*@
+<form asp-controller="ServiceDesk" asp-action="ExportXmlSelected" method="post" id="export-xml-selected-form">
+    <input type="hidden" id="selectedIds" name="selectedIds" value="" />
+</form>
+<script>
+
+</script>
+<script>  
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx);
+    $(document).ready(function () {
+        var mo = {};
+
+        MuestraGrafica(mo);
+
+        $('#exportxml-selected').click(function (e) {
+            e.preventDefault();
+            var ids = selectedIds.join(",");
+            if (!ids) {
+                $('#exportXmlSelected-info').text("@T("Admin.ServiceDesk.Remedy.NoRecords")");
+                $("#exportXmlSelected").click();
+            }
+            else {
+                $('#export-xml-selected-form #selectedIds').val(ids);
+                $('#export-xml-selected-form').submit();
+                updateTable('#customers-grid');
+            }
+            return false;
+        });        
+	});
+    function MuestraGrafica(mo) {
+     $.ajax({
+			cache: false,
+			type: "POST",
+			url: "@(Url.Action("ListRemedyCharts", "ServiceDesk"))",
+            data: mo ,
+			success: function (data, textStatus, jqXHR) {
+				console.log(JSON.stringify(data));
+
+                
+                myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Asignadas','Pendientes','Resueltas','Cerradas','Canceladas'],
+                        datasets: [{
+                            label: '# Incidencias',
+                            backgroundColor: "#000080",
+                                data: data[1]
+                        }, {
+                            label: '# Requerimientos',
+                            backgroundColor: "#add8e6",
+                            data: data[2]
+                        }]
+                    },
+                    options: {
+                        legend: {
+                            display: true,
+                            position: 'right',
+                            labels: {
+                                fontColor: "#000080",
+                            }
+                        },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: false
+                                }
+                            }]
+                        }
+                    }
+                });
+                myChart.update();	
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				console.log(textStatus);
+				console.log(errorThrown);
+				//location.reload();
+			}
+		});
+}
+    $("#search-ServiceDesk").click(function() {
+        var ticket = $("#TicketNumber").val();
+        var report = $("#ReportTypeId").val();
+        var event = $("#EventTypeId").val();
+        var cause = $("#CauseEvent").val();
+        var status = $("#StatusId").val();
+        var from = $("#CreatedOnFrom").val();
+        var to = $("#CreatedOnTo").val();
+        var mo = { 
+            TicketNumber : ticket ,
+            ReportTypeId : report ,
+            EventTypeId : event ,
+            CauseEvent : cause ,
+            StatusId : status ,
+            CreatedOnFrom : from ,
+            CreatedOnTo : to ,
+        };
+        myChart.destroy();
+        MuestraGrafica(mo);
+    });
+</script>
+<nop-alert asp-alert-id="exportXmlSelected" />

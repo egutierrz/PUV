@@ -1,0 +1,57 @@
+﻿@{
+    //page title
+    ViewBag.PageTitle = T("SAT.PUV.ControlPanel.DevicesStatus").Text;
+
+     //active menu item (system name)
+    NopHtml.SetActiveMenuItemSystemName("Devices Status");
+}
+<script type="text/javascript">
+
+    $(document).ready(function() {
+		getTableInfo(1);
+	});
+
+	function getTableInfo(op){
+		$('#applicationAwareRoutingTbl').DataTable({
+        ajax: {
+			url: '/Admin/ControlPanel/GetStatusList',
+			dataSrc: 'dataLst'
+		},
+		language: @await Html.PartialAsync("_GridLocalization"),
+		sort: false,
+        columns: [
+            { title: 'Name' },
+            { title: 'Position' },
+            { title: 'Office' },
+            { title: 'Extn.' },
+            { title: 'Start date' },
+            { title: 'Salary' },
+        ],
+		buttons: [{
+        name: 'refresh',
+        text: '<i class="fas fa-sync-alt" style="padding-left: 5px"></i>',
+        action: function() {
+            $('#applicationAwareRoutingTbl').DataTable().ajax.reload();
+        }
+    }],
+    });
+	}
+</script>
+<div class="content-header clearfix">
+	<h1 class="float-left">
+		@T("SAT.PUV.ControlPanel.DevicesStatus")
+	</h1>
+</div>
+<section class="content">
+			<div class="container-fluid">
+				<div class="form-horizontal">
+					<div class="cards-group">
+						<div class="card card-default">
+							<div class="card-body">
+								<table id="applicationAwareRoutingTbl" class="display" style="width:100%"></table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>

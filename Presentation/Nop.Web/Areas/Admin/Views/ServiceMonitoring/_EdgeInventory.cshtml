@@ -1,0 +1,13 @@
+﻿@model String
+
+<script type="text/javascript">
+    var myobj = @Html.Raw(Json.Serialize(Model));
+    var json = JSON.parse(myobj);
+	var htmlTxt='';
+	json.data.forEach(element=>{
+		htmlTxt+='<a href="#" class="a-link-dashboard"><div>'+element.name+'<span class="float-right">'+element.value+'</span></div></a>';
+	});
+	$("#wan-edge-inventory-body").append(htmlTxt);
+</script>
+<h5>WAN Edge Inventory</h5>
+<div id="wan-edge-inventory-body"></div>

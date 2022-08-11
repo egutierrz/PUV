@@ -1,0 +1,1121 @@
+﻿@model Nop.Web.Areas.Admin.Models.InformationRepository.InfoRepositoryModel
+
+@{
+    //page title
+    ViewBag.PageTitle = T("SAT.PUV.Informationrepository").Text;
+    //active menu item (system name)
+    NopHtml.SetActiveMenuItemSystemName("Information repository");
+    NopHtml.AppendCssFileParts("~/css/admin/dashlite.css");
+    //resources for product tags input
+    NopHtml.AppendCssFileParts("~/lib/tagEditor/jquery.tag-editor.css");
+    NopHtml.AppendCssFileParts("~/css/admin/bootstrap-treeview.min.css");
+
+	NopHtml.AppendScriptParts(ResourceLocation.Footer, "~/js/bootstrap-treeview.min.js");
+    NopHtml.AppendScriptParts(ResourceLocation.Footer, "~/lib/tagEditor/jquery.tag-editor.min.js");
+    NopHtml.AppendScriptParts(ResourceLocation.Footer, "~/lib/tagEditor/jquery.caret.min.js");
+	
+    NopHtml.AppendScriptParts(ResourceLocation.Footer, "~/js/bundle.js");
+    //NopHtml.AppendScriptParts(ResourceLocation.Footer, "~/lib_npm/dropzone/dropzone.min.js");
+    NopHtml.AppendScriptParts(ResourceLocation.Footer, "~/js/scripts.js");
+    NopHtml.AppendScriptParts(ResourceLocation.Footer, "~/js/file-manager.js");
+    NopHtml.AppendScriptParts(ResourceLocation.Footer, "~/lib/nioapp/nioapp.min.js");
+    
+
+
+
+}
+@{
+    const string hideInfoBlockAttributeName = "ReposotoryInfoPage.QuickAccess";
+    var hideInfoBlock = await genericAttributeService.GetAttributeAsync<bool>(await workContext.GetCurrentCustomerAsync(), hideInfoBlockAttributeName);
+}
+<script>
+    $('#file-upload').on('hidden.bs.modal', function () {
+        location.reload();
+    });
+	
+
+    $('#file-details').on('hidden.bs.modal', function () {
+        var actualTags = $("#fileTags").val();
+        if (actualTags != tagsList)
+            $.ajax({
+            cache: false,
+            type: "GET",
+            url: "@(Url.Action("AddUpdateTagList", "InformationRepository"))",
+            data: {
+                "idFile": fileId,
+                "tagList": actualTags
+            },
+            success: function (data, textStatus, jqXHR) {
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                location.reload();
+            }
+        });
+        versions_source = [];
+        actualTags = "";
+        tagsList = "";
+        $("#details-tab").click();
+    });
+    function downloadFile(id) {
+        $.ajax({
+            cache: false,
+            type: "GET",
+            url: "@(Url.Action("DownloadFile", "InformationRepository"))",
+            data: {
+                "idFile": id
+            },
+            success: function (data, textStatus, jqXHR) {
+
+                var binaryString = window.atob(data.blob);
+                var binaryLen = binaryString.length;
+                var bytes = new Uint8Array(binaryLen);
+                for (var i = 0; i < binaryLen; i++) {
+                    var ascii = binaryString.charCodeAt(i);
+                    bytes[i] = ascii;
+                }
+
+                var blob = new Blob([bytes], { type: data.typeFile });
+                let url = window.URL.createObjectURL(blob);
+                downloadURI(url, data.name);
+                window.URL.revokeObjectURL(url);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                location.reload();
+            }
+        });
+    }
+
+    function publish(id) {
+        $.ajax({
+            cache: false,
+            type: "GET",
+            url: "@(Url.Action("PublishFile", "InformationRepository"))",
+            data: {
+                "idFile": id
+            },
+            success: function (data, textStatus, jqXHR) {
+                if (data.success == 1) {
+                    location.reload();
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                location.reload();
+            }
+        });
+    }
+
+    function deleteFileRi(id) {
+        if (confirm('@T("admin.common.deleteconfirmation")')) {
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: "@(Url.Action("RemoveFile", "InformationRepository"))",
+                data: {
+                    "idFile": id
+                },
+                success: function (data, textStatus, jqXHR) {
+                    if (data.success == 1) {
+                        location.reload();
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    location.reload();
+                }
+            });
+        }
+
+    }
+
+    function deleteDirectoryRi(id) {
+        if (confirm('@T("admin.common.deleteconfirmation")')) {
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: "@(Url.Action("RemoveFolder", "InformationRepository"))",
+                data: {
+                    "idFolder": id
+                },
+                success: function (data, textStatus, jqXHR) {
+                    if (data.success == 1) {
+                        location.reload();
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    location.reload();
+                }
+            });
+        }
+
+    }
+
+    function renameDirectory(id, name) {
+        console.log(name);
+        $("#formFolderUpdate")
+            .find("input,textarea,select")
+            .val('')
+            .end();
+        $("#Id").val(id);
+        $("#NameUpdate").val(name);
+    }
+
+    function downloadURI(uri, name) {
+        let link = document.createElement("a");
+        link.download = name;
+        link.href = uri;
+        link.click();
+    }
+
+    function followFile(id) {
+        $.ajax({
+            cache: false,
+            type: "GET",
+            url: "@(Url.Action("FollowFile", "InformationRepository"))",
+            data: {
+                "idFile": id
+            },
+            success: function (data, textStatus, jqXHR) {
+                if (data.success == 1) {
+                    location.reload();
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                location.reload();
+            }
+        });
+    }
+
+    function unfollowFile(id) {
+        $.ajax({
+            cache: false,
+            type: "GET",
+            url: "@(Url.Action("UnfollowFile", "InformationRepository"))",
+            data: {
+                "idFile": id
+            },
+            success: function (data, textStatus, jqXHR) {
+                if (data.success == 1) {
+                    location.reload();
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                location.reload();
+            }
+        });
+    }
+    function authRejectModal(id)
+    {
+        $("#fileAuthRejectId").val(id);
+    }
+
+    function authRejectFile(opc) {
+        var dataSend;
+        if (opc == 1) {
+            dataSend = {
+                "idFile": $("#fileAuthRejectId").val(),
+                "authReject": opc
+            }
+        }
+        else {
+            dataSend = {
+                "idFile": $("#fileAuthRejectId").val(),
+                "authReject": opc,
+                "rejectComments": $("#commentsReject").val()
+            }
+        }
+        $.ajax({
+            cache: false,
+            type: "GET",
+            url: "@(Url.Action("AuthReject", "InformationRepository"))",
+            data: dataSend,
+            success: function (data, textStatus, jqXHR) {
+                if (data.success == 1) {
+                    location.reload();
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                location.reload();
+            }
+        });
+    }
+
+	function getTree() {
+		$.ajax({
+            cache: false,
+            type: "GET",
+            url: "@(Url.Action("GetFolderTree", "InformationRepository"))",
+            success: function (data, textStatus, jqXHR) {
+                if (data.success == 1) {
+					$('#tree').treeview({
+						data: data.tree.Parent,
+                        collapseIcon:'far fa-folder-open',
+                        expandIcon:'far fa-folder',
+						icon: "glyphicon glyphicon-stop",
+                        onNodeSelected: function (event, nodeInfo) {
+                            location.href = '/Admin/InformationRepository/GetFilesFromFolderId?idFolder=' + nodeInfo.Id;
+						}
+					});
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                location.reload();
+            }
+        });
+}
+
+
+
+</script>
+<div class="content-header clearfix">
+    <h1 class="float-left">
+        @T("SAT.PUV.Informationrepository")
+    </h1>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="form-horizontal">
+            <div class="cards-group">
+                <div class="nk-fmg-body">
+                    <div class="nk-fmg-body-head d-none d-lg-flex">
+                        <div class="nk-fmg-search">
+                            <i class="fas fa-search"></i>
+                            <input id="small-searchterms" autocomplete="off" name="q" type="text" class="form-control border-transparent form-focus-none" placeholder="Buscar archivos">
+                        </div>
+                        @if (Model.IsAuthor)
+                        {
+                            <div class="nk-fmg-actions">
+                                <ul class="nk-block-tools g-3">
+                                    <li><button class="btn btn-light" data-toggle="modal" data-target="#folder-create"><i class="fas fa-plus"></i> <span>@T("Admin.Informationrepository.CreateFolder")</span></button></li>
+                                    <li><button class="btn btn-primary" data-toggle="modal" data-target="#file-upload"><i class="fas fa-cloud-upload-alt"></i> <span>@T("Admin.Informationrepository.UploadFile")</span></button></li>
+                                </ul>
+                            </div>
+                        }
+                    </div>
+					<div class="row">
+						<div class="col-3">
+							<div class="nk-fmg-body-folder">
+								<div id="tree"></div>
+							</div>
+						</div>
+						<div class="col-9">
+							<div class="nk-fmg-body-content">
+								<div class="nk-block-head nk-block-head-sm">
+									<div class="nk-block-between position-relative">
+										<div class="nk-block-head-content">
+											<ul class="nk-block-tools g-1">
+												<li class="d-lg-none">
+													<a href="#" class="btn btn-trigger btn-icon search-toggle toggle-search" data-target="search"><i class="fas fa-search"></i></a>
+												</li>
+												<li class="d-lg-none">
+													<div class="dropdown">
+														<a href="#" class="btn btn-trigger btn-icon" data-toggle="dropdown"><em class="icon ni ni-plus"></em></a>
+														<div class="dropdown-menu dropdown-menu-end">
+															<ul class="link-list-opt no-bdr">
+																<li><a href="#file-upload" data-toggle="modal"><em class="icon ni ni-upload-cloud"></em><span>Upload File</span></a></li>
+																<li><a href="#"><em class="icon ni ni-file-plus"></em><span>Create File</span></a></li>
+																<li><a href="#"><em class="icon ni ni-folder-plus"></em><span>Create Folder</span></a></li>
+															</ul>
+														</div>
+													</div>
+												</li>
+												<li class="d-lg-none me-n1"><a href="#" class="btn btn-trigger btn-icon toggle" data-target="files-aside"><em class="icon ni ni-menu-alt-r"></em></a></li>
+											</ul>
+										</div>
+										<div class="search-wrap px-2 d-lg-none" data-search="search">
+											<div class="search-content">
+												<a href="#" class="search-back btn btn-icon toggle-search" data-target="search"><em class="icon ni ni-arrow-left"></em></a>
+												<input type="text" class="form-control border-transparent form-focus-none" placeholder="Search by user or message">
+												<button class="search-submit btn btn-icon"><em class="icon ni ni-search"></em></button>
+											</div>
+										</div><!-- .search-wrap -->
+									</div>
+								</div>
+								<div class="nk-fmg-quick-list nk-block">
+									<div class="nk-block-head-xs">
+										<div class="nk-block-between g-2">
+											<div class="nk-block-head-content">
+												<h6 class="nk-block-title title">@T("Admin.Informationrepository.WorkingFiles")</h6>
+											</div>
+											<div class="nk-block-head-content">
+												<a class="link link-primary toggle-opt active" data-toggle="collapse" href="#quick-access" role="button" aria-expanded="true" aria-controls="collapseExample">
+													<i class="fas fa-chevron-right pull-right"></i>
+													<i class="fas fa-chevron-down pull-right"></i>
+												</a>
+											</div>
+										</div>
+									</div><!-- .nk-block-head -->
+									<!-- EN SEGUIMIENTO -->
+									<div class="toggle-expand-content expanded collapse show" id="quick-access">
+										<div class="nk-files nk-files-view-group">
+											<div class="nk-files-group">
+												<div class="nk-files-list">
+													@if (Model.FollowedFileListModel.Count > 0)
+													{
+														@for (var i = 0; i < Model.FollowedFileListModel.Count; i++)
+														{
+															var fileFollowedInfo = Model.FollowedFileListModel[i];
+															@if (fileFollowedInfo != null)
+															{
+																var classIcon = "";
+																switch (fileFollowedInfo.FileExtention)
+																{
+																	case "application/vnd.ms-excel":
+																	case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+																		classIcon = "fa-file-excel";
+																		break;
+																	case "application/x-zip-compressed":
+																	case "application/octet-stream":
+																		classIcon = "fa-file-archive";
+																		break;
+																	case "application/msword":
+																	case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+																		classIcon = "fa-file-word";
+																		break;
+																	case "application/pdf":
+																		classIcon = "fa-file-pdf";
+																		break;
+																	case "application/vnd.ms-powerpoint":
+																	case "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+																		classIcon = "fa-file-powerpoint";
+																		break;
+																	case "image/jpeg":
+																	case "image/gif":
+																	case "image/png":
+																		classIcon = "fa-file-image";
+																		break;
+																	case "audio/mpeg":
+																	case "video/mp4":
+																		classIcon = "fa-photo-video";
+																		break;
+																	default:
+																		classIcon = "fa-file";
+																		break;
+																}
+																<div class="nk-file-item nk-file">
+																	<div class="nk-file-info">
+																		<div class="nk-file-title">
+																			<div class="nk-file-icon">
+																				<span class="nk-file-icon-type">
+																					<i class="fas @classIcon"></i>
+																				</span>
+																			</div>
+																			<div class="nk-file-name">
+																				<div class="nk-file-name-text">
+																					<a href="#" class="title">@fileFollowedInfo.FileName</a>
+																					<div class="asterisk"><a href="#" onclick="unfollowFile(@(fileFollowedInfo.Id))"><i class="fas fa-star"></i></a></div>
+																				</div>
+																			</div>
+																		</div>
+																		<ul class="nk-file-desc">
+																			<li class="date">@fileFollowedInfo.FileLastUpdate</li>
+																			<li class="members">@T("Admin.Informationrepository.Author"): @fileFollowedInfo.OwnerName</li>
+																		</ul>
+																		<ul class="nk-file-desc">
+																			<li class="members">@fileFollowedInfo.StatusTxt</li>
+																			<li class="members">@fileFollowedInfo.PublishedTxt</li>
+																			<li class="members">@T("Admin.Informationrepository.UploadFile.Version"): @fileFollowedInfo.Version</li>
+																		</ul>
+																	</div>
+																	<div class="nk-file-actions">
+																		<div class="dropdown">
+																			<a href="" class="dropdown-toggle btn btn-sm btn-icon btn-trigger" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
+																			<div class="dropdown-menu dropdown-menu-end">
+																				<ul class="link-list-plain no-bdr">
+																					<li><a href="#file-details" data-toggle="modal" onclick="getFileDetails(@(fileFollowedInfo.Id))"><i class="fas fa-eye"></i><span>@T("common.fileuploader.details")</span></a></li>
+																					<li><a href="#" class="file-dl-toast" onclick="downloadFile(@(fileFollowedInfo.Id))"><i class="fas fa-download"></i><span>@T("common.fileuploader.downloaduploadedfile")</span></a></li>
+
+																				</ul>
+																			</div>
+																		</div>
+																	</div>
+																</div><!-- .nk-file -->
+															}
+
+														}
+													}
+													else
+													{
+														<h6 class="title">@T("Admin.Informationrepository.NoFilesUploaded")</h6>
+													}
+												</div>
+											</div>
+											<!-- -*-*-*-*-*-*-*-*-*-* ARCHIVOS POR AUTORIZAR *-*-*-*-*-*-*-*-*-*-*-*- -->
+											@if (Model.IsAuthorizer)
+											{
+												<div class="nk-files-group">
+													<h6 class="title">@T("Admin.Informationrepository.FilesToAuth")</h6>
+													<div class="nk-files-list">
+														@if (Model.FileToAuthListModel.Count > 0)
+														{
+															@for (var i = 0; i < Model.FileToAuthListModel.Count; i++)
+															{
+																var fileToAuthInfo = Model.FileToAuthListModel[i];
+																var classIcon = "";
+																switch (fileToAuthInfo.FileExtention)
+																{
+																	case "application/vnd.ms-excel":
+																	case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+																		classIcon = "fa-file-excel";
+																		break;
+																	case "application/x-zip-compressed":
+																	case "application/octet-stream":
+																		classIcon = "fa-file-archive";
+																		break;
+																	case "application/msword":
+																	case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+																		classIcon = "fa-file-word";
+																		break;
+																	case "application/pdf":
+																		classIcon = "fa-file-pdf";
+																		break;
+																	case "application/vnd.ms-powerpoint":
+																	case "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+																		classIcon = "fa-file-powerpoint";
+																		break;
+																	case "image/jpeg":
+																	case "image/gif":
+																	case "image/png":
+																		classIcon = "fa-file-image";
+																		break;
+																	case "audio/mpeg":
+																	case "video/mp4":
+																		classIcon = "fa-photo-video";
+																		break;
+																	default:
+																		classIcon = "fa-file";
+																		break;
+																}
+																<div class="nk-file-item nk-file">
+																	<div class="nk-file-info">
+																		<div class="nk-file-title">
+																			<div class="nk-file-icon">
+																				<span class="nk-file-icon-type">
+																					<i class="fas @classIcon"></i>
+																				</span>
+																			</div>
+																			<div class="nk-file-name">
+																				<div class="nk-file-name-text">
+																					<a href="#" class="title">@fileToAuthInfo.FileName</a>
+																					@if (fileToAuthInfo.FileFavEnabled == true)
+																					{
+																						<div class=""><a href="#" onclick="unfollowFile(@(fileToAuthInfo.Id))"><i class="fas fa-star"></i></a></div>
+																					}
+																					else
+																					{
+																						<div class="asterisk"><a href="#" onclick="followFile(@(fileToAuthInfo.Id))"><i class="fas fa-star"></i></a></div>
+																					}
+																				</div>
+																			</div>
+																		</div>
+																		<ul class="nk-file-desc">
+																			<li class="date">@fileToAuthInfo.FileLastUpdate</li>
+																			<li class="members">@T("Admin.Informationrepository.Author"): @fileToAuthInfo.OwnerName</li>
+																		</ul>
+																		<ul class="nk-file-desc">
+																			<li class="members">@fileToAuthInfo.StatusTxt</li>
+																			<li class="members">@fileToAuthInfo.PublishedTxt</li>
+																			<li class="members">@T("Admin.Informationrepository.UploadFile.Version"): @fileToAuthInfo.Version</li>
+																		</ul>
+																	</div>
+																	<div class="nk-file-actions">
+																		<div class="dropdown">
+																			<a href="" class="dropdown-toggle btn btn-sm btn-icon btn-trigger" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
+																			<div class="dropdown-menu dropdown-menu-end">
+																				<ul class="link-list-plain no-bdr">
+																					<li><a href="#file-authorized" data-toggle="modal" onclick="authRejectModal(@(fileToAuthInfo.Id))"><i class="fas fa-check"></i><span>@T("Admin.Informationrepository.UploadFile.Auth")</span></a></li>
+																					<li><a href="#file-rejected" data-toggle="modal" onclick="authRejectModal(@(fileToAuthInfo.Id))"><i class="fas fa-ban"></i><span>@T("Admin.Informationrepository.UploadFile.Reject")</span></a></li>
+																					<li><a href="#" class="file-dl-toast" onclick="downloadFile(@(fileToAuthInfo.Id))"><i class="fas fa-download"></i><span>@T("common.fileuploader.downloaduploadedfile")</span></a></li>
+																				</ul>
+																			</div>
+																		</div>
+																	</div>
+																</div><!-- .nk-file -->
+															}
+														}
+														else
+														{
+															<h6 class="title">@T("Admin.Informationrepository.NoFilesUploaded")</h6>
+														}
+													</div>
+												</div>
+											}
+										</div>
+									</div>
+								</div>
+								<div class="nk-fmg-listing nk-block">
+									<div class="nk-block-head-xs">
+										<div class="nk-block-between g-2">
+											<div class="nk-block-head-content">
+												@if (Model.ParentId > 0)
+												{
+													<h3 class="nk-block-title page-title"><a href="@Url.Content("~/Admin/InformationRepository/GetFilesFromFolderId?idFolder="+Model.GParentFolderId)">@Model.ParentName</a></h3>
+												}
+												else
+												{
+													<h3 class="nk-block-title page-title">@T("Admin.Informationrepository.Index")</h3>
+												}
+											</div>
+											<div class="nk-block-head-content">
+												<a class="link link-primary toggle-opt active" data-toggle="collapse" href="#recent-files" role="button" aria-expanded="true" aria-controls="collapseExample">
+													<i class="fas fa-chevron-right pull-right"></i>
+													<i class="fas fa-chevron-down pull-right"></i>
+												</a>
+											</div>
+										</div>
+									</div><!-- .nk-block-head <a role="button" aria-expanded="true" aria-controls="collapseExample">-->
+									<div class="toggle-expand-content expanded collapse show" id="recent-files">
+										<div class="nk-files nk-files-view-group">
+											<!-- *************************CARPETAS************************* -->
+											<div class="nk-files-group">
+												<h6 class="title">@T("Admin.Informationrepository.Folders")</h6>
+												<div class="nk-files-list">
+													@if (Model.DirectoryListModel.Count > 0)
+													{
+														@for (var i = 0; i < Model.DirectoryListModel.Count; i++)
+														{
+															var folder = Model.DirectoryListModel[i];
+													<div class="nk-file-item nk-file">
+														<div class="nk-file-info">
+															<div class="nk-file-title">
+																<div class="nk-file-icon">
+																	<span class="nk-file-icon-type">
+																		<i class="fas fa-folder"></i>
+																	</span>
+																</div>
+																<div class="nk-file-name">
+																	<div class="nk-file-name-text">
+																		<a href="@Url.Content("~/Admin/InformationRepository/GetFilesFromFolderId?idFolder="+folder.Id)" class="title">@folder.DirectoryName</a>
+																	</div>
+																</div>
+															</div>
+															<ul class="nk-file-desc">
+																<li class="date">@folder.DirectoryLastUpdate</li>
+																<li class="members">@T("Admin.Informationrepository.Author"): @folder.AuthorName</li>
+															</ul>
+														</div>
+														<div class="nk-file-actions">
+															<div class="dropdown">
+																<a href="" class="dropdown-toggle btn btn-sm btn-icon btn-trigger" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
+																<div class="dropdown-menu dropdown-menu-end">
+																	<ul class="link-list-plain no-bdr">
+																		@if (Model.IsAuthor)
+																		{
+																			<li><a href="#" data-toggle="modal" data-target="#folder-update" onclick="renameDirectory(@(folder.Id), '@(folder.DirectoryName)')"><i class="fas fa-pencil-alt"></i><span>@T("common.fileuploader.rename")</span></a></li>
+																			<li><a href="#" data-toggle="modal" onclick="deleteDirectoryRi(@(folder.Id))"><i class="fas fa-trash"></i><span>@T("admin.common.delete")</span></a></li>
+																		}
+
+																	</ul>
+																</div>
+															</div>
+														</div>
+													</div><!-- .nk-file -->
+														}
+													}
+													else
+													{
+														<h6 class="title">@T("Admin.Informationrepository.NoDirectoriesExist")</h6>
+													}
+												</div>
+											</div>
+											<!-- -*-*-*-*-*-*-*-*-*-* ARCHIVOS *-*-*-*-*-*-*-*-*-*-*-*- -->
+											<div class="nk-files-group">
+												<h6 class="title">@T("Admin.Informationrepository.Files")</h6>
+												<div class="nk-files-list">
+													@if (Model.FileListModel.Count > 0)
+													{
+														@for (var i = 0; i < Model.FileListModel.Count; i++)
+														{
+															var fileInfo = Model.FileListModel[i];
+															@if (fileInfo != null)
+															{
+																var classIcon = "";
+																switch (fileInfo.FileExtention)
+																{
+																	case "application/vnd.ms-excel":
+																	case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+																		classIcon = "fa-file-excel";
+																		break;
+																	case "application/x-zip-compressed":
+																	case "application/octet-stream":
+																		classIcon = "fa-file-archive";
+																		break;
+																	case "application/msword":
+																	case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+																		classIcon = "fa-file-word";
+																		break;
+																	case "application/pdf":
+																		classIcon = "fa-file-pdf";
+																		break;
+																	case "application/vnd.ms-powerpoint":
+																	case "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+																		classIcon = "fa-file-powerpoint";
+																		break;
+																	case "image/jpeg":
+																	case "image/gif":
+																	case "image/png":
+																		classIcon = "fa-file-image";
+																		break;
+																	case "audio/mpeg":
+																	case "video/mp4":
+																		classIcon = "fa-photo-video";
+																		break;
+																	default:
+																		classIcon = "fa-file";
+																		break;
+																}
+																<div class="nk-file-item nk-file">
+																	<div class="nk-file-info">
+																		<div class="nk-file-title">
+																			<div class="nk-file-icon">
+																				<span class="nk-file-icon-type">
+																					<i class="fas @classIcon"></i>
+																				</span>
+																			</div>
+																			<div class="nk-file-name">
+																				<div class="nk-file-name-text">
+																					<a href="#" class="title">@fileInfo.FileName</a>
+																					@if (fileInfo.FileFavEnabled == true)
+																					{
+																						<div class=""><a href="#" onclick="unfollowFile(@(fileInfo.Id))"><i class="fas fa-star"></i></a></div>
+																					}
+																					else
+																					{
+																						<div class="asterisk"><a href="#" onclick="followFile(@(fileInfo.Id))"><i class="fas fa-star"></i></a></div>
+																					}
+																				</div>
+																			</div>
+																		</div>
+																		<ul class="nk-file-desc">
+																			<li class="date">@fileInfo.FileLastUpdate</li>
+																			<li class="members">@T("Admin.Informationrepository.Author"): @fileInfo.OwnerName</li>
+																		</ul>
+																		<ul class="nk-file-desc">
+																			<li class="members">@fileInfo.StatusTxt</li>
+																			<li class="members">@fileInfo.PublishedTxt</li>
+																			<li class="members">@T("Admin.Informationrepository.UploadFile.Version"): @fileInfo.Version</li>
+																		</ul>
+																	</div>
+																	<div class="nk-file-actions">
+																		<div class="dropdown">
+																			<a href="" class="dropdown-toggle btn btn-sm btn-icon btn-trigger" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
+																			<div class="dropdown-menu dropdown-menu-end">
+																				<ul class="link-list-plain no-bdr">
+																					<li><a href="#file-details" data-toggle="modal" onclick="getFileDetails(@(fileInfo.Id))"><i class="fas fa-eye"></i><span>@T("common.fileuploader.details")</span></a></li>
+																					@if (Model.IsAuthor)
+																					{
+																						if (fileInfo.Published == false && Model.IsAuthor)
+																						{
+																							<li><a href="#" data-toggle="modal" onclick="publish(@(fileInfo.Id))"><i class="fas fa-share"></i><span>@T("Admin.Informationrepository.UploadFile.Publish")</span></a></li>
+																						}
+																						<li><a href="#" data-toggle="modal" onclick="deleteFileRi(@(fileInfo.Id))"><i class="fas fa-trash"></i><span>@T("admin.common.delete")</span></a></li>
+																					}
+																					<li><a href="#" class="file-dl-toast" onclick="downloadFile(@(fileInfo.Id))"><i class="fas fa-download"></i><span>@T("common.fileuploader.downloaduploadedfile")</span></a></li>
+
+																				</ul>
+																			</div>
+																		</div>
+																	</div>
+																</div><!-- .nk-file -->
+															}
+
+														}
+													}
+													else
+													{
+														<h6 class="title">@T("Admin.Informationrepository.NoFilesUploaded")</h6>
+													}
+												</div>
+											</div>
+											
+										</div><!-- .nk-files -->
+									</div>
+								</div><!-- .nk-block -->
+							</div><!-- .nk-fmg-body-content -->
+						</div>
+					</div>
+                    
+                </div><!-- .nk-fmg-body -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- @@ Share File Modal-->
+<div class="modal fade" tabindex="-1" role="dialog" id="file-share">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header align-center">
+                <div class="nk-file-title">
+                    <div class="nk-file-icon">
+                        <span class="nk-file-icon-type">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 72 72">
+                                <path fill="#6C87FE" d="M57.5,31h-23c-1.4,0-2.5-1.1-2.5-2.5v-10c0-1.4,1.1-2.5,2.5-2.5h23c1.4,0,2.5,1.1,2.5,2.5v10
+	C60,29.9,58.9,31,57.5,31z" />
+                                <path fill="#8AA3FF" d="M59.8,61H12.2C8.8,61,6,58,6,54.4V17.6C6,14,8.8,11,12.2,11h18.5c1.7,0,3.3,1,4.1,2.6L38,24h21.8
+	c3.4,0,6.2,2.4,6.2,6v24.4C66,58,63.2,61,59.8,61z" />
+                                <path display="none" fill="#8AA3FF" d="M62.1,61H9.9C7.8,61,6,59.2,6,57c0,0,0-31.5,0-42c0-2.2,1.8-4,3.9-4h19.3
+	c1.6,0,3.2,0.2,3.9,2.3l2.7,6.8c0.5,1.1,1.6,1.9,2.8,1.9h23.5c2.2,0,3.9,1.8,3.9,4v31C66,59.2,64.2,61,62.1,61z" />
+                                <path fill="#798BFF" d="M7.7,59c2.2,2.4,4.7,2,6.3,2h45c1.1,0,3.2,0.1,5.3-2H7.7z" />
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="nk-file-name">
+                        <div class="nk-file-name-text"><span class="title">UI/UX Design</span></div>
+                        <div class="nk-file-name-sub">394.87 MB</div>
+                    </div>
+                </div>
+                <a href="#" class="close" data-bs-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+            </div>
+            <div class="modal-body p-0">
+                <div class="nk-file-share-header">
+                    <div class="nk-file-share-group">
+                        <div class="nk-file-share-input-group">
+                            <div class="nk-file-share-input nk-file-share-input-to">
+                                <label class="label">To</label>
+                                <input type="text" class="input-mail tagify" placeholder="Email or Name" data-whitelist="team@softnio.com, help@softnio.com, contact@softnio.com">
+                            </div>
+                        </div>
+                        <ul class="nk-file-share-nav">
+                            <li><span class="badge badge-sm bg-outline-gray">Can View</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="nk-file-share-editor">
+                    <div class="nk-file-share-field">
+                        <textarea class="form-control form-control-simple no-resize ex-large" placeholder="Add a Message (optional)"></textarea>
+                    </div>
+                </div><!-- .nk-file-share-editor -->
+            </div><!-- .modal-body -->
+            <div class="modal-footer bg-light">
+                <ul class="btn-toolbar g-3">
+                    <li><a href="#" data-bs-dismiss="modal" class="btn btn-outline-light btn-white">Cancel</a></li>
+                    <li><a href="#" class="btn btn-primary">Share</a></li>
+                </ul>
+            </div><!-- .modal-footer -->
+        </div><!-- .modal-content -->
+    </div><!-- .modla-dialog -->
+</div><!-- .modal -->
+<!-- @@ Copy File Modal-->
+<div class="modal fade" tabindex="-1" role="dialog" id="file-copy">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header align-center border-bottom-0">
+                <h5 class="modal-title">Copy item to...</h5>
+                <a href="#" class="close" data-bs-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+            </div>
+            <div class="modal-body pt-0 mt-n2">
+                <ul class="breadcrumb breadcrumb-alt breadcrumb-xs breadcrumb-arrow mb-1">
+                    <li class="breadcrumb-item">Project</li>
+                    <li class="breadcrumb-item">Apps</li>
+                </ul>
+                <div class="nk-fmg-listing is-scrollable">
+                    <div class="nk-files nk-files-view-list is-compact">
+                        <div class="nk-files-list">
+                            <div class="nk-file-item nk-file">
+                                <div class="nk-file-info">
+                                    <a class="nk-file-link" href="#">
+                                        <div class="nk-file-title">
+                                            <div class="nk-file-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 72 72">
+                                                    <path fill="#6C87FE" d="M57.5,31h-23c-1.4,0-2.5-1.1-2.5-2.5v-10c0-1.4,1.1-2.5,2.5-2.5h23c1.4,0,2.5,1.1,2.5,2.5v10
+	C60,29.9,58.9,31,57.5,31z" />
+                                                    <path fill="#8AA3FF" d="M59.8,61H12.2C8.8,61,6,58,6,54.4V17.6C6,14,8.8,11,12.2,11h18.5c1.7,0,3.3,1,4.1,2.6L38,24h21.8
+	c3.4,0,6.2,2.4,6.2,6v24.4C66,58,63.2,61,59.8,61z" />
+                                                    <path display="none" fill="#8AA3FF" d="M62.1,61H9.9C7.8,61,6,59.2,6,57c0,0,0-31.5,0-42c0-2.2,1.8-4,3.9-4h19.3
+	c1.6,0,3.2,0.2,3.9,2.3l2.7,6.8c0.5,1.1,1.6,1.9,2.8,1.9h23.5c2.2,0,3.9,1.8,3.9,4v31C66,59.2,64.2,61,62.1,61z" />
+                                                    <path fill="#798BFF" d="M7.7,59c2.2,2.4,4.7,2,6.3,2h45c1.1,0,3.2,0.1,5.3-2H7.7z" />
+                                                </svg>
+                                            </div>
+                                            <div class="nk-file-name">
+                                                <div class="nk-file-name-text">
+                                                    <span class="title">UI/UX Design</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="nk-file-actions">
+                                    <a href="#" class="btn btn-sm btn-icon btn-trigger"><em class="icon ni ni-chevron-right"></em></a>
+                                </div>
+                            </div><!-- .nk-file -->
+                            <div class="nk-file-item nk-file selected">
+                                <div class="nk-file-info">
+                                    <a class="nk-file-link" href="#">
+                                        <div class="nk-file-title">
+                                            <div class="nk-file-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 72 72">
+                                                    <path fill="#6C87FE" d="M57.5,31h-23c-1.4,0-2.5-1.1-2.5-2.5v-10c0-1.4,1.1-2.5,2.5-2.5h23c1.4,0,2.5,1.1,2.5,2.5v10
+	C60,29.9,58.9,31,57.5,31z" />
+                                                    <path fill="#8AA3FF" d="M59.8,61H12.2C8.8,61,6,58,6,54.4V17.6C6,14,8.8,11,12.2,11h18.5c1.7,0,3.3,1,4.1,2.6L38,24h21.8
+	c3.4,0,6.2,2.4,6.2,6v24.4C66,58,63.2,61,59.8,61z" />
+                                                    <path display="none" fill="#8AA3FF" d="M62.1,61H9.9C7.8,61,6,59.2,6,57c0,0,0-31.5,0-42c0-2.2,1.8-4,3.9-4h19.3
+	c1.6,0,3.2,0.2,3.9,2.3l2.7,6.8c0.5,1.1,1.6,1.9,2.8,1.9h23.5c2.2,0,3.9,1.8,3.9,4v31C66,59.2,64.2,61,62.1,61z" />
+                                                    <path fill="#798BFF" d="M7.7,59c2.2,2.4,4.7,2,6.3,2h45c1.1,0,3.2,0.1,5.3-2H7.7z" />
+                                                </svg>
+                                            </div>
+                                            <div class="nk-file-name">
+                                                <div class="nk-file-name-text">
+                                                    <span class="title">UI Design</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="nk-file-actions">
+                                    <a href="#" class="btn btn-sm btn-icon btn-trigger"><em class="icon ni ni-chevron-right"></em></a>
+                                </div>
+                            </div><!-- .nk-file -->
+                            <div class="nk-file-item nk-file">
+                                <div class="nk-file-info">
+                                    <a class="nk-file-link" href="#">
+                                        <div class="nk-file-title">
+                                            <div class="nk-file-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">
+                                                    <g>
+                                                        <rect x="32" y="16" width="28" height="15" rx="2.5" ry="2.5" style="fill:#6c87fe" />
+                                                        <path d="M59.7778,61H12.2222A6.4215,6.4215,0,0,1,6,54.3962V17.6038A6.4215,6.4215,0,0,1,12.2222,11H30.6977a4.6714,4.6714,0,0,1,4.1128,2.5644L38,24H59.7778A5.91,5.91,0,0,1,66,30V54.3962A6.4215,6.4215,0,0,1,59.7778,61Z" style="fill:#8aa3ff" />
+                                                        <path d="M7.7454,58.9807C9.9352,61.3864,12.4882,61.0163,14,61H59a6.3373,6.3373,0,0,0,5.2562-2.0193Z" style="fill:#798bff" />
+                                                        <path d="M29.6309,37.36a3.0236,3.0236,0,0,1-.86-2.39A4.3748,4.3748,0,0,1,32.9961,31h.0078a4.36,4.36,0,0,1,4.22,3.9121,3.0532,3.0532,0,0,1-.8545,2.4482A4.4158,4.4158,0,0,1,33.23,38.53c-.0771,0-.1533-.002-.23-.0049A4.519,4.519,0,0,1,29.6309,37.36Zm13.8359,2.7549a1,1,0,1,0-.9336,1.77c.7207.38,1.4658,2.126,1.4668,4.39V48a1,1,0,0,0,2,0V46.2744C45.999,43.3447,45.0049,40.9268,43.4668,40.1152ZM40.165,37.3965c-.1445.084-.29.168-.4316.2549a1,1,0,0,0,.5215,1.8535.9887.9887,0,0,0,.52-.1465c.1289-.0781.2607-.1543.3916-.23a4.2311,4.2311,0,0,0,2.1465-2.124.9839.9839,0,0,0,.0313-.1045A3.8411,3.8411,0,0,0,40.5,32.5352a1,1,0,0,0-.4922,1.9395,1.8773,1.8773,0,0,1,1.4,1.9092A2.835,2.835,0,0,1,40.165,37.3965ZM36.5,41h-7c-2.5234,0-4.5,2.7822-4.5,6.333V48.5a.8355.8355,0,0,0,.0588.2914.9731.9731,0,0,0,.3508.4946C26.4646,50.2812,29.4614,51,33,51s6.5353-.7187,7.59-1.7139a.9726.9726,0,0,0,.3509-.4949A.8361.8361,0,0,0,41,48.5V47.333C41,43.7822,39.0234,41,36.5,41Z" style="fill:#4b66bc" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <div class="nk-file-name">
+                                                <div class="nk-file-name-text">
+                                                    <span class="title">Projects</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="nk-file-actions">
+                                    <a href="#" class="btn btn-sm btn-icon btn-trigger"><em class="icon ni ni-chevron-right"></em></a>
+                                </div>
+                            </div><!-- .nk-file -->
+                            <div class="nk-file-item nk-file">
+                                <div class="nk-file-info">
+                                    <a class="nk-file-link" href="#">
+                                        <div class="nk-file-title">
+                                            <div class="nk-file-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 72 72">
+                                                    <path fill="#6C87FE" d="M57.5,31h-23c-1.4,0-2.5-1.1-2.5-2.5v-10c0-1.4,1.1-2.5,2.5-2.5h23c1.4,0,2.5,1.1,2.5,2.5v10
+	C60,29.9,58.9,31,57.5,31z" />
+                                                    <path fill="#8AA3FF" d="M59.8,61H12.2C8.8,61,6,58,6,54.4V17.6C6,14,8.8,11,12.2,11h18.5c1.7,0,3.3,1,4.1,2.6L38,24h21.8
+	c3.4,0,6.2,2.4,6.2,6v24.4C66,58,63.2,61,59.8,61z" />
+                                                    <path display="none" fill="#8AA3FF" d="M62.1,61H9.9C7.8,61,6,59.2,6,57c0,0,0-31.5,0-42c0-2.2,1.8-4,3.9-4h19.3
+	c1.6,0,3.2,0.2,3.9,2.3l2.7,6.8c0.5,1.1,1.6,1.9,2.8,1.9h23.5c2.2,0,3.9,1.8,3.9,4v31C66,59.2,64.2,61,62.1,61z" />
+                                                    <path fill="#798BFF" d="M7.7,59c2.2,2.4,4.7,2,6.3,2h45c1.1,0,3.2,0.1,5.3-2H7.7z" />
+                                                </svg>
+                                            </div>
+                                            <div class="nk-file-name">
+                                                <div class="nk-file-name-text">
+                                                    <span class="title">2019 Project</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="nk-file-actions">
+                                    <a href="#" class="btn btn-sm btn-icon btn-trigger"><em class="icon ni ni-chevron-right"></em></a>
+                                </div>
+                            </div><!-- .nk-file -->
+                        </div>
+                    </div>
+                </div>
+            </div><!-- .modal-body -->
+            <div class="modal-footer modal-footer-stretch  bg-light">
+                <div class="modal-footer-between">
+                    <div class="g">
+                        <a href="#" class="link link-primary">Create New Folder</a>
+                    </div>
+                    <div class="g">
+                        <ul class="btn-toolbar g-3">
+                            <li><a href="#" data-bs-dismiss="modal" class="btn btn-outline-light btn-white">Cancel</a></li>
+                            <li><a href="#" class="btn btn-primary">Copy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div><!-- .modal-footer -->
+        </div><!-- .modal-content -->
+    </div><!-- .modla-dialog -->
+</div><!-- .modal -->
+<!-- @@ Move File Modal-->
+<div class="modal fade" tabindex="-1" role="dialog" id="file-move">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header align-center border-bottom-0">
+                <h5 class="modal-title">Move item to...</h5>
+                <a href="#" class="close" data-bs-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+            </div>
+            <div class="modal-body pt-0 mt-n2">
+                <ul class="breadcrumb breadcrumb-alt breadcrumb-xs breadcrumb-arrow mb-1">
+                    <li class="breadcrumb-item">Project</li>
+                    <li class="breadcrumb-item">Apps</li>
+                </ul>
+                <div class="nk-fmg-listing is-scrollable">
+                    <div class="nk-files nk-files-view-list is-compact">
+                        <div class="nk-files-list">
+                            <div class="nk-file-item nk-file">
+                                <div class="nk-file-info">
+                                    <a class="nk-file-link" href="#">
+                                        <div class="nk-file-title">
+                                            <div class="nk-file-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 72 72">
+                                                    <path fill="#6C87FE" d="M57.5,31h-23c-1.4,0-2.5-1.1-2.5-2.5v-10c0-1.4,1.1-2.5,2.5-2.5h23c1.4,0,2.5,1.1,2.5,2.5v10
+	C60,29.9,58.9,31,57.5,31z" />
+                                                    <path fill="#8AA3FF" d="M59.8,61H12.2C8.8,61,6,58,6,54.4V17.6C6,14,8.8,11,12.2,11h18.5c1.7,0,3.3,1,4.1,2.6L38,24h21.8
+	c3.4,0,6.2,2.4,6.2,6v24.4C66,58,63.2,61,59.8,61z" />
+                                                    <path display="none" fill="#8AA3FF" d="M62.1,61H9.9C7.8,61,6,59.2,6,57c0,0,0-31.5,0-42c0-2.2,1.8-4,3.9-4h19.3
+	c1.6,0,3.2,0.2,3.9,2.3l2.7,6.8c0.5,1.1,1.6,1.9,2.8,1.9h23.5c2.2,0,3.9,1.8,3.9,4v31C66,59.2,64.2,61,62.1,61z" />
+                                                    <path fill="#798BFF" d="M7.7,59c2.2,2.4,4.7,2,6.3,2h45c1.1,0,3.2,0.1,5.3-2H7.7z" />
+                                                </svg>
+                                            </div>
+                                            <div class="nk-file-name">
+                                                <div class="nk-file-name-text">
+                                                    <span class="title">UI/UX Design</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="nk-file-actions">
+                                    <a href="#" class="btn btn-sm btn-icon btn-trigger"><em class="icon ni ni-chevron-right"></em></a>
+                                </div>
+                            </div><!-- .nk-file -->
+                            <div class="nk-file-item nk-file">
+                                <div class="nk-file-info">
+                                    <a class="nk-file-link" href="#">
+                                        <div class="nk-file-title">
+                                            <div class="nk-file-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 72 72">
+                                                    <path fill="#6C87FE" d="M57.5,31h-23c-1.4,0-2.5-1.1-2.5-2.5v-10c0-1.4,1.1-2.5,2.5-2.5h23c1.4,0,2.5,1.1,2.5,2.5v10
+	C60,29.9,58.9,31,57.5,31z" />
+                                                    <path fill="#8AA3FF" d="M59.8,61H12.2C8.8,61,6,58,6,54.4V17.6C6,14,8.8,11,12.2,11h18.5c1.7,0,3.3,1,4.1,2.6L38,24h21.8
+	c3.4,0,6.2,2.4,6.2,6v24.4C66,58,63.2,61,59.8,61z" />
+                                                    <path display="none" fill="#8AA3FF" d="M62.1,61H9.9C7.8,61,6,59.2,6,57c0,0,0-31.5,0-42c0-2.2,1.8-4,3.9-4h19.3
+	c1.6,0,3.2,0.2,3.9,2.3l2.7,6.8c0.5,1.1,1.6,1.9,2.8,1.9h23.5c2.2,0,3.9,1.8,3.9,4v31C66,59.2,64.2,61,62.1,61z" />
+                                                    <path fill="#798BFF" d="M7.7,59c2.2,2.4,4.7,2,6.3,2h45c1.1,0,3.2,0.1,5.3-2H7.7z" />
+                                                </svg>
+                                            </div>
+                                            <div class="nk-file-name">
+                                                <div class="nk-file-name-text">
+                                                    <span class="title">2019 Project</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="nk-file-actions">
+                                    <a href="#" class="btn btn-sm btn-icon btn-trigger"><em class="icon ni ni-chevron-right"></em></a>
+                                </div>
+                            </div><!-- .nk-file -->
+                            <div class="nk-file-item nk-file selected">
+                                <div class="nk-file-info">
+                                    <a class="nk-file-link" href="#">
+                                        <div class="nk-file-title">
+                                            <div class="nk-file-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">
+                                                    <g>
+                                                        <rect x="32" y="16" width="28" height="15" rx="2.5" ry="2.5" style="fill:#6c87fe" />
+                                                        <path d="M59.7778,61H12.2222A6.4215,6.4215,0,0,1,6,54.3962V17.6038A6.4215,6.4215,0,0,1,12.2222,11H30.6977a4.6714,4.6714,0,0,1,4.1128,2.5644L38,24H59.7778A5.91,5.91,0,0,1,66,30V54.3962A6.4215,6.4215,0,0,1,59.7778,61Z" style="fill:#8aa3ff" />
+                                                        <path d="M7.7454,58.9807C9.9352,61.3864,12.4882,61.0163,14,61H59a6.3373,6.3373,0,0,0,5.2562-2.0193Z" style="fill:#798bff" />
+                                                        <path d="M29.6309,37.36a3.0236,3.0236,0,0,1-.86-2.39A4.3748,4.3748,0,0,1,32.9961,31h.0078a4.36,4.36,0,0,1,4.22,3.9121,3.0532,3.0532,0,0,1-.8545,2.4482A4.4158,4.4158,0,0,1,33.23,38.53c-.0771,0-.1533-.002-.23-.0049A4.519,4.519,0,0,1,29.6309,37.36Zm13.8359,2.7549a1,1,0,1,0-.9336,1.77c.7207.38,1.4658,2.126,1.4668,4.39V48a1,1,0,0,0,2,0V46.2744C45.999,43.3447,45.0049,40.9268,43.4668,40.1152ZM40.165,37.3965c-.1445.084-.29.168-.4316.2549a1,1,0,0,0,.5215,1.8535.9887.9887,0,0,0,.52-.1465c.1289-.0781.2607-.1543.3916-.23a4.2311,4.2311,0,0,0,2.1465-2.124.9839.9839,0,0,0,.0313-.1045A3.8411,3.8411,0,0,0,40.5,32.5352a1,1,0,0,0-.4922,1.9395,1.8773,1.8773,0,0,1,1.4,1.9092A2.835,2.835,0,0,1,40.165,37.3965ZM36.5,41h-7c-2.5234,0-4.5,2.7822-4.5,6.333V48.5a.8355.8355,0,0,0,.0588.2914.9731.9731,0,0,0,.3508.4946C26.4646,50.2812,29.4614,51,33,51s6.5353-.7187,7.59-1.7139a.9726.9726,0,0,0,.3509-.4949A.8361.8361,0,0,0,41,48.5V47.333C41,43.7822,39.0234,41,36.5,41Z" style="fill:#4b66bc" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <div class="nk-file-name">
+                                                <div class="nk-file-name-text">
+                                                    <span class="title">Projects</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="nk-file-actions">
+                                    <a href="#" class="btn btn-sm btn-icon btn-trigger"><em class="icon ni ni-chevron-right"></em></a>
+                                </div>
+                            </div><!-- .nk-file -->
+                            <div class="nk-file-item nk-file">
+                                <div class="nk-file-info">
+                                    <a class="nk-file-link" href="#">
+                                        <div class="nk-file-title">
+                                            <div class="nk-file-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 72 72">
+                                                    <path fill="#6C87FE" d="M57.5,31h-23c-1.4,0-2.5-1.1-2.5-2.5v-10c0-1.4,1.1-2.5,2.5-2.5h23c1.4,0,2.5,1.1,2.5,2.5v10
+	C60,29.9,58.9,31,57.5,31z" />
+                                                    <path fill="#8AA3FF" d="M59.8,61H12.2C8.8,61,6,58,6,54.4V17.6C6,14,8.8,11,12.2,11h18.5c1.7,0,3.3,1,4.1,2.6L38,24h21.8
+	c3.4,0,6.2,2.4,6.2,6v24.4C66,58,63.2,61,59.8,61z" />
+                                                    <path display="none" fill="#8AA3FF" d="M62.1,61H9.9C7.8,61,6,59.2,6,57c0,0,0-31.5,0-42c0-2.2,1.8-4,3.9-4h19.3
+	c1.6,0,3.2,0.2,3.9,2.3l2.7,6.8c0.5,1.1,1.6,1.9,2.8,1.9h23.5c2.2,0,3.9,1.8,3.9,4v31C66,59.2,64.2,61,62.1,61z" />
+                                                    <path fill="#798BFF" d="M7.7,59c2.2,2.4,4.7,2,6.3,2h45c1.1,0,3.2,0.1,5.3-2H7.7z" />
+                                                </svg>
+                                            </div>
+                                            <div class="nk-file-name">
+                                                <div class="nk-file-name-text">
+                                                    <span class="title">UI Design</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="nk-file-actions">
+                                    <a href="#" class="btn btn-sm btn-icon btn-trigger"><em class="icon ni ni-chevron-right"></em></a>
+                                </div>
+                            </div><!-- .nk-file -->
+                        </div>
+                    </div>
+                </div>
+            </div><!-- .modal-body -->
+            <div class="modal-footer modal-footer-stretch  bg-light">
+                <div class="modal-footer-between">
+                    <div class="g">
+                        <a href="#" class="link link-primary">Create New Folder</a>
+                    </div>
+                    <div class="g">
+                        <ul class="btn-toolbar g-3">
+                            <li><a href="#" data-bs-dismiss="modal" class="btn btn-outline-light btn-white">Cancel</a></li>
+                            <li><a href="#" class="btn btn-primary">Move</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div><!-- .modal-footer -->
+        </div><!-- .modal-content -->
+    </div><!-- .modla-dialog -->
+</div><!-- .modal -->
+
+
+<script asp-location="Footer">
+                $(document).ready(function() {
+					getTree();
+                    var showLinkToResultSearch;
+                    var searchText;
+                    $('#small-searchterms').autocomplete({
+                            delay: 500,
+                            minLength: 2,
+                            source: '@(Url.Action("SearchTermAutoComplete", "InformationRepository"))',
+                            appendTo: '.search-box',
+                            select: function(event, ui) {
+                                $("#small-searchterms").val(ui.item.label);
+                                setLocation(ui.item.url);
+                                return false;
+                        }
+                    })
+                    .data("ui-autocomplete")._renderItem = function(ul, item) {
+                        var t = item.label;
+                        //html encode
+                        t = htmlEncode(t);
+                        return $("<li></li>")
+                            .data("item.autocomplete", item)
+                            .append('<a href="@Url.Content("~/Admin/InformationRepository/GetFilesFromFolderId?idFolder=")' + item.url+'"><span>' + t + '</span></a>')
+                            .appendTo(ul);
+                                };
+                            });
+    function htmlEncode(value) {
+        return $('<div/>').text(value).html();
+    }
+</script>
+
+@await Html.PartialAsync("_UploadFileModal", Model.UploadFileModel)
+@await Html.PartialAsync("_CreateFolderModal", Model.InfoFolder)
+@await Html.PartialAsync("_UpdateFolderModal", Model.InfoFolder)
+@await Html.PartialAsync("_DetailFileModal", null)
+@await Html.PartialAsync("_AuthRejectModal", null)
