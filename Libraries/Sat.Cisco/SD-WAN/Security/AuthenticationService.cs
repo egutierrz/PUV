@@ -41,7 +41,7 @@ namespace Sat.Cisco.SD_WAN.Security
                 request.Method = Method.Post;
                 request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
                 request.AddParameter("j_username", ciscoSettings.SdWan_User);
-                request.AddParameter("j_password", ciscoSettings.SdWan_Password);
+                request.AddParameter("j_password", ciscoSettings.SdWan_Pass);
                 RestResponse response = await client.ExecuteAsync(request);
                 Cookie? jsessionId = response.Cookies != null ? response.Cookies.Where(s => s.Name == "JSESSIONID").SingleOrDefault()  : null;
                 return jsessionId != null ? jsessionId.Value : "";

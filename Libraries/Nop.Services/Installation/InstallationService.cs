@@ -223,7 +223,6 @@ namespace Nop.Services.Installation
                     Host = "smtp.mail.com",
                     Port = 25,
                     Username = "123",
-                    Password = "123",
                     EnableSsl = false,
                     UseDefaultCredentials = false
                 }
@@ -623,7 +622,6 @@ namespace Nop.Services.Installation
             await InsertInstallationDataAsync(new CustomerPassword
             {
                 CustomerId = secondUser.Id,
-                Password = "123456",
                 PasswordFormat = PasswordFormat.Clear,
                 PasswordSalt = string.Empty,
                 CreatedOnUtc = DateTime.UtcNow
@@ -758,7 +756,6 @@ namespace Nop.Services.Installation
             await InsertInstallationDataAsync(new CustomerPassword
             {
                 CustomerId = fourthUser.Id,
-                Password = "123456",
                 PasswordFormat = PasswordFormat.Clear,
                 PasswordSalt = string.Empty,
                 CreatedOnUtc = DateTime.UtcNow
@@ -826,7 +823,6 @@ namespace Nop.Services.Installation
             await InsertInstallationDataAsync(new CustomerPassword
             {
                 CustomerId = fifthUser.Id,
-                Password = "123456",
                 PasswordFormat = PasswordFormat.Clear,
                 PasswordSalt = string.Empty,
                 CreatedOnUtc = DateTime.UtcNow
@@ -894,7 +890,6 @@ namespace Nop.Services.Installation
             await InsertInstallationDataAsync(new CustomerPassword
             {
                 CustomerId = sixthUser.Id,
-                Password = "123456",
                 PasswordFormat = PasswordFormat.Clear,
                 PasswordSalt = string.Empty,
                 CreatedOnUtc = DateTime.UtcNow
@@ -1689,7 +1684,7 @@ namespace Nop.Services.Installation
             var settingService = EngineContext.Current.Resolve<IComponentSettingService>();
             await settingService.SaveSettingAsync(new CiscoSettings
             {
-                SdWan_Password = "RG!_Yw919_83",
+                SdWan_Pass = "RG!_Yw919_83",
                 SdWan_User = "devnetuser",
                 SdWan_Url = "https://sandbox-sdwan-2.cisco.com"
             });

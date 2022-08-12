@@ -10,7 +10,7 @@ namespace Nop.Core.Domain.Cisco
     public class CiscoSettings : ISettings
     {
         public string SdWan_User { get; set; }
-        public string SdWan_Password { get; set; }
+        public string SdWan_Pass { get; set; }
         public string SdWan_Url { get; set; }
 
     }
