@@ -109,7 +109,7 @@ namespace Nop.Core.Caching
         /// <param name="data">Value for caching</param>
         private void Set(CacheKey cky, object data)
         {
-            if ((cky?.CacheTime ?? 0) <= 0 || data == null)
+            if (cky == null || (cky?.CacheTime ?? 0) <= 0 || data == null)
                 return;
 
             _distributedCache.SetString(cky.Key, JsonConvert.SerializeObject(data), PrepareEntryOptions(cky));
@@ -255,7 +255,7 @@ namespace Nop.Core.Caching
         /// <returns>A task that represents the asynchronous operation</returns>
         public async Task SetAsync(CacheKey cky, object data)
         {
-            if ((cky?.CacheTime ?? 0) <= 0 || data == null)
+            if (cky == null || (cky?.CacheTime ?? 0) <= 0 || data == null)
                 return;
 
             await _distributedCache.SetStringAsync(cky.Key, JsonConvert.SerializeObject(data), PrepareEntryOptions(cky));
