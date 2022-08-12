@@ -46,13 +46,13 @@ namespace Nop.Core.Caching
         #region Utilities
 
         /// <summary>
-        /// Prepare cache entry options for the passed key
+        /// Prepare cache entry options for the passed cky
         /// </summary>
-        /// <param name="key">Cache key</param>
+        /// <param name="key">Cache cky</param>
         /// <returns>Cache entry options</returns>
         private DistributedCacheEntryOptions PrepareEntryOptions(CacheKey key)
         {
-            //set expiration time for the passed cache key
+            //set expiration time for the passed cache cky
             var options = new DistributedCacheEntryOptions
             {
                 AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(key.CacheTime)
@@ -65,10 +65,10 @@ namespace Nop.Core.Caching
         /// Try to get the cached item
         /// </summary>
         /// <typeparam name="T">Type of cached item</typeparam>
-        /// <param name="key">Cache key</param>
+        /// <param name="key">Cache cky</param>
         /// <returns>
         /// A task that represents the asynchronous operation
-        /// The task result contains the flag which indicate is the key exists in the cache, cached item or default value
+        /// The task result contains the flag which indicate is the cky exists in the cache, cached item or default value
         /// </returns>
         private async Task<(bool isSet, T item)> TryGetItemAsync<T>(CacheKey key)
         {
@@ -87,8 +87,8 @@ namespace Nop.Core.Caching
         /// Try to get the cached item
         /// </summary>
         /// <typeparam name="T">Type of cached item</typeparam>
-        /// <param name="key">Cache key</param>
-        /// <returns>Flag which indicate is the key exists in the cache, cached item or default value</returns>
+        /// <param name="key">Cache cky</param>
+        /// <returns>Flag which indicate is the cky exists in the cache, cached item or default value</returns>
         private (bool isSet, T item) TryGetItem<T>(CacheKey key)
         {
             var json = _distributedCache.GetString(key.Key);
@@ -103,20 +103,20 @@ namespace Nop.Core.Caching
         }
 
         /// <summary>
-        /// Add the specified key and object to the cache
+        /// Add the specified cky and object to the cache
         /// </summary>
-        /// <param name="key">Key of cached item</param>
+        /// <param name="cky">Key of cached item</param>
         /// <param name="data">Value for caching</param>
-        private void Set(CacheKey key, object data)
+        private void Set(CacheKey cky, object data)
         {
-            if ((key?.CacheTime ?? 0) <= 0 || data == null)
+            if ((cky?.CacheTime ?? 0) <= 0 || data == null)
                 return;
 
-            _distributedCache.SetString(key.Key, JsonConvert.SerializeObject(data), PrepareEntryOptions(key));
-            _perRequestCache.Set(key.Key, data);
+            _distributedCache.SetString(cky.Key, JsonConvert.SerializeObject(data), PrepareEntryOptions(cky));
+            _perRequestCache.Set(cky.Key, data);
 
             using var _ = _locker.Lock();
-            _keys.Add(key.Key);
+            _keys.Add(cky.Key);
         }
 
         #endregion
@@ -135,11 +135,11 @@ namespace Nop.Core.Caching
         /// Get a cached item. If it's not in the cache yet, then load and cache it
         /// </summary>
         /// <typeparam name="T">Type of cached item</typeparam>
-        /// <param name="key">Cache key</param>
+        /// <param name="key">Cache cky</param>
         /// <param name="acquire">Function to load item if it's not in the cache yet</param>
         /// <returns>
         /// A task that represents the asynchronous operation
-        /// The task result contains the cached value associated with the specified key
+        /// The task result contains the cached value associated with the specified cky
         /// </returns>
         public async Task<T> GetAsync<T>(CacheKey key, Func<Task<T>> acquire)
         {
@@ -169,11 +169,11 @@ namespace Nop.Core.Caching
         /// Get a cached item. If it's not in the cache yet, then load and cache it
         /// </summary>
         /// <typeparam name="T">Type of cached item</typeparam>
-        /// <param name="key">Cache key</param>
+        /// <param name="key">Cache cky</param>
         /// <param name="acquire">Function to load item if it's not in the cache yet</param>
         /// <returns>
         /// A task that represents the asynchronous operation
-        /// The task result contains the cached value associated with the specified key
+        /// The task result contains the cached value associated with the specified cky
         /// </returns>
         public async Task<T> GetAsync<T>(CacheKey key, Func<T> acquire)
         {
@@ -203,9 +203,9 @@ namespace Nop.Core.Caching
         /// Get a cached item. If it's not in the cache yet, then load and cache it
         /// </summary>
         /// <typeparam name="T">Type of cached item</typeparam>
-        /// <param name="key">Cache key</param>
+        /// <param name="key">Cache cky</param>
         /// <param name="acquire">Function to load item if it's not in the cache yet</param>
-        /// <returns>The cached value associated with the specified key</returns>
+        /// <returns>The cached value associated with the specified cky</returns>
         public T Get<T>(CacheKey key, Func<T> acquire)
         {
             //little performance workaround here:
@@ -231,10 +231,10 @@ namespace Nop.Core.Caching
         }
 
         /// <summary>
-        /// Remove the value with the specified key from the cache
+        /// Remove the value with the specified cky from the cache
         /// </summary>
-        /// <param name="cacheKey">Cache key</param>
-        /// <param name="cacheKeyParameters">Parameters to create cache key</param>
+        /// <param name="cacheKey">Cache cky</param>
+        /// <param name="cacheKeyParameters">Parameters to create cache cky</param>
         /// <returns>A task that represents the asynchronous operation</returns>
         public async Task RemoveAsync(CacheKey cacheKey, params object[] cacheKeyParameters)
         {
@@ -248,28 +248,28 @@ namespace Nop.Core.Caching
         }
 
         /// <summary>
-        /// Add the specified key and object to the cache
+        /// Add the specified cky and object to the cache
         /// </summary>
-        /// <param name="key">Key of cached item</param>
+        /// <param name="cky">Key of cached item</param>
         /// <param name="data">Value for caching</param>
         /// <returns>A task that represents the asynchronous operation</returns>
-        public async Task SetAsync(CacheKey key, object data)
+        public async Task SetAsync(CacheKey cky, object data)
         {
-            if ((key?.CacheTime ?? 0) <= 0 || data == null)
+            if ((cky?.CacheTime ?? 0) <= 0 || data == null)
                 return;
 
-            await _distributedCache.SetStringAsync(key.Key, JsonConvert.SerializeObject(data), PrepareEntryOptions(key));
-            _perRequestCache.Set(key.Key, data);
+            await _distributedCache.SetStringAsync(cky.Key, JsonConvert.SerializeObject(data), PrepareEntryOptions(cky));
+            _perRequestCache.Set(cky.Key, data);
 
             using var _ = await _locker.LockAsync();
-            _keys.Add(key.Key);
+            _keys.Add(cky.Key);
         }
 
         /// <summary>
-        /// Remove items by cache key prefix
+        /// Remove items by cache cky prefix
         /// </summary>
-        /// <param name="prefix">Cache key prefix</param>
-        /// <param name="prefixParameters">Parameters to create cache key prefix</param>
+        /// <param name="prefix">Cache cky prefix</param>
+        /// <param name="prefixParameters">Parameters to create cache cky prefix</param>
         /// <returns>A task that represents the asynchronous operation</returns>
         public async Task RemoveByPrefixAsync(string prefix, params object[] prefixParameters)
         {
@@ -307,7 +307,7 @@ namespace Nop.Core.Caching
         /// <summary>
         /// Perform some action with exclusive lock
         /// </summary>
-        /// <param name="resource">The key we are locking on</param>
+        /// <param name="resource">The cky we are locking on</param>
         /// <param name="expirationTime">The time after which the lock will automatically be expired</param>
         /// <param name="action">Action to be performed with locking</param>
         /// <returns>True if lock was acquired and action was performed; otherwise false</returns>
@@ -366,7 +366,7 @@ namespace Nop.Core.Caching
             #region Utilities
 
             /// <summary>
-            /// Get a key/value collection that can be used to share data within the scope of this request
+            /// Get a cky/value collection that can be used to share data within the scope of this request
             /// </summary>
             protected virtual IDictionary<object, object> GetItems()
             {
@@ -381,9 +381,9 @@ namespace Nop.Core.Caching
             /// Get a cached item. If it's not in the cache yet, then load and cache it
             /// </summary>
             /// <typeparam name="T">Type of cached item</typeparam>
-            /// <param name="key">Cache key</param>
+            /// <param name="key">Cache cky</param>
             /// <param name="acquire">Function to load item if it's not in the cache yet</param>
-            /// <returns>The cached value associated with the specified key</returns>
+            /// <returns>The cached value associated with the specified cky</returns>
             public virtual T Get<T>(string key, Func<T> acquire)
             {
                 IDictionary<object, object> items;
@@ -410,7 +410,7 @@ namespace Nop.Core.Caching
             }
 
             /// <summary>
-            /// Add the specified key and object to the cache
+            /// Add the specified cky and object to the cache
             /// </summary>
             /// <param name="key">Key of cached item</param>
             /// <param name="data">Value for caching</param>
@@ -430,7 +430,7 @@ namespace Nop.Core.Caching
             }
 
             /// <summary>
-            /// Get a value indicating whether the value associated with the specified key is cached
+            /// Get a value indicating whether the value associated with the specified cky is cached
             /// </summary>
             /// <param name="key">Key of cached item</param>
             /// <returns>True if item already is in cache; otherwise false</returns>
@@ -444,7 +444,7 @@ namespace Nop.Core.Caching
             }
 
             /// <summary>
-            /// Remove the value with the specified key from the cache
+            /// Remove the value with the specified cky from the cache
             /// </summary>
             /// <param name="key">Key of cached item</param>
             public virtual void Remove(string key)
@@ -457,9 +457,9 @@ namespace Nop.Core.Caching
             }
 
             /// <summary>
-            /// Remove items by key prefix
+            /// Remove items by cky prefix
             /// </summary>
-            /// <param name="prefix">String key prefix</param>
+            /// <param name="prefix">String cky prefix</param>
             public virtual void RemoveByPrefix(string prefix)
             {
                 using (new ReaderWriteLockDisposable(_lockSlim, ReaderWriteLockType.UpgradeableRead))
