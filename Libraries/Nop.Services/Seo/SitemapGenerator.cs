@@ -188,10 +188,10 @@ namespace Nop.Services.Seo
             };
             writer.WriteStartDocument();
             writer.WriteStartElement("sitemapindex");
-            writer.WriteAttributeString("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9");
-            writer.WriteAttributeString("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-            writer.WriteAttributeString("xmlns:xhtml", "http://www.w3.org/1999/xhtml");
-            writer.WriteAttributeString("xsi:schemaLocation", "http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd");
+            writer.WriteAttributeString("xmlns", "https://www.sitemaps.org/schemas/sitemap/0.9");
+            writer.WriteAttributeString("xmlns:xsi", "https://www.w3.org/2001/XMLSchema-instance");
+            writer.WriteAttributeString("xmlns:xhtml", "https://www.w3.org/1999/xhtml");
+            writer.WriteAttributeString("xsi:schemaLocation", "https://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd");
 
             //write URLs of all available sitemaps
             for (var id = 1; id <= sitemapNumber; id++)

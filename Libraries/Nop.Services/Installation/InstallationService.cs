@@ -689,7 +689,6 @@ namespace Nop.Services.Installation
             await InsertInstallationDataAsync(new CustomerPassword
             {
                 CustomerId = thirdUser.Id,
-                Password = "123456",
                 PasswordFormat = PasswordFormat.Clear,
                 PasswordSalt = string.Empty,
                 CreatedOnUtc = DateTime.UtcNow

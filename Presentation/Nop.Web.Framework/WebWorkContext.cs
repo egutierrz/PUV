@@ -121,7 +121,7 @@ namespace Nop.Web.Framework
             {
                 HttpOnly = true,
                 Expires = cookieExpiresDate,
-                Secure = _webHelper.IsCurrentConnectionSecured()
+                Secure = true //_webHelper.IsCurrentConnectionSecured()
             };
             _httpContextAccessor.HttpContext.Response.Cookies.Append(cookieName, customerGuid.ToString(), options);
         }
@@ -144,7 +144,7 @@ namespace Nop.Web.Framework
 
             //set new cookie value
             var value = CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(language.LanguageCulture));
-            var options = new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) };
+            var options = new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1), Secure = true, HttpOnly = true };
             _httpContextAccessor.HttpContext.Response.Cookies.Append(cookieName, value, options);
         }
 
