@@ -17,13 +17,10 @@ using Nop.Core.Domain.Logging;
 using Nop.Core.Domain.Media;
 using Nop.Core.Domain.Messages;
 using Nop.Core.Domain.Security;
-using Nop.Core.Domain.Tax;
 using Nop.Core.Events;
 using Nop.Core.Http;
 using Nop.Core.Http.Extensions;
 using Nop.Services.Authentication;
-using Nop.Services.Authentication.External;
-using Nop.Services.Authentication.MultiFactor;
 using Nop.Services.Common;
 using Nop.Services.Customers;
 using Nop.Services.Directory;
@@ -70,19 +67,15 @@ namespace Nop.Web.Controllers
         private readonly IDownloadService _downloadService;
         private readonly IEventPublisher _eventPublisher;
         private readonly IExportManager _exportManager;
-        private readonly IExternalAuthenticationService _externalAuthenticationService;
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly ILocalizationService _localizationService;
         private readonly ILogger _logger;
-        private readonly IMultiFactorAuthenticationPluginManager _multiFactorAuthenticationPluginManager;
         private readonly INotificationService _notificationService;
-        private readonly IPictureService _pictureService;
         private readonly IStateProvinceService _stateProvinceService;
         private readonly IStoreContext _storeContext;
         private readonly IWorkContext _workContext;
         private readonly IWorkflowMessageService _workflowMessageService;
         private readonly LocalizationSettings _localizationSettings;
-        private readonly MediaSettings _mediaSettings;
         private readonly MultiFactorAuthenticationSettings _multiFactorAuthenticationSettings;
         private readonly StoreInformationSettings _storeInformationSettings;
         private readonly IGdprService _gdprService;
@@ -112,20 +105,16 @@ namespace Nop.Web.Controllers
             IDownloadService downloadService,
             IEventPublisher eventPublisher,
             IExportManager exportManager,
-            IExternalAuthenticationService externalAuthenticationService,
             IGdprService gdprService,
             IGenericAttributeService genericAttributeService,
             ILocalizationService localizationService,
             ILogger logger,
-            IMultiFactorAuthenticationPluginManager multiFactorAuthenticationPluginManager,
             INotificationService notificationService,
-            IPictureService pictureService,
             IStateProvinceService stateProvinceService,
             IStoreContext storeContext,
             IWorkContext workContext,
             IWorkflowMessageService workflowMessageService,
             LocalizationSettings localizationSettings,
-            MediaSettings mediaSettings,
             MultiFactorAuthenticationSettings multiFactorAuthenticationSettings,
             StoreInformationSettings storeInformationSettings)
         {
@@ -150,20 +139,16 @@ namespace Nop.Web.Controllers
             _downloadService = downloadService;
             _eventPublisher = eventPublisher;
             _exportManager = exportManager;
-            _externalAuthenticationService = externalAuthenticationService;
             _gdprService = gdprService;
             _genericAttributeService = genericAttributeService;
             _localizationService = localizationService;
             _logger = logger;
-            _multiFactorAuthenticationPluginManager = multiFactorAuthenticationPluginManager;
             _notificationService = notificationService;
-            _pictureService = pictureService;
             _stateProvinceService = stateProvinceService;
             _storeContext = storeContext;
             _workContext = workContext;
             _workflowMessageService = workflowMessageService;
             _localizationSettings = localizationSettings;
-            _mediaSettings = mediaSettings;
             _multiFactorAuthenticationSettings = multiFactorAuthenticationSettings;
             _storeInformationSettings = storeInformationSettings;
         }
@@ -192,21 +177,7 @@ namespace Nop.Web.Controllers
 
             var store = await _storeContext.GetCurrentStoreAsync();
 
-            var multiFactorAuthenticationProviders = await _multiFactorAuthenticationPluginManager.LoadActivePluginsAsync(await _workContext.GetCurrentCustomerAsync(), store.Id);
-            foreach (var provider in multiFactorAuthenticationProviders)
-            {
-                var controlId = $"provider_{provider.PluginDescriptor.SystemName}";
-
-                var curProvider = form[controlId];
-                if (!StringValues.IsNullOrEmpty(curProvider))
-                {
-                    var selectedProvider = curProvider.ToString();
-                    if (!string.IsNullOrEmpty(selectedProvider))
-                    {
-                        return selectedProvider;
-                    }
-                }
-            }
+            
             return string.Empty;
         }
 
@@ -477,37 +448,7 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
-        /// <summary>
-        /// The entry point for injecting a plugin component of type "MultiFactorAuth"
-        /// </summary>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the user verification page for Multi-factor authentication. Served by an authentication provider.
-        /// </returns>
-        public virtual async Task<IActionResult> MultiFactorVerification()
-        {
-            if (!await _multiFactorAuthenticationPluginManager.HasActivePluginsAsync())
-                return RedirectToRoute("Login");
-
-            var customerMultiFactorAuthenticationInfo = HttpContext.Session.Get<CustomerMultiFactorAuthenticationInfo>(NopCustomerDefaults.CustomerMultiFactorAuthenticationInfo);
-            var userName = customerMultiFactorAuthenticationInfo.UserName;
-            if (string.IsNullOrEmpty(userName))
-                return RedirectToRoute("HomePage");
-
-            var customer = _customerSettings.UsernamesEnabled ? await _customerService.GetCustomerByUsernameAsync(userName) : await _customerService.GetCustomerByEmailAsync(userName);
-            if (customer == null)
-                return RedirectToRoute("HomePage");
-
-            var selectedProvider = await _genericAttributeService.GetAttributeAsync<string>(customer, NopCustomerDefaults.SelectedMultiFactorAuthenticationProviderAttribute);
-            if (string.IsNullOrEmpty(selectedProvider))
-                return RedirectToRoute("HomePage");
-
-            var model = new MultiFactorAuthenticationProviderModel();
-            model = await _customerModelFactory.PrepareMultiFactorAuthenticationProviderModelAsync(model, selectedProvider, true);
-
-            return View(model);
-        }
-
+       
         //available even when a store is closed
         [CheckAccessClosedStore(true)]
         //available even when navigation is not allowed
@@ -1203,31 +1144,6 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public virtual async Task<IActionResult> RemoveExternalAssociation(int id)
-        {
-            if (!await _customerService.IsRegisteredAsync(await _workContext.GetCurrentCustomerAsync()))
-                return Challenge();
-
-            //ensure it's our record
-            var ear = await _externalAuthenticationService.GetExternalAuthenticationRecordByIdAsync(id);
-
-            if (ear == null)
-            {
-                return Json(new
-                {
-                    redirect = Url.Action("Info"),
-                });
-            }
-
-            await _externalAuthenticationService.DeleteExternalAuthenticationRecordAsync(ear);
-
-            return Json(new
-            {
-                redirect = Url.Action("Info"),
-            });
-        }
-
         //available even when navigation is not allowed
         [CheckAccessPublicStore(true)]
         public virtual async Task<IActionResult> EmailRevalidation(string token, string email, Guid guid)
@@ -1495,190 +1411,8 @@ namespace Nop.Web.Controllers
 
         #endregion
 
-        #region My account / Avatar
+       
 
-        public virtual async Task<IActionResult> Avatar()
-        {
-            if (!await _customerService.IsRegisteredAsync(await _workContext.GetCurrentCustomerAsync()))
-                return Challenge();
-
-            if (!_customerSettings.AllowCustomersToUploadAvatars)
-                return RedirectToRoute("CustomerInfo");
-
-            var model = new CustomerAvatarModel();
-            model = await _customerModelFactory.PrepareCustomerAvatarModelAsync(model);
-
-            return View(model);
-        }
-
-        [HttpPost, ActionName("Avatar")]
-        [FormValueRequired("upload-avatar")]
-        public virtual async Task<IActionResult> UploadAvatar(CustomerAvatarModel model, IFormFile uploadedFile)
-        {
-            var customer = await _workContext.GetCurrentCustomerAsync();
-            if (!await _customerService.IsRegisteredAsync(customer))
-                return Challenge();
-
-            if (!_customerSettings.AllowCustomersToUploadAvatars)
-                return RedirectToRoute("CustomerInfo");
-
-            var contentType = uploadedFile.ContentType.ToLowerInvariant();
-
-            if (!contentType.Equals("image/jpeg") && !contentType.Equals("image/gif"))
-                ModelState.AddModelError("", await _localizationService.GetResourceAsync("Account.Avatar.UploadRules"));
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var customerAvatar = await _pictureService.GetPictureByIdAsync(await _genericAttributeService.GetAttributeAsync<int>(customer, NopCustomerDefaults.AvatarPictureIdAttribute));
-                    if (uploadedFile != null && !string.IsNullOrEmpty(uploadedFile.FileName))
-                    {
-                        var avatarMaxSize = _customerSettings.AvatarMaximumSizeBytes;
-                        if (uploadedFile.Length > avatarMaxSize)
-                            throw new NopException(string.Format(await _localizationService.GetResourceAsync("Account.Avatar.MaximumUploadedFileSize"), avatarMaxSize));
-
-                        var customerPictureBinary = await _downloadService.GetDownloadBitsAsync(uploadedFile);
-                        if (customerAvatar != null)
-                            customerAvatar = await _pictureService.UpdatePictureAsync(customerAvatar.Id, customerPictureBinary, contentType, null);
-                        else
-                            customerAvatar = await _pictureService.InsertPictureAsync(customerPictureBinary, contentType, null);
-                    }
-
-                    var customerAvatarId = 0;
-                    if (customerAvatar != null)
-                        customerAvatarId = customerAvatar.Id;
-
-                    await _genericAttributeService.SaveAttributeAsync(customer, NopCustomerDefaults.AvatarPictureIdAttribute, customerAvatarId);
-
-                    model.AvatarUrl = await _pictureService.GetPictureUrlAsync(
-                        await _genericAttributeService.GetAttributeAsync<int>(customer, NopCustomerDefaults.AvatarPictureIdAttribute),
-                        _mediaSettings.AvatarPictureSize,
-                        false);
-
-                    return View(model);
-                }
-                catch (Exception exc)
-                {
-                    ModelState.AddModelError("", exc.Message);
-                }
-            }
-
-            //If we got this far, something failed, redisplay form
-            model = await _customerModelFactory.PrepareCustomerAvatarModelAsync(model);
-            return View(model);
-        }
-
-        [HttpPost, ActionName("Avatar")]
-        [FormValueRequired("remove-avatar")]
-        public virtual async Task<IActionResult> RemoveAvatar(CustomerAvatarModel model)
-        {
-            var customer = await _workContext.GetCurrentCustomerAsync();
-            if (!await _customerService.IsRegisteredAsync(customer))
-                return Challenge();
-
-            if (!_customerSettings.AllowCustomersToUploadAvatars)
-                return RedirectToRoute("CustomerInfo");
-
-            var customerAvatar = await _pictureService.GetPictureByIdAsync(await _genericAttributeService.GetAttributeAsync<int>(customer, NopCustomerDefaults.AvatarPictureIdAttribute));
-            if (customerAvatar != null)
-                await _pictureService.DeletePictureAsync(customerAvatar);
-            await _genericAttributeService.SaveAttributeAsync(customer, NopCustomerDefaults.AvatarPictureIdAttribute, 0);
-
-            return RedirectToRoute("CustomerAvatar");
-        }
-
-        #endregion
-
-        #region Multi-factor Authentication
-
-        //available even when a store is closed
-        [CheckAccessClosedStore(true)]
-        public virtual async Task<IActionResult> MultiFactorAuthentication()
-        {
-            if (!await _multiFactorAuthenticationPluginManager.HasActivePluginsAsync())
-            {
-                return RedirectToRoute("CustomerInfo");
-            }
-
-            var model = new MultiFactorAuthenticationModel();
-            model = await _customerModelFactory.PrepareMultiFactorAuthenticationModelAsync(model);
-            return View(model);
-        }
-
-        [HttpPost]
-        public virtual async Task<IActionResult> MultiFactorAuthentication(MultiFactorAuthenticationModel model, IFormCollection form)
-        {
-            var customer = await _workContext.GetCurrentCustomerAsync();
-            if (!await _customerService.IsRegisteredAsync(customer))
-                return Challenge();
-
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    //save MultiFactorIsEnabledAttribute
-                    if (!model.IsEnabled)
-                    {
-                        if (!_multiFactorAuthenticationSettings.ForceMultifactorAuthentication)
-                        {
-                            await _genericAttributeService
-                                .SaveAttributeAsync(customer, NopCustomerDefaults.SelectedMultiFactorAuthenticationProviderAttribute, string.Empty);
-
-                            //raise change multi-factor authentication provider event       
-                            await _eventPublisher.PublishAsync(new CustomerChangeMultiFactorAuthenticationProviderEvent(customer));
-                        }
-                        else
-                        {
-                            model = await _customerModelFactory.PrepareMultiFactorAuthenticationModelAsync(model);
-                            model.Message = await _localizationService.GetResourceAsync("Account.MultiFactorAuthentication.Warning.ForceActivation");
-                            return View(model);
-                        }
-                    }
-                    else
-                    {
-                        //save selected multi-factor authentication provider
-                        var selectedProvider = await ParseSelectedProviderAsync(form);
-                        var lastSavedProvider = await _genericAttributeService.GetAttributeAsync<string>(customer, NopCustomerDefaults.SelectedMultiFactorAuthenticationProviderAttribute);
-                        if (string.IsNullOrEmpty(selectedProvider) && !string.IsNullOrEmpty(lastSavedProvider))
-                        {
-                            selectedProvider = lastSavedProvider;
-                        }
-
-                        if (selectedProvider != lastSavedProvider)
-                        {
-                            await _genericAttributeService.SaveAttributeAsync(customer, NopCustomerDefaults.SelectedMultiFactorAuthenticationProviderAttribute, selectedProvider);
-
-                            //raise change multi-factor authentication provider event       
-                            await _eventPublisher.PublishAsync(new CustomerChangeMultiFactorAuthenticationProviderEvent(customer));
-                        }
-                    }
-
-                    return RedirectToRoute("MultiFactorAuthenticationSettings");
-                }
-            }
-            catch (Exception exc)
-            {
-                ModelState.AddModelError("", exc.Message);
-            }
-
-            //If we got this far, something failed, redisplay form
-            model = await _customerModelFactory.PrepareMultiFactorAuthenticationModelAsync(model);
-            return View(model);
-        }
-
-        public virtual async Task<IActionResult> ConfigureMultiFactorAuthenticationProvider(string providerSysName)
-        {
-            if (!await _customerService.IsRegisteredAsync(await _workContext.GetCurrentCustomerAsync()))
-                return Challenge();
-
-            var model = new MultiFactorAuthenticationProviderModel();
-            model = await _customerModelFactory.PrepareMultiFactorAuthenticationProviderModelAsync(model, providerSysName);
-
-            return View(model);
-        }
-
-        #endregion
 
         #endregion
     }

@@ -7,7 +7,6 @@ using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Gdpr;
 using Nop.Core.Events;
 using Nop.Data;
-using Nop.Services.Authentication.External;
 using Nop.Services.Common;
 using Nop.Services.Customers;
 using Nop.Services.Stores;
@@ -23,7 +22,6 @@ namespace Nop.Services.Gdpr
 
         private readonly IAddressService _addressService;
         private readonly ICustomerService _customerService;
-        private readonly IExternalAuthenticationService _externalAuthenticationService;
         private readonly IEventPublisher _eventPublisher;
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly IRepository<GdprConsent> _gdprConsentRepository;
@@ -36,7 +34,6 @@ namespace Nop.Services.Gdpr
 
         public GdprService(IAddressService addressService,
             ICustomerService customerService,
-            IExternalAuthenticationService externalAuthenticationService,
             IEventPublisher eventPublisher,
             IGenericAttributeService genericAttributeService,
             IRepository<GdprConsent> gdprConsentRepository,
@@ -45,7 +42,6 @@ namespace Nop.Services.Gdpr
         {
             _addressService = addressService;
             _customerService = customerService;
-            _externalAuthenticationService = externalAuthenticationService;
             _eventPublisher = eventPublisher;
             _genericAttributeService = genericAttributeService;
             _gdprConsentRepository = gdprConsentRepository;
@@ -243,11 +239,6 @@ namespace Nop.Services.Gdpr
             if (customer == null)
                 throw new ArgumentNullException(nameof(customer));
 
-            
-            //external authentication record
-            foreach (var ear in await _externalAuthenticationService.GetCustomerExternalAuthenticationRecordsAsync(customer))
-                await _externalAuthenticationService.DeleteExternalAuthenticationRecordAsync(ear);
-           
             //addresses
             foreach (var address in await _customerService.GetAddressesByCustomerIdAsync(customer.Id))
             {

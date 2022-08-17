@@ -7,7 +7,6 @@ using Nop.Core;
 using Nop.Core.Configuration;
 using Nop.Core.Domain.Localization;
 using Nop.Core.Domain.Security;
-using Nop.Services.Plugins;
 
 namespace Nop.Services.Localization
 {
@@ -244,29 +243,5 @@ namespace Nop.Services.Localization
         /// <returns>A task that represents the asynchronous operation</returns>
         Task DeleteLocaleResourcesAsync(string resourceNamePrefix, int? languageId = null);
 
-        /// <summary>
-        /// Get localized friendly name of a plugin
-        /// </summary>
-        /// <typeparam name="TPlugin">Plugin type</typeparam>
-        /// <param name="plugin">Plugin</param>
-        /// <param name="languageId">Language identifier</param>
-        /// <param name="returnDefaultValue">A value indicating whether to return default value (if localized is not found)</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the localized value
-        /// </returns>
-        Task<string> GetLocalizedFriendlyNameAsync<TPlugin>(TPlugin plugin, int languageId, bool returnDefaultValue = true)
-            where TPlugin : IPlugin;
-
-        /// <summary>
-        /// Save localized friendly name of a plugin
-        /// </summary>
-        /// <typeparam name="TPlugin">Plugin</typeparam>
-        /// <param name="plugin">Plugin</param>
-        /// <param name="languageId">Language identifier</param>
-        /// <param name="localizedFriendlyName">Localized friendly name</param>
-        /// <returns>A task that represents the asynchronous operation</returns>
-        Task SaveLocalizedFriendlyNameAsync<TPlugin>(TPlugin plugin, int languageId, string localizedFriendlyName)
-            where TPlugin : IPlugin;
     }
 }

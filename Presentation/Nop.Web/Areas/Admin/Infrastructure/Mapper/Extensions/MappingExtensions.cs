@@ -2,7 +2,6 @@
 using Nop.Core;
 using Nop.Core.Configuration;
 using Nop.Core.Infrastructure.Mapper;
-using Nop.Services.Plugins;
 using Nop.Web.Framework.Models;
 
 namespace Nop.Web.Areas.Admin.Infrastructure.Mapper.Extensions
@@ -188,40 +187,6 @@ namespace Nop.Web.Areas.Admin.Infrastructure.Mapper.Extensions
                 throw new ArgumentNullException(nameof(config));
 
             return model.MapTo(config);
-        }
-
-        #endregion
-
-        #region Model-Plugin mapping
-
-        /// <summary>
-        /// Execute a mapping from the plugin to a new plugin model
-        /// </summary>
-        /// <typeparam name="TModel">Model type</typeparam>
-        /// <param name="plugin">Plugin to map from</param>
-        /// <returns>Mapped model</returns>
-        public static TModel ToPluginModel<TModel>(this IPlugin plugin) where TModel : BaseNopModel, IPluginModel
-        {
-            if (plugin == null)
-                throw new ArgumentNullException(nameof(plugin));
-
-            return plugin.Map<TModel>();
-        }
-
-        /// <summary>
-        /// Execute a mapping from the plugin descriptor to the plugin model
-        /// </summary>
-        /// <typeparam name="TModel">Model type</typeparam>
-        /// <param name="pluginDescriptor">Plugin descriptor to map from</param>
-        /// <param name="model">Model to map into; pass null to map to the new model</param>
-        /// <returns>Mapped model</returns>
-        public static TModel ToPluginModel<TModel>(this PluginDescriptor pluginDescriptor, TModel model = null)
-            where TModel : BaseNopModel, IPluginModel
-        {
-            if (pluginDescriptor == null)
-                throw new ArgumentNullException(nameof(pluginDescriptor));
-
-            return model == null ? pluginDescriptor.Map<TModel>() : pluginDescriptor.MapTo(model);
         }
 
         #endregion

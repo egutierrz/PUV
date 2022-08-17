@@ -44,26 +44,20 @@ namespace Nop.Web.Infrastructure
             services.AddScoped<IAddressAttributeModelFactory, AddressAttributeModelFactory>();
             services.AddScoped<ICommonModelFactory, CommonModelFactory>();
             services.AddScoped<ICountryModelFactory, CountryModelFactory>();
-            services.AddScoped<ICurrencyModelFactory, CurrencyModelFactory>();
             services.AddScoped<ICustomerAttributeModelFactory, CustomerAttributeModelFactory>();
             services.AddScoped<ICustomerModelFactory, CustomerModelFactory>();
             services.AddScoped<ICustomerRoleModelFactory, CustomerRoleModelFactory>();
             services.AddScoped<IEmailAccountModelFactory, EmailAccountModelFactory>();
-            services.AddScoped<IExternalAuthenticationMethodModelFactory, ExternalAuthenticationMethodModelFactory>();
             services.AddScoped<IHomeModelFactory, HomeModelFactory>();
             services.AddScoped<ILanguageModelFactory, LanguageModelFactory>();
             services.AddScoped<ILogModelFactory, LogModelFactory>();
             services.AddScoped<IMessageTemplateModelFactory, MessageTemplateModelFactory>();
-            services.AddScoped<IMultiFactorAuthenticationMethodModelFactory, MultiFactorAuthenticationMethodModelFactory>();
-            services.AddScoped<IPluginModelFactory, PluginModelFactory>();
             services.AddScoped<IQueuedEmailModelFactory, QueuedEmailModelFactory>();
             services.AddScoped<IScheduleTaskModelFactory, ScheduleTaskModelFactory>();
             services.AddScoped<ISecurityModelFactory, SecurityModelFactory>();
             services.AddScoped<ISettingModelFactory, SettingModelFactory>();
             services.AddScoped<IComponentSettingModelFactory, ComponentSettingModelFactory>();
             services.AddScoped<IStoreModelFactory, StoreModelFactory>();
-            services.AddScoped<ITemplateModelFactory, TemplateModelFactory>();
-            services.AddScoped<ITopicModelFactory, TopicModelFactory>();
             services.AddScoped<IWidgetModelFactory, WidgetModelFactory>();
             services.AddScoped<IServiceDeskModelFactory, ServiceDeskModelFactory>();
 
@@ -76,9 +70,7 @@ namespace Nop.Web.Infrastructure
             services.AddScoped<Factories.ICommonModelFactory, Factories.CommonModelFactory>();
             services.AddScoped<Factories.ICountryModelFactory, Factories.CountryModelFactory>();
             services.AddScoped<Factories.ICustomerModelFactory, Factories.CustomerModelFactory>();
-            services.AddScoped<Factories.IExternalAuthenticationModelFactory, Factories.ExternalAuthenticationModelFactory>();
             services.AddScoped<Factories.IProfileModelFactory, Factories.ProfileModelFactory>();
-            services.AddScoped<Factories.ITopicModelFactory, Factories.TopicModelFactory>();
             services.AddScoped<Factories.IWidgetModelFactory, Factories.WidgetModelFactory>();
 
             //helpers classes

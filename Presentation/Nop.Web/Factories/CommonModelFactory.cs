@@ -24,9 +24,6 @@ using Nop.Services.Directory;
 using Nop.Services.Localization;
 using Nop.Services.Media;
 using Nop.Services.Security;
-using Nop.Services.Seo;
-using Nop.Services.Themes;
-using Nop.Services.Topics;
 using Nop.Web.Framework.Themes;
 using Nop.Web.Framework.UI;
 using Nop.Web.Infrastructure.Cache;
@@ -56,19 +53,13 @@ namespace Nop.Web.Factories
         private readonly INopFileProvider _fileProvider;
         private readonly INopHtmlHelper _nopHtmlHelper;
         private readonly IPermissionService _permissionService;
-        private readonly IPictureService _pictureService;
-        private readonly ISitemapGenerator _sitemapGenerator;
         private readonly IStaticCacheManager _staticCacheManager;
         private readonly IStoreContext _storeContext;
         private readonly IThemeContext _themeContext;
-        private readonly IThemeProvider _themeProvider;
-        private readonly ITopicService _topicService;
         private readonly IUrlHelperFactory _urlHelperFactory;
-        private readonly IUrlRecordService _urlRecordService;
         private readonly IWebHelper _webHelper;
         private readonly IWorkContext _workContext;
         private readonly LocalizationSettings _localizationSettings;
-        private readonly MediaSettings _mediaSettings;
         private readonly SitemapSettings _sitemapSettings;
         private readonly SitemapXmlSettings _sitemapXmlSettings;
         private readonly StoreInformationSettings _storeInformationSettings;
@@ -93,19 +84,13 @@ namespace Nop.Web.Factories
             INopFileProvider fileProvider,
             INopHtmlHelper nopHtmlHelper,
             IPermissionService permissionService,
-            IPictureService pictureService,
-            ISitemapGenerator sitemapGenerator,
             IStaticCacheManager staticCacheManager,
             IStoreContext storeContext,
             IThemeContext themeContext,
-            IThemeProvider themeProvider,
-            ITopicService topicService,
             IUrlHelperFactory urlHelperFactory,
-            IUrlRecordService urlRecordService,
             IWebHelper webHelper,
             IWorkContext workContext,
             LocalizationSettings localizationSettings,
-            MediaSettings mediaSettings,
             SitemapSettings sitemapSettings,
             SitemapXmlSettings sitemapXmlSettings,
             StoreInformationSettings storeInformationSettings)
@@ -125,18 +110,12 @@ namespace Nop.Web.Factories
             _fileProvider = fileProvider;
             _nopHtmlHelper = nopHtmlHelper;
             _permissionService = permissionService;
-            _pictureService = pictureService;
-            _sitemapGenerator = sitemapGenerator;
             _staticCacheManager = staticCacheManager;
             _storeContext = storeContext;
             _themeContext = themeContext;
-            _themeProvider = themeProvider;
-            _topicService = topicService;
             _urlHelperFactory = urlHelperFactory;
-            _urlRecordService = urlRecordService;
             _webHelper = webHelper;
             _workContext = workContext;
-            _mediaSettings = mediaSettings;
             _localizationSettings = localizationSettings;
             _sitemapSettings = sitemapSettings;
             _sitemapXmlSettings = sitemapXmlSettings;
@@ -169,24 +148,8 @@ namespace Nop.Web.Factories
 
             var cacheKey = _staticCacheManager.PrepareKeyForDefaultCache(NopModelCacheDefaults.StoreLogoPath
                 , store, await _themeContext.GetWorkingThemeNameAsync(), _webHelper.IsCurrentConnectionSecured());
-            model.LogoPath = await _staticCacheManager.GetAsync(cacheKey, async () =>
-            {
-                var logo = string.Empty;
-                var logoPictureId = _storeInformationSettings.LogoPictureId;
+            model.LogoPath = String.Empty;
 
-                if (logoPictureId > 0)
-                    logo = await _pictureService.GetPictureUrlAsync(logoPictureId, showDefaultPicture: false);
-
-                if (string.IsNullOrEmpty(logo))
-                {
-                    //use default logo
-                    var pathBase = _httpContextAccessor.HttpContext.Request.PathBase.Value ?? string.Empty;
-                    var storeLocation = _mediaSettings.UseAbsoluteImagePath ? _webHelper.GetStoreLocation() : $"{pathBase}/";
-                    logo = $"{storeLocation}Themes/{await _themeContext.GetWorkingThemeNameAsync()}/Content/images/logo.png";
-                }
-
-                return logo;
-            });
 
             return model;
         }
@@ -338,18 +301,7 @@ namespace Nop.Web.Factories
         {
             //footer topics
             var store = await _storeContext.GetCurrentStoreAsync();
-            var topicModels = await (await _topicService.GetAllTopicsAsync(store.Id))
-                    .Where(t => t.IncludeInFooterColumn1 || t.IncludeInFooterColumn2 || t.IncludeInFooterColumn3)
-                    .SelectAwait(async t => new FooterModel.FooterTopicModel
-                    {
-                        Id = t.Id,
-                        Name = await _localizationService.GetLocalizedAsync(t, x => x.Title),
-                        SeName = await _urlRecordService.GetSeNameAsync(t),
-                        IncludeInFooterColumn1 = t.IncludeInFooterColumn1,
-                        IncludeInFooterColumn2 = t.IncludeInFooterColumn2,
-                        IncludeInFooterColumn3 = t.IncludeInFooterColumn3
-                    }).ToListAsync();
-
+            
             //model
             var model = new FooterModel
             {
@@ -366,7 +318,6 @@ namespace Nop.Web.Factories
                 HidePoweredByNopCommerce = _storeInformationSettings.HidePoweredByNopCommerce,
                 IsHomePage = _webHelper.GetStoreLocation().Equals(_webHelper.GetThisPageUrl(false), StringComparison.InvariantCultureIgnoreCase),
                 AllowCustomersToCheckGiftCardBalance = _customerSettings.AllowCustomersToCheckGiftCardBalance && _captchaSettings.Enabled,
-                Topics = topicModels,
                 DisplaySitemapFooterItem = _displayDefaultFooterItemSettings.DisplaySitemapFooterItem,
                 DisplayContactUsFooterItem = _displayDefaultFooterItemSettings.DisplayContactUsFooterItem,
                 DisplayProductSearchFooterItem = _displayDefaultFooterItemSettings.DisplayProductSearchFooterItem,
@@ -475,21 +426,6 @@ namespace Nop.Web.Factories
                     Name = await _localizationService.GetResourceAsync("Account.MyAccount"),
                     Url = urlHelper.RouteUrl("CustomerInfo")
                 });
-
-                //at the moment topics are in general category too
-                if (_sitemapSettings.SitemapIncludeTopics)
-                {
-                    var topics = (await _topicService.GetAllTopicsAsync(storeId: store.Id))
-                        .Where(topic => topic.IncludeInSitemap);
-
-                    model.Items.AddRange(await topics.SelectAwait(async topic => new SitemapModel.SitemapItemModel
-                    {
-                        GroupTitle = commonGroupTitle,
-                        Name = await _localizationService.GetLocalizedAsync(topic, x => x.Title),
-                        Url = urlHelper.RouteUrl("Topic", new { SeName = await _urlRecordService.GetSeNameAsync(topic) })
-                    }).ToListAsync());
-                }
-
                 
                 return model;
             });
@@ -505,54 +441,6 @@ namespace Nop.Web.Factories
             return sitemapModel;
         }
 
-        /// <summary>
-        /// Get the sitemap in XML format
-        /// </summary>
-        /// <param name="id">Sitemap identifier; pass null to load the first sitemap or sitemap index file</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the sitemap as string in XML format
-        /// </returns>
-        public virtual async Task<string> PrepareSitemapXmlAsync(int? id)
-        {
-            var language = await _workContext.GetWorkingLanguageAsync();
-            var customer = await _workContext.GetCurrentCustomerAsync();
-            var customerRoleIds = await _customerService.GetCustomerRoleIdsAsync(customer);
-            var store = await _storeContext.GetCurrentStoreAsync();
-            var cacheKey = _staticCacheManager.PrepareKeyForDefaultCache(NopModelCacheDefaults.SitemapSeoModelKey,
-                id, language, customerRoleIds, store);
-
-            var siteMap = await _staticCacheManager.GetAsync(cacheKey, async () => await _sitemapGenerator.GenerateAsync(id));
-
-            return siteMap;
-        }
-
-        /// <summary>
-        /// Prepare the store theme selector model
-        /// </summary>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the store theme selector model
-        /// </returns>
-        public virtual async Task<StoreThemeSelectorModel> PrepareStoreThemeSelectorModelAsync()
-        {
-            var model = new StoreThemeSelectorModel();
-
-            var currentTheme = await _themeProvider.GetThemeBySystemNameAsync(await _themeContext.GetWorkingThemeNameAsync());
-            model.CurrentStoreTheme = new StoreThemeModel
-            {
-                Name = currentTheme?.SystemName,
-                Title = currentTheme?.FriendlyName
-            };
-
-            model.AvailableStoreThemes = (await _themeProvider.GetThemesAsync()).Select(x => new StoreThemeModel
-            {
-                Name = x.SystemName,
-                Title = x.FriendlyName
-            }).ToList();
-
-            return model;
-        }
 
         /// <summary>
         /// Prepare the favicon model

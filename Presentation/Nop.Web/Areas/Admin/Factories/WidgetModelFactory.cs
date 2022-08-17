@@ -74,20 +74,21 @@ namespace Nop.Web.Areas.Admin.Factories
                 .ToPagedList(searchModel);
 
             //prepare grid model
-            var model = new WidgetListModel().PrepareToGrid(searchModel, widgets, () =>
-            {
-                return widgets.Select(widget =>
-                {
-                    //fill in model values from the entity
-                    var widgetMethodModel = widget.ToPluginModel<WidgetModel>();
+            var model = new WidgetListModel();
+            //new WidgetListModel().PrepareToGrid(searchModel, widgets, () =>
+            //{
+            //    return widgets.Select(widget =>
+            //    {
+            //        //fill in model values from the entity
+            //        var widgetMethodModel = widget.ToPluginModel<WidgetModel>();
 
-                    //fill in additional values (not existing in the entity)
-                    widgetMethodModel.IsActive = _widgetPluginManager.IsPluginActive(widget);
-                    widgetMethodModel.ConfigurationUrl = widget.GetConfigurationPageUrl();
+            //        //fill in additional values (not existing in the entity)
+            //        widgetMethodModel.IsActive = _widgetPluginManager.IsPluginActive(widget);
+            //        widgetMethodModel.ConfigurationUrl = widget.GetConfigurationPageUrl();
 
-                    return widgetMethodModel;
-                });
-            });
+            //        return widgetMethodModel;
+            //    });
+            //});
 
             return model;
         }

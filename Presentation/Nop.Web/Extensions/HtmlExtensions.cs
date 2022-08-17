@@ -6,9 +6,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Nop.Core;
 using Nop.Core.Infrastructure;
 using Nop.Services.Localization;
-using Nop.Services.Seo;
-using Nop.Services.Themes;
-using Nop.Services.Topics;
 using Nop.Web.Framework.Extensions;
 using Nop.Web.Framework.Themes;
 using Nop.Web.Framework.UI.Paging;
@@ -268,32 +265,6 @@ namespace Nop.Web.Extensions
             return new Pager(model, helper.ViewContext);
         }
 
-        
-        /// <summary>
-        /// Get topic SEO name by system name
-        /// </summary>
-        /// <typeparam name="TModel">Model type</typeparam>
-        /// <param name="html">HTML helper</param>
-        /// <param name="systemName">System name</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the topic SEO Name
-        /// </returns>
-        public static async Task<string> GetTopicSeNameAsync<TModel>(this IHtmlHelper<TModel> html, string systemName)
-        {
-            var storeContext = EngineContext.Current.Resolve<IStoreContext>();
-            var store = await storeContext.GetCurrentStoreAsync();
-            var topicService = EngineContext.Current.Resolve<ITopicService>();
-            var topic = await topicService.GetTopicBySystemNameAsync(systemName, store.Id);
-
-            if (topic == null)
-                return string.Empty;
-
-            var urlRecordService = EngineContext.Current.Resolve<IUrlRecordService>();
-
-            return await urlRecordService.GetSeNameAsync(topic);
-        }
-
         /// <summary>
         /// Get a value of the text flow uses for the current UI culture
         /// </summary>
@@ -308,25 +279,6 @@ namespace Nop.Web.Extensions
             return CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft ? "rtl" : "ltr";
         }
 
-        /// <summary>
-        /// Return a value indicating whether the working language and theme support RTL (right-to-left)
-        /// </summary>
-        /// <param name="html">HTML helper</param>
-        /// <param name="themeName">Theme name</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the value
-        /// </returns>
-        public static async Task<bool> ShouldUseRtlThemeAsync(this IHtmlHelper html, string themeName = null)
-        {
-            if (!CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft)
-                return false;
-
-            //ensure that the active theme also supports it
-            themeName ??= await EngineContext.Current.Resolve<IThemeContext>().GetWorkingThemeNameAsync();
-            var theme = await EngineContext.Current.Resolve<IThemeProvider>().GetThemeBySystemNameAsync(themeName);
-
-            return theme?.SupportRtl ?? false;
-        }
+        
     }
 }

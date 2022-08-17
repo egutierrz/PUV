@@ -31,7 +31,6 @@ namespace Nop.Services.Plugins
         private readonly INopFileProvider _fileProvider;
         private readonly IPluginsInfo _pluginsInfo;
         private readonly IWebHelper _webHelper;
-        private readonly MediaSettings _mediaSettings;
 
         #endregion
 
@@ -43,8 +42,7 @@ namespace Nop.Services.Plugins
             IMigrationManager migrationManager,
             ILogger logger,
             INopFileProvider fileProvider,
-            IWebHelper webHelper,
-            MediaSettings mediaSettings)
+            IWebHelper webHelper)
         {
             _catalogSettings = catalogSettings;
             _customerService = customerService;
@@ -54,7 +52,6 @@ namespace Nop.Services.Plugins
             _fileProvider = fileProvider;
             _pluginsInfo = Singleton<IPluginsInfo>.Instance;
             _webHelper = webHelper;
-            _mediaSettings = mediaSettings;
         }
 
         #endregion
@@ -318,23 +315,8 @@ namespace Nop.Services.Plugins
         /// </returns>
         public virtual Task<string> GetPluginLogoUrlAsync(PluginDescriptor pluginDescriptor)
         {
-            var pluginDirectory = _fileProvider.GetDirectoryName(pluginDescriptor.OriginalAssemblyFile);
-            if (string.IsNullOrEmpty(pluginDirectory))
-                return Task.FromResult<string>(null);
 
-            //check for supported extensions
-            var logoExtension = NopPluginDefaults.SupportedLogoImageExtensions
-                .FirstOrDefault(ext => _fileProvider.FileExists(_fileProvider.Combine(pluginDirectory, $"{NopPluginDefaults.LogoFileName}.{ext}")));
-            if (string.IsNullOrWhiteSpace(logoExtension))
-                return Task.FromResult<string>(null);
-
-            var pathBase = _httpContextAccessor.HttpContext.Request.PathBase.Value ?? string.Empty;
-            var logoPathUrl = _mediaSettings.UseAbsoluteImagePath ? _webHelper.GetStoreLocation() : $"{pathBase}/";
-
-            var logoUrl = $"{logoPathUrl}{NopPluginDefaults.PathName}/" +
-                $"{_fileProvider.GetDirectoryNameOnly(pluginDirectory)}/{NopPluginDefaults.LogoFileName}.{logoExtension}";
-
-            return Task.FromResult(logoUrl);
+            return Task.FromResult("");
         }
 
         /// <summary>

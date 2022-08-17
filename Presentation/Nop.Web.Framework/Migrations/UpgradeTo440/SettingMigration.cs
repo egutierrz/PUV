@@ -3,12 +3,10 @@ using Nop.Core.Domain.Common;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Configuration;
 using Nop.Core.Domain.Customers;
-using Nop.Core.Domain.Seo;
 using Nop.Core.Infrastructure;
 using Nop.Data;
 using Nop.Data.Migrations;
 using Nop.Services.Configuration;
-using Nop.Services.Seo;
 
 namespace Nop.Web.Framework.Migrations.UpgradeTo440
 {
@@ -53,28 +51,6 @@ namespace Nop.Web.Framework.Migrations.UpgradeTo440
                     setting.Name == "commonsettings.supportpreviousnopcommerceversions" ||
                     setting.Name == "securitysettings.pluginstaticfileextensionsBlacklist")
                 .Wait();
-
-            //#5384
-            var seoSettings = settingService.LoadSettingAsync<SeoSettings>().Result;
-            foreach (var slug in NopSeoDefaults.ReservedUrlRecordSlugs)
-            {
-                if (!seoSettings.ReservedUrlRecordSlugs.Contains(slug))
-                    seoSettings.ReservedUrlRecordSlugs.Add(slug);
-            }
-            settingService.SaveSettingAsync(seoSettings, settings => seoSettings.ReservedUrlRecordSlugs).Wait();
-
-            //#3015
-            if (!settingService.SettingExistsAsync(seoSettings, settings => settings.HomepageTitle).Result)
-            {
-                seoSettings.HomepageTitle = seoSettings.DefaultTitle;
-                settingService.SaveSettingAsync(seoSettings, settings => settings.HomepageTitle).Wait();
-            }
-
-            if (!settingService.SettingExistsAsync(seoSettings, settings => settings.HomepageDescription).Result)
-            {
-                seoSettings.HomepageDescription = "Your home page description";
-                settingService.SaveSettingAsync(seoSettings, settings => settings.HomepageDescription).Wait();
-            }
 
             //#5210
             var adminAreaSettings = settingService.LoadSettingAsync<AdminAreaSettings>().Result;

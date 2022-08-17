@@ -1,7 +1,6 @@
 ﻿@using Nop.Web.Framework.Models.AdminAreaTour
 @inject Nop.Services.Stores.IStoreService storeService
 @inject Nop.Services.Messages.IEmailAccountService emailAccountService
-@inject Nop.Services.Topics.ITopicService topicService
 
 @{
     var showTour = ViewBag.ShowTour ?? false;
@@ -265,48 +264,7 @@
             </script>
             break;
 
-        case TourStep.TopicList:
-            entityId = (await topicService.GetTopicBySystemNameAsync("ShippingInfo"))?.Id ?? 0;
-
-            <script asp-exclude-from-bundle="true" src="~/js/admintour/admin.tour.topiclist.js" asp-location="Footer"></script>
-            <script asp-location="Footer">
-                var localized_data = {
-                    Done: '@T("Admin.ConfigurationSteps.Done")',
-
-                    TopicListTopics1Title: '@T("Admin.ConfigurationSteps.TopicList.Topics1.Title")',
-                    TopicListTopics1Text: '@T("Admin.ConfigurationSteps.TopicList.Topics1.Text")',
-
-                    TopicListTopics2Title: '@T("Admin.ConfigurationSteps.TopicList.Topics2.Title")',
-                    TopicListTopics2Text: '@T("Admin.ConfigurationSteps.TopicList.Topics2.Text")',
-
-                    TopicListShippingTitle: '@T("Admin.ConfigurationSteps.TopicList.Shipping.Title")',
-                    TopicListShippingText: '@T("Admin.ConfigurationSteps.TopicList.Shipping.Text")',
-
-                    TopicListLocationTitle: '@T("Admin.ConfigurationSteps.TopicList.Location.Title")',
-                    TopicListLocationText: '@T("Admin.ConfigurationSteps.TopicList.Location.Text")',
-
-                    TopicListEditTitle: '@T("Admin.ConfigurationSteps.TopicList.Edit.Title")',
-                    TopicListEditText: '@T("Admin.ConfigurationSteps.TopicList.Edit.Text")',
-                };
-            </script>
-            break;
-
-        case TourStep.Topic:
-
-            <script asp-exclude-from-bundle="true" src="~/js/admintour/admin.tour.topic.js" asp-location="Footer"></script>
-            <script asp-location="Footer">
-                var localized_data = {
-                    Done: '@T("Admin.ConfigurationSteps.Done")',
-
-                    TopicTitleContentTitle: '@T("Admin.ConfigurationSteps.Topic.TitleContent.Title")',
-                    TopicTitleContentText: '@T("Admin.ConfigurationSteps.Topic.TitleContent.Text")',
-
-                    TopicPreviewTitle: '@T("Admin.ConfigurationSteps.Topic.Preview.Title")',
-                    TopicPreviewText: '@T("Admin.ConfigurationSteps.Topic.Preview.Text")',
-                };
-            </script>
-            break;
-
+       
         default:
             break;
     }

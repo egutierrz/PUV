@@ -1,7 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Nop.Services.Seo;
-using Nop.Services.Topics;
 
 namespace Nop.Web.Controllers
 {
@@ -11,38 +9,19 @@ namespace Nop.Web.Controllers
     {
         #region Fields
 
-        private readonly ITopicService _topicService;
-        private readonly IUrlRecordService _urlRecordService;
-
         #endregion
 
         #region Ctor
 
-        public BackwardCompatibility2XController(
-            ITopicService topicService,
-            IUrlRecordService urlRecordService)
-        {            
-            _topicService = topicService;
-            _urlRecordService = urlRecordService;
+        public BackwardCompatibility2XController()
+        {
         }
 
         #endregion
 
         #region Methods
 
-        
-        //in versions 2.00-3.20 we had SystemName in topic URLs
-        public virtual async Task<IActionResult> RedirectTopicBySystemName(string systemName)
-        {
-            var topic = await _topicService.GetTopicBySystemNameAsync(systemName);
-            if (topic == null)
-                return RedirectToRoutePermanent("Homepage");
-
-            return RedirectToRoutePermanent("Topic", new { SeName = await _urlRecordService.GetSeNameAsync(topic) });
-        }
-
-       
-
+    
         #endregion
     }
 }

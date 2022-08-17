@@ -17,12 +17,10 @@ using Nop.Core.Domain.Gdpr;
 using Nop.Core.Domain.Localization;
 using Nop.Core.Domain.Media;
 using Nop.Core.Domain.Security;
-using Nop.Core.Domain.Seo;
 using Nop.Core.Events;
 using Nop.Core.Infrastructure;
 using Nop.Data;
 using Nop.Data.Configuration;
-using Nop.Services.Authentication.MultiFactor;
 using Nop.Services.Common;
 using Nop.Services.Configuration;
 using Nop.Services.Customers;
@@ -33,7 +31,6 @@ using Nop.Services.Logging;
 using Nop.Services.Media;
 using Nop.Services.Media.RoxyFileman;
 using Nop.Services.Messages;
-using Nop.Services.Plugins;
 using Nop.Services.Security;
 using Nop.Services.Stores;
 using Nop.Web.Areas.Admin.Factories;
@@ -62,11 +59,9 @@ namespace Nop.Web.Areas.Admin.Controllers
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly ILocalizedEntityService _localizedEntityService;
         private readonly ILocalizationService _localizationService;
-        private readonly IMultiFactorAuthenticationPluginManager _multiFactorAuthenticationPluginManager;
         private readonly INopFileProvider _fileProvider;
         private readonly INotificationService _notificationService;
         private readonly IPermissionService _permissionService;
-        private readonly IPictureService _pictureService;
         private readonly IRoxyFilemanService _roxyFilemanService;
         private readonly IServiceScopeFactory _serviceScopeFactory;
         private readonly ISettingModelFactory _settingModelFactory;
@@ -74,7 +69,6 @@ namespace Nop.Web.Areas.Admin.Controllers
         private readonly IStoreContext _storeContext;
         private readonly IStoreService _storeService;
         private readonly IWorkContext _workContext;
-        private readonly IUploadService _uploadService;
         private readonly IGdprService _gdprService;
 
         #endregion
@@ -91,11 +85,9 @@ namespace Nop.Web.Areas.Admin.Controllers
             IGenericAttributeService genericAttributeService,
             ILocalizedEntityService localizedEntityService,
             ILocalizationService localizationService,
-            IMultiFactorAuthenticationPluginManager multiFactorAuthenticationPluginManager,
             INopFileProvider fileProvider,
             INotificationService notificationService,
             IPermissionService permissionService,
-            IPictureService pictureService,
             IRoxyFilemanService roxyFilemanService,
             IServiceScopeFactory serviceScopeFactory,
             ISettingModelFactory settingModelFactory,
@@ -103,7 +95,6 @@ namespace Nop.Web.Areas.Admin.Controllers
             IStoreContext storeContext,
             IStoreService storeService,
             IWorkContext workContext,
-            IUploadService uploadService,
             IGdprService gdprService)
         {
             _appSettings = appSettings;
@@ -117,11 +108,9 @@ namespace Nop.Web.Areas.Admin.Controllers
             _gdprService = gdprService;
             _localizedEntityService = localizedEntityService;
             _localizationService = localizationService;
-            _multiFactorAuthenticationPluginManager = multiFactorAuthenticationPluginManager;
             _fileProvider = fileProvider;
             _notificationService = notificationService;
             _permissionService = permissionService;
-            _pictureService = pictureService;
             _roxyFilemanService = roxyFilemanService;
             _serviceScopeFactory = serviceScopeFactory;
             _settingModelFactory = settingModelFactory;
@@ -129,7 +118,6 @@ namespace Nop.Web.Areas.Admin.Controllers
             _storeContext = storeContext;
             _storeService = storeService;
             _workContext = workContext;
-            _uploadService = uploadService;
         }
 
         #endregion
@@ -251,97 +239,6 @@ namespace Nop.Web.Areas.Admin.Controllers
             await _settingService.ClearCacheAsync();
 
             return new NullJsonResult();
-        }
-
-        
-        public virtual async Task<IActionResult> Media()
-        {
-            if (!await _permissionService.AuthorizeAsync(StandardPermissionProvider.ManageSettings))
-                return AccessDeniedView();
-
-            //prepare model
-            var model = await _settingModelFactory.PrepareMediaSettingsModelAsync();
-
-            return View(model);
-        }
-
-        [HttpPost]
-        [FormValueRequired("save")]
-        public virtual async Task<IActionResult> Media(MediaSettingsModel model)
-        {
-            if (!await _permissionService.AuthorizeAsync(StandardPermissionProvider.ManageSettings))
-                return AccessDeniedView();
-
-            if (ModelState.IsValid)
-            { 
-                //load settings for a chosen store scope
-                var storeScope = await _storeContext.GetActiveStoreScopeConfigurationAsync();
-                var mediaSettings = await _settingService.LoadSettingAsync<MediaSettings>(storeScope);
-                mediaSettings = model.ToSettings(mediaSettings);
-
-                //we do not clear cache after each setting update.
-                //this behavior can increase performance because cached settings will not be cleared 
-                //and loaded from database after each update
-                await _settingService.SaveSettingOverridablePerStoreAsync(mediaSettings, x => x.AvatarPictureSize, model.AvatarPictureSize_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(mediaSettings, x => x.ProductThumbPictureSize, model.ProductThumbPictureSize_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(mediaSettings, x => x.ProductDetailsPictureSize, model.ProductDetailsPictureSize_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(mediaSettings, x => x.ProductThumbPictureSizeOnProductDetailsPage, model.ProductThumbPictureSizeOnProductDetailsPage_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(mediaSettings, x => x.AssociatedProductPictureSize, model.AssociatedProductPictureSize_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(mediaSettings, x => x.CategoryThumbPictureSize, model.CategoryThumbPictureSize_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(mediaSettings, x => x.ManufacturerThumbPictureSize, model.ManufacturerThumbPictureSize_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(mediaSettings, x => x.VendorThumbPictureSize, model.VendorThumbPictureSize_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(mediaSettings, x => x.CartThumbPictureSize, model.CartThumbPictureSize_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(mediaSettings, x => x.MiniCartThumbPictureSize, model.MiniCartThumbPictureSize_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(mediaSettings, x => x.MaximumImageSize, model.MaximumImageSize_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(mediaSettings, x => x.MultipleThumbDirectories, model.MultipleThumbDirectories_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(mediaSettings, x => x.DefaultImageQuality, model.DefaultImageQuality_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(mediaSettings, x => x.ImportProductImagesUsingHash, model.ImportProductImagesUsingHash_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(mediaSettings, x => x.DefaultPictureZoomEnabled, model.DefaultPictureZoomEnabled_OverrideForStore, storeScope, false);
-
-                //now clear settings cache
-                await _settingService.ClearCacheAsync();
-
-                //activity log
-                await _customerActivityService.InsertActivityAsync("EditSettings", await _localizationService.GetResourceAsync("ActivityLog.EditSettings"));
-
-                _notificationService.SuccessNotification(await _localizationService.GetResourceAsync("Admin.Configuration.Updated"));
-
-                return RedirectToAction("Media");
-            }
-
-            //prepare model
-            model = await _settingModelFactory.PrepareMediaSettingsModelAsync(model);
-
-            //if we got this far, something failed, redisplay form
-            return View(model);
-        }
-
-        [HttpPost, ActionName("Media")]
-        [FormValueRequired("change-picture-storage")]
-        public virtual async Task<IActionResult> ChangePictureStorage()
-        {
-            if (!await _permissionService.AuthorizeAsync(StandardPermissionProvider.ManageSettings))
-                return AccessDeniedView();
-
-            await _roxyFilemanService.FlushAllImagesOnDiskAsync();
-
-            await _pictureService.SetIsStoreInDbAsync(!await _pictureService.IsStoreInDbAsync());
-
-            //use "Resolve" to load the correct service
-            //we do it because the IRoxyFilemanService service is registered for
-            //a scope and in the usual way to get a new instance there is no possibility
-            using (var scope = _serviceScopeFactory.CreateScope())
-            {
-                var newRoxyFilemanService = EngineContext.Current.Resolve<IRoxyFilemanService>(scope);
-                await newRoxyFilemanService.ConfigureAsync();
-            }
-
-            //activity log
-            await _customerActivityService.InsertActivityAsync("EditSettings", await _localizationService.GetResourceAsync("ActivityLog.EditSettings"));
-
-            _notificationService.SuccessNotification(await _localizationService.GetResourceAsync("Admin.Configuration.Updated"));
-
-            return RedirectToAction("Media");
         }
 
         public virtual async Task<IActionResult> CustomerUser()
@@ -715,43 +612,7 @@ namespace Nop.Web.Areas.Admin.Controllers
                 //now clear settings cache
                 await _settingService.ClearCacheAsync();
 
-                //seo settings
-                var seoSettings = await _settingService.LoadSettingAsync<SeoSettings>(storeScope);
-                seoSettings.PageTitleSeparator = model.SeoSettings.PageTitleSeparator;
-                seoSettings.PageTitleSeoAdjustment = (PageTitleSeoAdjustment)model.SeoSettings.PageTitleSeoAdjustment;
-                seoSettings.HomepageTitle = model.SeoSettings.HomepageTitle;
-                seoSettings.HomepageDescription = model.SeoSettings.HomepageDescription;
-                seoSettings.DefaultTitle = model.SeoSettings.DefaultTitle;
-                seoSettings.DefaultMetaKeywords = model.SeoSettings.DefaultMetaKeywords;
-                seoSettings.DefaultMetaDescription = model.SeoSettings.DefaultMetaDescription;
-                seoSettings.GenerateProductMetaDescription = model.SeoSettings.GenerateProductMetaDescription;
-                seoSettings.ConvertNonWesternChars = model.SeoSettings.ConvertNonWesternChars;
-                seoSettings.CanonicalUrlsEnabled = model.SeoSettings.CanonicalUrlsEnabled;
-                seoSettings.WwwRequirement = (WwwRequirement)model.SeoSettings.WwwRequirement;
-                seoSettings.TwitterMetaTags = model.SeoSettings.TwitterMetaTags;
-                seoSettings.OpenGraphMetaTags = model.SeoSettings.OpenGraphMetaTags;
-                seoSettings.MicrodataEnabled = model.SeoSettings.MicrodataEnabled;
-                seoSettings.CustomHeadTags = model.SeoSettings.CustomHeadTags;
-
-                //we do not clear cache after each setting update.
-                //this behavior can increase performance because cached settings will not be cleared 
-                //and loaded from database after each update
-                await _settingService.SaveSettingOverridablePerStoreAsync(seoSettings, x => x.PageTitleSeparator, model.SeoSettings.PageTitleSeparator_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(seoSettings, x => x.PageTitleSeoAdjustment, model.SeoSettings.PageTitleSeoAdjustment_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(seoSettings, x => x.HomepageTitle, model.SeoSettings.HomepageTitle_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(seoSettings, x => x.HomepageDescription, model.SeoSettings.HomepageDescription_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(seoSettings, x => x.DefaultTitle, model.SeoSettings.DefaultTitle_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(seoSettings, x => x.DefaultMetaKeywords, model.SeoSettings.DefaultMetaKeywords_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(seoSettings, x => x.DefaultMetaDescription, model.SeoSettings.DefaultMetaDescription_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(seoSettings, x => x.GenerateProductMetaDescription, model.SeoSettings.GenerateProductMetaDescription_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(seoSettings, x => x.ConvertNonWesternChars, model.SeoSettings.ConvertNonWesternChars_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(seoSettings, x => x.CanonicalUrlsEnabled, model.SeoSettings.CanonicalUrlsEnabled_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(seoSettings, x => x.WwwRequirement, model.SeoSettings.WwwRequirement_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(seoSettings, x => x.TwitterMetaTags, model.SeoSettings.TwitterMetaTags_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(seoSettings, x => x.OpenGraphMetaTags, model.SeoSettings.OpenGraphMetaTags_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(seoSettings, x => x.CustomHeadTags, model.SeoSettings.CustomHeadTags_OverrideForStore, storeScope, false);
-                await _settingService.SaveSettingOverridablePerStoreAsync(seoSettings, x => x.MicrodataEnabled, model.SeoSettings.MicrodataEnabled_OverrideForStore, storeScope, false);
-
+                
                 //now clear settings cache
                 await _settingService.ClearCacheAsync();
 
@@ -986,7 +847,6 @@ namespace Nop.Web.Areas.Admin.Controllers
 
             try
             {
-                _uploadService.UploadLocalePattern();
                 _notificationService.SuccessNotification(await _localizationService.GetResourceAsync("Admin.Configuration.Settings.GeneralCommon.LocalePattern.SuccessUpload"));
             }
             catch (Exception exc)
@@ -1015,29 +875,6 @@ namespace Nop.Web.Areas.Admin.Controllers
                 var storeScope = await _storeContext.GetActiveStoreScopeConfigurationAsync();
                 var commonSettings = await _settingService.LoadSettingAsync<CommonSettings>(storeScope);
 
-                switch (_fileProvider.GetFileExtension(iconsFile.FileName))
-                {
-                    case ".ico":
-                        _uploadService.UploadFavicon(iconsFile);
-                        commonSettings.FaviconAndAppIconsHeadCode = string.Format(NopCommonDefaults.SingleFaviconHeadLink, storeScope, iconsFile.FileName);
-
-                        break;
-
-                    case ".zip":
-                        _uploadService.UploadIconsArchive(iconsFile);
-
-                        var headCodePath = _fileProvider.GetAbsolutePath(string.Format(NopCommonDefaults.FaviconAndAppIconsPath, storeScope), NopCommonDefaults.HeadCodeFileName);
-                        if (!_fileProvider.FileExists(headCodePath))
-                            throw new Exception(string.Format(await _localizationService.GetResourceAsync("Admin.Configuration.Settings.GeneralCommon.FaviconAndAppIcons.MissingFile"), NopCommonDefaults.HeadCodeFileName));
-
-                        using (var sr = new StreamReader(headCodePath))
-                            commonSettings.FaviconAndAppIconsHeadCode = await sr.ReadToEndAsync();
-
-                        break;
-
-                    default:
-                        throw new InvalidOperationException("File is not supported.");
-                }
 
                 await _settingService.SaveSettingOverridablePerStoreAsync(commonSettings, x => x.FaviconAndAppIconsHeadCode, true, storeScope);
 
@@ -1172,22 +1009,6 @@ namespace Nop.Web.Areas.Admin.Controllers
                 {
                     Result = await _localizationService
                         .GetResourceAsync("Admin.Configuration.Settings.GeneralCommon.LoadAllLocaleRecordsOnStartup.Warning")
-                });
-            }
-
-            return Json(new { Result = string.Empty });
-        }
-
-        //Action that displays a notification (warning) to the store owner about the absence of active authentication providers
-        public async Task<IActionResult> ForceMultifactorAuthenticationWarning(bool forceMultifactorAuthentication)
-        {
-            //ForceMultifactorAuthentication is set and the store haven't active Authentication provider , so display warning
-            if (forceMultifactorAuthentication && !await _multiFactorAuthenticationPluginManager.HasActivePluginsAsync())
-            {
-                return Json(new
-                {
-                    Result = await _localizationService
-                        .GetResourceAsync("Admin.Configuration.Settings.CustomerUser.ForceMultifactorAuthentication.Warning")
                 });
             }
 

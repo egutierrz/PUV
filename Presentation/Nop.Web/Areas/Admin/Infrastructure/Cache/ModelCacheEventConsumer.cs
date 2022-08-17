@@ -4,7 +4,6 @@ using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Configuration;
 using Nop.Core.Events;
 using Nop.Services.Events;
-using Nop.Services.Plugins;
 
 namespace Nop.Web.Areas.Admin.Infrastructure.Cache
 {
@@ -13,9 +12,8 @@ namespace Nop.Web.Areas.Admin.Infrastructure.Cache
     /// </summary>
     public partial class ModelCacheEventConsumer :
         //settings
-        IConsumer<EntityUpdatedEvent<Setting>>,
+        IConsumer<EntityUpdatedEvent<Setting>>
         
-        IConsumer<PluginUpdatedEvent>
     {
         #region Fields
 
@@ -41,16 +39,7 @@ namespace Nop.Web.Areas.Admin.Infrastructure.Cache
             await _staticCacheManager.RemoveAsync(NopModelCacheDefaults.OfficialNewsModelKey); //depends on AdminAreaSettings.HideAdvertisementsOnAdminArea
         }
 
-        /// <summary>
-        /// Handle plugin updated event
-        /// </summary>
-        /// <param name="eventMessage">Event</param>
-        /// <returns>A task that represents the asynchronous operation</returns>
-        public async Task HandleEventAsync(PluginUpdatedEvent eventMessage)
-        {
-            await _staticCacheManager.RemoveByPrefixAsync(NopPluginDefaults.AdminNavigationPluginsPrefix);
-        }
-
+        
         #endregion
     }
 }

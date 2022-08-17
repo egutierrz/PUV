@@ -18,17 +18,7 @@ namespace Nop.Web.Areas.Admin.Factories
         /// The task result contains the app settings model
         /// </returns>
         Task<AppSettingsModel> PrepareAppSettingsModel(AppSettingsModel model = null);
-
-         
-        /// <summary>
-        /// Prepare media settings model
-        /// </summary>
-        /// <param name="model">Media settings model</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the media settings model
-        /// </returns>
-        Task<MediaSettingsModel> PrepareMediaSettingsModelAsync(MediaSettingsModel model = null);
+        
 
         /// <summary>
         /// Prepare customer user settings model

@@ -5,7 +5,6 @@ using Nop.Core;
 using Nop.Core.Domain;
 using Nop.Core.Domain.Customers;
 using Nop.Services.Common;
-using Nop.Services.Themes;
 
 namespace Nop.Web.Framework.Themes
 {
@@ -18,7 +17,6 @@ namespace Nop.Web.Framework.Themes
 
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly IStoreContext _storeContext;
-        private readonly IThemeProvider _themeProvider;
         private readonly IWorkContext _workContext;
         private readonly StoreInformationSettings _storeInformationSettings;
 
@@ -38,13 +36,11 @@ namespace Nop.Web.Framework.Themes
         /// <param name="storeInformationSettings">Store information settings</param>
         public ThemeContext(IGenericAttributeService genericAttributeService,
             IStoreContext storeContext,
-            IThemeProvider themeProvider,
             IWorkContext workContext,
             StoreInformationSettings storeInformationSettings)
         {
             _genericAttributeService = genericAttributeService;
             _storeContext = storeContext;
-            _themeProvider = themeProvider;
             _workContext = workContext;
             _storeInformationSettings = storeInformationSettings;
         }
@@ -77,14 +73,6 @@ namespace Nop.Web.Framework.Themes
             //if not, try to get default store theme
             if (string.IsNullOrEmpty(themeName))
                 themeName = _storeInformationSettings.DefaultStoreTheme;
-
-            //ensure that this theme exists
-            if (!await _themeProvider.ThemeExistsAsync(themeName))
-            {
-                //if it does not exist, try to get the first one
-                themeName = (await _themeProvider.GetThemesAsync()).FirstOrDefault()?.SystemName
-                            ?? throw new Exception("No theme could be loaded");
-            }
 
             //cache theme system name
             _cachedThemeName = themeName;

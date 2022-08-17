@@ -23,7 +23,6 @@ using Nop.Services.Helpers;
 using Nop.Services.Localization;
 using Nop.Services.Media;
 using Nop.Services.Messages;
-using Nop.Services.Seo;
 using Nop.Services.Stores;
 
 namespace Nop.Services.ExportImport
@@ -45,13 +44,9 @@ namespace Nop.Services.ExportImport
         private readonly ICustomerService _customerService;
         private readonly IDateTimeHelper _dateTimeHelper;
         private readonly IGenericAttributeService _genericAttributeService;
-        private readonly ILocalizationService _localizationService;
-        private readonly IMeasureService _measureService;
-        private readonly IPictureService _pictureService;
         private readonly IStateProvinceService _stateProvinceService;
         private readonly IStoreMappingService _storeMappingService;
         private readonly IStoreService _storeService;
-        private readonly IUrlRecordService _urlRecordService;
         private readonly IWorkContext _workContext;
 
         #endregion
@@ -68,13 +63,9 @@ namespace Nop.Services.ExportImport
             ICustomerService customerService,
             IDateTimeHelper dateTimeHelper,
             IGenericAttributeService genericAttributeService,
-            ILocalizationService localizationService,
-            IMeasureService measureService,
-            IPictureService pictureService,
             IStateProvinceService stateProvinceService,
             IStoreMappingService storeMappingService,
             IStoreService storeService,
-            IUrlRecordService urlRecordService,
             IWorkContext workContext)
         {
             _addressSettings = addressSettings;
@@ -87,34 +78,15 @@ namespace Nop.Services.ExportImport
             _customerService = customerService;
             _dateTimeHelper = dateTimeHelper;
             _genericAttributeService = genericAttributeService;
-            _localizationService = localizationService;
-            _measureService = measureService;
-            _pictureService = pictureService;
             _stateProvinceService = stateProvinceService;
             _storeMappingService = storeMappingService;
             _storeService = storeService;
-            _urlRecordService = urlRecordService;
             _workContext = workContext;
         }
 
         #endregion
 
         #region Utilities
-        /// <summary>
-        /// Returns the path to the image file by ID
-        /// </summary>
-        /// <param name="pictureId">Picture ID</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the path to the image file
-        /// </returns>
-        protected virtual async Task<string> GetPicturesAsync(int pictureId)
-        {
-            var picture = await _pictureService.GetPictureByIdAsync(pictureId);
-
-            return await _pictureService.GetThumbLocalPathAsync(picture);
-        }
-
 
         /// <returns>A task that represents the asynchronous operation</returns>
         private async Task<object> GetCustomCustomerAttributesAsync(Customer customer)

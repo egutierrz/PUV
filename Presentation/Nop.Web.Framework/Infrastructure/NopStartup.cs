@@ -11,9 +11,6 @@ using Nop.Core.Events;
 using Nop.Core.Infrastructure;
 using Nop.Data;
 using Nop.Services.Authentication;
-using Nop.Services.Authentication.External;
-using Nop.Services.Authentication.MultiFactor;
-using Nop.Services.Cms;
 using Nop.Services.Common;
 using Nop.Services.Configuration;
 using Nop.Services.Customers;
@@ -30,16 +27,10 @@ using Nop.Services.Installation;
 using Nop.Services.Localization;
 using Nop.Services.Logging;
 using Nop.Services.Media;
-using Nop.Services.Media.RoxyFileman;
 using Nop.Services.Messages;
-using Nop.Services.Plugins;
-using Nop.Services.Plugins.Marketplace;
 using Nop.Services.ScheduleTasks;
 using Nop.Services.Security;
-using Nop.Services.Seo;
 using Nop.Services.Stores;
-using Nop.Services.Themes;
-using Nop.Services.Topics;
 using Nop.Web.Framework.Menu;
 using Nop.Web.Framework.Mvc.Routing;
 using Nop.Web.Framework.Themes;
@@ -76,10 +67,6 @@ namespace Nop.Web.Framework.Infrastructure
             //repositories
             services.AddScoped(typeof(IRepository<>), typeof(EntityRepository<>));
 
-            //plugins
-            services.AddScoped<IPluginService, PluginService>();
-            services.AddScoped<OfficialFeedManager>();
-
             //static cache manager
             var appSettings = Singleton<AppSettings>.Instance;
             if (appSettings.Get<DistributedCacheConfig>().Enabled)
@@ -100,12 +87,10 @@ namespace Nop.Web.Framework.Infrastructure
             services.AddScoped<IStoreContext, WebStoreContext>();
 
             //services
-            services.AddScoped<ITopicTemplateService, TopicTemplateService>();
             services.AddScoped<IAddressAttributeFormatter, AddressAttributeFormatter>();
             services.AddScoped<IAddressAttributeParser, AddressAttributeParser>();
             services.AddScoped<IAddressAttributeService, AddressAttributeService>();
             services.AddScoped<IAddressService, AddressService>();
-            services.AddScoped<ISearchTermService, SearchTermService>();
             services.AddScoped<IGenericAttributeService, GenericAttributeService>();
             services.AddScoped<IMaintenanceService, MaintenanceService>();
             services.AddScoped<ICustomerAttributeFormatter, CustomerAttributeFormatter>();
@@ -117,8 +102,6 @@ namespace Nop.Web.Framework.Infrastructure
             services.AddScoped<IAclService, AclService>();
             services.AddScoped<IGeoLookupService, GeoLookupService>();
             services.AddScoped<ICountryService, CountryService>();
-            services.AddScoped<ICurrencyService, CurrencyService>();
-            services.AddScoped<IMeasureService, MeasureService>();
             services.AddScoped<IStateProvinceService, StateProvinceService>();
             services.AddScoped<IStoreService, StoreService>();
             services.AddScoped<IStoreMappingService, StoreMappingService>();
@@ -137,20 +120,14 @@ namespace Nop.Web.Framework.Infrastructure
             services.AddScoped<IEmailSender, EmailSender>();
             services.AddScoped<IEncryptionService, EncryptionService>();
             services.AddScoped<IAuthenticationService, CookieAuthenticationService>();
-            services.AddScoped<IUrlRecordService, UrlRecordService>();
             services.AddScoped<ILogger, DefaultLogger>();
             services.AddScoped<ICustomerActivityService, CustomerActivityService>();
-            services.AddScoped<ITopicService, TopicService>();
             services.AddScoped<IDateTimeHelper, DateTimeHelper>();
-            services.AddScoped<ISitemapGenerator, SitemapGenerator>();
             services.AddScoped<INopHtmlHelper, NopHtmlHelper>();
             services.AddScoped<IScheduleTaskService, ScheduleTaskService>();
             services.AddScoped<IExportManager, ExportManager>();
             services.AddScoped<IImportManager, ImportManager>();
-            services.AddScoped<IUploadService, UploadService>();
-            services.AddScoped<IThemeProvider, ThemeProvider>();
             services.AddScoped<IThemeContext, ThemeContext>();
-            services.AddScoped<IExternalAuthenticationService, ExternalAuthenticationService>();
             services.AddSingleton<IRoutePublisher, RoutePublisher>();
             services.AddSingleton<IEventPublisher, EventPublisher>();
             services.AddScoped<ISettingService, SettingService>();
@@ -158,7 +135,6 @@ namespace Nop.Web.Framework.Infrastructure
             services.AddScoped<IBBCodeHelper, BBCodeHelper>();
             services.AddScoped<IHtmlFormatter, HtmlFormatter>();
             services.AddScoped<IGdprService, GdprService>();
-            services.AddScoped<IWidgetPluginManager, WidgetPluginManager>();
             services.AddScoped<IHelpDeskService, HelpDeskService>();
 
             services.AddScoped<IInformationRepositoryService, InformationRepositoryService>();
@@ -167,13 +143,7 @@ namespace Nop.Web.Framework.Infrastructure
             services.AddScoped<IInformationRepositoryService, InformationRepositoryService>();
             services.AddScoped<IFilesRepositoryService, FilesRepositoryService>();
             services.AddScoped<InstallationService>();
-
-            //plugin managers
-            services.AddScoped(typeof(IPluginManager<>), typeof(PluginManager<>));
-            services.AddScoped<IAuthenticationPluginManager, AuthenticationPluginManager>();
-            services.AddScoped<IMultiFactorAuthenticationPluginManager, MultiFactorAuthenticationPluginManager>();
-            services.AddScoped<IExchangeRatePluginManager, ExchangeRatePluginManager>();
-
+           
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
             //register all settings
@@ -191,20 +161,7 @@ namespace Nop.Web.Framework.Infrastructure
                     return serviceProvider.GetRequiredService<ISettingService>().LoadSettingAsync(setting, storeId).Result;
                 });
             }
-            
-            services.AddScoped<IPictureService, PictureService>();
-
-            //roxy file manager service
-            services.AddTransient<DatabaseRoxyFilemanService>();
-            services.AddTransient<FileRoxyFilemanService>();
-
-            services.AddScoped<IRoxyFilemanService>(serviceProvider =>
-            {
-                return serviceProvider.GetRequiredService<IPictureService>().IsStoreInDbAsync().Result
-                    ? serviceProvider.GetRequiredService<DatabaseRoxyFilemanService>()
-                    : serviceProvider.GetRequiredService<FileRoxyFilemanService>();
-            });
-
+          
             //installation service
             if (!DataSettingsManager.IsDatabaseInstalled())
                 services.AddScoped<IInstallationService, InstallationService>();

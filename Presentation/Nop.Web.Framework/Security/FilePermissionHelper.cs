@@ -10,7 +10,6 @@ using System.Security.Principal;
 using Nop.Core.Configuration;
 using Nop.Core.Infrastructure;
 using Nop.Data;
-using Nop.Services.Plugins;
 
 namespace Nop.Web.Framework.Security
 {
@@ -287,7 +286,6 @@ namespace Nop.Web.Framework.Security
         {
             return new List<string>
             {
-                fileProvider.MapPath(NopPluginDefaults.PluginsInfoFilePath),
                 fileProvider.MapPath(NopDataSettingsDefaults.FilePath),
                 fileProvider.MapPath(NopConfigurationDefaults.AppSettingsFilePath)
             };

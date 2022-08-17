@@ -65,75 +65,7 @@ namespace Nop.Web.Areas.Admin.Factories
             if (model == null)
                 throw new ArgumentNullException(nameof(model));
 
-            //prepare nested search models
-            await _commonModelFactory.PreparePopularSearchTermSearchModelAsync(model.PopularSearchTerms);
-
-            return model;
-        }
-
-        /// <summary>
-        /// Prepare nopCommerce news model
-        /// </summary>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the nopCommerce news model
-        /// </returns>
-        public virtual async Task<NopCommerceNewsModel> PrepareNopCommerceNewsModelAsync()
-        {
-            var model = new NopCommerceNewsModel
-            {
-                HideAdvertisements = _adminAreaSettings.HideAdvertisementsOnAdminArea
-            };
-
-            try
-            {
-                //try to get news RSS feed
-                var rssData = await _staticCacheManager.GetAsync(_staticCacheManager.PrepareKeyForDefaultCache(NopModelCacheDefaults.OfficialNewsModelKey), async () =>
-                {
-                    try
-                    {
-                        return await _nopHttpClient.GetNewsRssAsync();
-                    }
-                    catch (AggregateException exception)
-                    {
-                        //rethrow actual excepion
-                        throw exception.InnerException;
-                    }
-                });
-
-                for (var i = 0; i < rssData.Items.Count; i++)
-                {
-                    var item = rssData.Items.ElementAt(i);
-                    var newsItem = new NopCommerceNewsDetailsModel
-                    {
-                        Title = item.TitleText,
-                        Summary = XmlHelper.XmlDecode(item.Content?.Value ?? string.Empty),
-                        Url = item.Url.OriginalString,
-                        PublishDate = item.PublishDate
-                    };
-                    model.Items.Add(newsItem);
-
-                    //has new items?
-                    if (i != 0)
-                        continue;
-
-                    var firstRequest = string.IsNullOrEmpty(_adminAreaSettings.LastNewsTitleAdminArea);
-                    if (_adminAreaSettings.LastNewsTitleAdminArea == newsItem.Title)
-                        continue;
-
-                    _adminAreaSettings.LastNewsTitleAdminArea = newsItem.Title;
-                    await _settingService.SaveSettingAsync(_adminAreaSettings);
-
-                    //new item
-                    if (!firstRequest)
-                        model.HasNewItems = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                await _logger.ErrorAsync("No access to the news. Website www.nopcommerce.com is not available.", ex);
-            }
-
+           
             return model;
         }
 

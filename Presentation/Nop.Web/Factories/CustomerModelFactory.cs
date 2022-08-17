@@ -11,9 +11,6 @@ using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Gdpr;
 using Nop.Core.Domain.Media;
 using Nop.Core.Domain.Security;
-using Nop.Core.Domain.Tax;
-using Nop.Services.Authentication.External;
-using Nop.Services.Authentication.MultiFactor;
 using Nop.Services.Common;
 using Nop.Services.Customers;
 using Nop.Services.Directory;
@@ -22,7 +19,6 @@ using Nop.Services.Helpers;
 using Nop.Services.Localization;
 using Nop.Services.Media;
 using Nop.Services.Messages;
-using Nop.Services.Seo;
 using Nop.Services.Stores;
 using Nop.Web.Models.Common;
 using Nop.Web.Models.Customer;
@@ -45,24 +41,18 @@ namespace Nop.Web.Factories
         private readonly ExternalAuthenticationSettings _externalAuthenticationSettings;
         private readonly GdprSettings _gdprSettings;
         private readonly IAddressModelFactory _addressModelFactory;
-        private readonly IAuthenticationPluginManager _authenticationPluginManager;
         private readonly ICountryService _countryService;
         private readonly ICustomerAttributeParser _customerAttributeParser;
         private readonly ICustomerAttributeService _customerAttributeService;
         private readonly ICustomerService _customerService;
         private readonly IDateTimeHelper _dateTimeHelper;
-        private readonly IExternalAuthenticationService _externalAuthenticationService;
         private readonly IGdprService _gdprService;
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly ILocalizationService _localizationService;
-        private readonly IMultiFactorAuthenticationPluginManager _multiFactorAuthenticationPluginManager;
-        private readonly IPictureService _pictureService;
         private readonly IStateProvinceService _stateProvinceService;
         private readonly IStoreContext _storeContext;
         private readonly IStoreMappingService _storeMappingService;
-        private readonly IUrlRecordService _urlRecordService;
         private readonly IWorkContext _workContext;
-        private readonly MediaSettings _mediaSettings;
         private readonly RewardPointsSettings _rewardPointsSettings;
         private readonly SecuritySettings _securitySettings;
 
@@ -79,24 +69,18 @@ namespace Nop.Web.Factories
             ExternalAuthenticationSettings externalAuthenticationSettings,
             GdprSettings gdprSettings,
             IAddressModelFactory addressModelFactory,
-            IAuthenticationPluginManager authenticationPluginManager,
             ICountryService countryService,
             ICustomerAttributeParser customerAttributeParser,
             ICustomerAttributeService customerAttributeService,
             ICustomerService customerService,
             IDateTimeHelper dateTimeHelper,
-            IExternalAuthenticationService externalAuthenticationService,
             IGdprService gdprService,
             IGenericAttributeService genericAttributeService,
             ILocalizationService localizationService,
-            IMultiFactorAuthenticationPluginManager multiFactorAuthenticationPluginManager,
-            IPictureService pictureService,
             IStateProvinceService stateProvinceService,
             IStoreContext storeContext,
             IStoreMappingService storeMappingService,
-            IUrlRecordService urlRecordService,
             IWorkContext workContext,
-            MediaSettings mediaSettings,
             RewardPointsSettings rewardPointsSettings,
             SecuritySettings securitySettings)
         {
@@ -106,11 +90,9 @@ namespace Nop.Web.Factories
             _commonSettings = commonSettings;
             _customerSettings = customerSettings;
             _dateTimeSettings = dateTimeSettings;
-            _externalAuthenticationService = externalAuthenticationService;
             _externalAuthenticationSettings = externalAuthenticationSettings;
             _gdprSettings = gdprSettings;
             _addressModelFactory = addressModelFactory;
-            _authenticationPluginManager = authenticationPluginManager;
             _countryService = countryService;
             _customerAttributeParser = customerAttributeParser;
             _customerAttributeService = customerAttributeService;
@@ -119,14 +101,10 @@ namespace Nop.Web.Factories
             _gdprService = gdprService;
             _genericAttributeService = genericAttributeService;
             _localizationService = localizationService;
-            _multiFactorAuthenticationPluginManager = multiFactorAuthenticationPluginManager;
-            _pictureService = pictureService;
             _stateProvinceService = stateProvinceService;
             _storeContext = storeContext;
             _storeMappingService = storeMappingService;
-            _urlRecordService = urlRecordService;
             _workContext = workContext;
-            _mediaSettings = mediaSettings;
             _rewardPointsSettings = rewardPointsSettings;
             _securitySettings = securitySettings;
         }
@@ -262,8 +240,6 @@ namespace Nop.Web.Factories
                 }
             }
 
-            model.VatNumberStatusNote = await _localizationService.GetLocalizedEnumAsync((VatNumberStatus)await _genericAttributeService
-                .GetAttributeAsync<int>(customer, NopCustomerDefaults.VatNumberStatusIdAttribute));
             model.FirstNameEnabled = _customerSettings.FirstNameEnabled;
             model.LastNameEnabled = _customerSettings.LastNameEnabled;
             model.FirstNameRequired = _customerSettings.FirstNameRequired;
@@ -298,26 +274,6 @@ namespace Nop.Web.Factories
 
             //external authentication
             var currentCustomer = await _workContext.GetCurrentCustomerAsync();
-            model.AllowCustomersToRemoveAssociations = _externalAuthenticationSettings.AllowCustomersToRemoveAssociations;
-            model.NumberOfExternalAuthenticationProviders = (await _authenticationPluginManager
-                .LoadActivePluginsAsync(currentCustomer, store.Id))
-                .Count;
-            foreach (var record in await _externalAuthenticationService.GetCustomerExternalAuthenticationRecordsAsync(customer))
-            {
-                var authMethod = await _authenticationPluginManager
-                    .LoadPluginBySystemNameAsync(record.ProviderSystemName, currentCustomer, store.Id);
-                if (!_authenticationPluginManager.IsPluginActive(authMethod))
-                    continue;
-
-                model.AssociatedExternalAuthRecords.Add(new CustomerInfoModel.AssociatedExternalAuthModel
-                {
-                    Id = record.Id,
-                    Email = record.Email,
-                    ExternalIdentifier = !string.IsNullOrEmpty(record.ExternalDisplayIdentifier)
-                        ? record.ExternalDisplayIdentifier : record.ExternalIdentifier,
-                    AuthMethodName = await _localizationService.GetLocalizedFriendlyNameAsync(authMethod, currentLanguage.Id)
-                });
-            }
 
             //custom customer attributes
             var customAttributes = await PrepareCustomCustomerAttributesAsync(customer, overrideCustomCustomerAttributesXml);
@@ -609,27 +565,6 @@ namespace Nop.Web.Factories
         }
 
         /// <summary>
-        /// Prepare the customer avatar model
-        /// </summary>
-        /// <param name="model">Customer avatar model</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the customer avatar model
-        /// </returns>
-        public virtual async Task<CustomerAvatarModel> PrepareCustomerAvatarModelAsync(CustomerAvatarModel model)
-        {
-            if (model == null)
-                throw new ArgumentNullException(nameof(model));
-
-            model.AvatarUrl = await _pictureService.GetPictureUrlAsync(
-                await _genericAttributeService.GetAttributeAsync<int>(await _workContext.GetCurrentCustomerAsync(), NopCustomerDefaults.AvatarPictureIdAttribute),
-                _mediaSettings.AvatarPictureSize,
-                false);
-
-            return model;
-        }
-
-        /// <summary>
         /// Prepare the GDPR tools model
         /// </summary>
         /// <returns>
@@ -643,66 +578,7 @@ namespace Nop.Web.Factories
             return Task.FromResult(model);
         }
 
-        
-        /// <summary>
-        /// Prepare the multi-factor authentication model
-        /// </summary>
-        /// <param name="model">Multi-factor authentication model</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the multi-factor authentication model
-        /// </returns>
-        public virtual async Task<MultiFactorAuthenticationModel> PrepareMultiFactorAuthenticationModelAsync(MultiFactorAuthenticationModel model)
-        {
-            var customer = await _workContext.GetCurrentCustomerAsync();
-
-            model.IsEnabled = !string.IsNullOrEmpty(
-                await _genericAttributeService.GetAttributeAsync<string>(customer, NopCustomerDefaults.SelectedMultiFactorAuthenticationProviderAttribute));
-
-            var store = await _storeContext.GetCurrentStoreAsync();
-            var multiFactorAuthenticationProviders = (await _multiFactorAuthenticationPluginManager.LoadActivePluginsAsync(customer, store.Id)).ToList();
-            foreach (var multiFactorAuthenticationProvider in multiFactorAuthenticationProviders)
-            {
-                var providerModel = new MultiFactorAuthenticationProviderModel();
-                var sysName = multiFactorAuthenticationProvider.PluginDescriptor.SystemName;
-                providerModel = await PrepareMultiFactorAuthenticationProviderModelAsync(providerModel, sysName);
-                model.Providers.Add(providerModel);
-            }
-
-            return model;
-        }
-
-        /// <summary>
-        /// Prepare the multi-factor authentication provider model
-        /// </summary>
-        /// <param name="providerModel">Multi-factor authentication provider model</param>
-        /// <param name="sysName">Multi-factor authentication provider system name</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the multi-factor authentication model
-        /// </returns>
-        public virtual async Task<MultiFactorAuthenticationProviderModel> PrepareMultiFactorAuthenticationProviderModelAsync(MultiFactorAuthenticationProviderModel providerModel, string sysName, bool isLogin = false)
-        {
-            var customer = await _workContext.GetCurrentCustomerAsync();
-            var selectedProvider = await _genericAttributeService.GetAttributeAsync<string>(customer, NopCustomerDefaults.SelectedMultiFactorAuthenticationProviderAttribute);
-            var store = await _storeContext.GetCurrentStoreAsync();
-
-            var multiFactorAuthenticationProvider = (await _multiFactorAuthenticationPluginManager.LoadActivePluginsAsync(customer, store.Id))
-                    .FirstOrDefault(provider => provider.PluginDescriptor.SystemName == sysName);
-
-            if (multiFactorAuthenticationProvider != null)
-            {
-                providerModel.Name = await _localizationService.GetLocalizedFriendlyNameAsync(multiFactorAuthenticationProvider, (await _workContext.GetWorkingLanguageAsync()).Id);
-                providerModel.SystemName = sysName;
-                providerModel.Description = await multiFactorAuthenticationProvider.GetDescriptionAsync();
-                providerModel.LogoUrl = await _multiFactorAuthenticationPluginManager.GetPluginLogoUrlAsync(multiFactorAuthenticationProvider);
-                providerModel.ViewComponentName = isLogin ? multiFactorAuthenticationProvider.GetVerificationViewComponentName() : multiFactorAuthenticationProvider.GetPublicViewComponentName();
-                providerModel.Selected = sysName == selectedProvider;
-            }
-
-            return providerModel;
-        }
-
+       
         /// <summary>
         /// Prepare the custom customer attribute models
         /// </summary>

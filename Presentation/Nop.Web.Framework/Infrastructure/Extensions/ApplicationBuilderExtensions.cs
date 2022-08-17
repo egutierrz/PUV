@@ -27,7 +27,6 @@ using Nop.Services.Installation;
 using Nop.Services.Localization;
 using Nop.Services.Logging;
 using Nop.Services.Media.RoxyFileman;
-using Nop.Services.Plugins;
 using Nop.Services.ScheduleTasks;
 using Nop.Web.Framework.Globalization;
 using Nop.Web.Framework.Mvc.Routing;
@@ -60,12 +59,7 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
                 //log application start
                 engine.Resolve<ILogger>().InformationAsync("Application started").Wait();
 
-                //install and update plugins
-                var pluginService = engine.Resolve<IPluginService>();
-                pluginService.InstallPluginsAsync().Wait();
-                pluginService.UpdatePluginsAsync().Wait();
-
-                //update nopCommerce core and db
+                //update  core and db
                 var migrationManager = engine.Resolve<IMigrationManager>();
                 var assembly = Assembly.GetAssembly(typeof(ApplicationBuilderExtensions));
                 migrationManager.ApplyUpMigrations(assembly, MigrationProcessType.Update);

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
 using Nop.Core;
 using Nop.Core.Domain.Common;
-using Nop.Core.Rss;
 using Nop.Services.Localization;
 
 namespace Nop.Services.Common
@@ -89,29 +88,7 @@ namespace Nop.Services.Common
             return await _httpClient.GetStringAsync(url);
         }
 
-        /// <summary>
-        /// Get official news RSS
-        /// </summary>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the asynchronous task whose result contains news RSS feed
-        /// </returns>
-        public virtual async Task<RssFeed> GetNewsRssAsync()
-        {
-            //prepare URL to request
-            var language = _languageService.GetTwoLetterIsoLanguageName(await _workContext.GetWorkingLanguageAsync());
-            var url = string.Format(NopCommonDefaults.NopNewsRssPath,
-                NopVersion.CURRENT_VERSION,
-                _webHelper.IsLocalRequest(_httpContextAccessor.HttpContext.Request),
-                _adminAreaSettings.HideAdvertisementsOnAdminArea,
-                _webHelper.GetStoreLocation(),
-                language).ToLowerInvariant();
-
-            //get news feed
-            await using var stream = await _httpClient.GetStreamAsync(url);
-            return await RssFeed.LoadAsync(stream);
-        }
-
+        
         /// <summary>
         /// Notification about the successful installation
         /// </summary>

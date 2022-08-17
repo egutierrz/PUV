@@ -45,9 +45,8 @@ namespace Nop.Services.Media.RoxyFileman
         /// <returns>The file information. Caller must check Exists property.</returns>
         public IFileInfo GetFileInfo(string subpath)
         {
-            var pictureService = EngineContext.Current.Resolve<IPictureService>();
 
-            if (_physicalFileProvider.GetFileInfo(subpath).Exists || !pictureService.IsStoreInDbAsync().Result)
+            if (_physicalFileProvider.GetFileInfo(subpath).Exists)
                 return _physicalFileProvider.GetFileInfo(subpath);
 
             var fileProvider = EngineContext.Current.Resolve<INopFileProvider>();

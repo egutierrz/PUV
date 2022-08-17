@@ -29,9 +29,7 @@ namespace Nop.Web.Factories
         private readonly IDateTimeHelper _dateTimeHelper;
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly ILocalizationService _localizationService;
-        private readonly IPictureService _pictureService;
         private readonly IWorkContext _workContext;
-        private readonly MediaSettings _mediaSettings;
 
         #endregion
 
@@ -43,9 +41,7 @@ namespace Nop.Web.Factories
             IDateTimeHelper dateTimeHelper,
             IGenericAttributeService genericAttributeService,
             ILocalizationService localizationService,
-            IPictureService pictureService,
-            IWorkContext workContext,
-            MediaSettings mediaSettings)
+            IWorkContext workContext)
         {
             _customerSettings = customerSettings;
             _countryService = countryService;
@@ -53,9 +49,7 @@ namespace Nop.Web.Factories
             _dateTimeHelper = dateTimeHelper;
             _genericAttributeService = genericAttributeService;
             _localizationService = localizationService;
-            _pictureService = pictureService;
             _workContext = workContext;
-            _mediaSettings = mediaSettings;
         }
 
         #endregion
@@ -111,17 +105,7 @@ namespace Nop.Web.Factories
             if (customer == null)
                 throw new ArgumentNullException(nameof(customer));
 
-            //avatar
-            var avatarUrl = "";
-            if (_customerSettings.AllowCustomersToUploadAvatars)
-            {
-                avatarUrl = await _pictureService.GetPictureUrlAsync(
-                 await _genericAttributeService.GetAttributeAsync<int>(customer, NopCustomerDefaults.AvatarPictureIdAttribute),
-                 _mediaSettings.AvatarPictureSize,
-                 _customerSettings.DefaultAvatarEnabled,
-                 defaultPictureType: PictureType.Avatar);
-            }
-
+            
             //location
             var locationEnabled = false;
             var location = string.Empty;
@@ -167,7 +151,6 @@ namespace Nop.Web.Factories
             var model = new ProfileInfoModel
             {
                 CustomerProfileId = customer.Id,
-                AvatarUrl = avatarUrl,
                 LocationEnabled = locationEnabled,
                 Location = location,
                 JoinDateEnabled = joinDateEnabled,

@@ -36,8 +36,7 @@ namespace Nop.Services.Media.RoxyFileman
             IHttpContextAccessor httpContextAccessor,
             INopFileProvider fileProvider,
             IWebHelper webHelper,
-            IWorkContext workContext,
-            MediaSettings mediaSettings) : base(webHostEnvironment, httpContextAccessor, fileProvider, webHelper, workContext, mediaSettings)
+            IWorkContext workContext) : base(webHostEnvironment, httpContextAccessor, fileProvider, webHelper, workContext)
         {
             _fileRootPath = null;
         }

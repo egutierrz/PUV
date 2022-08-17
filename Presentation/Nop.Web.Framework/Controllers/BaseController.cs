@@ -29,7 +29,6 @@ namespace Nop.Web.Framework.Controllers
     [SaveIpAddress]
     [SaveLastActivity]
     [SaveLastVisitedPage]
-    [ForceMultiFactorAuthentication]
     public abstract class BaseController : Controller
     {
         #region Rendering

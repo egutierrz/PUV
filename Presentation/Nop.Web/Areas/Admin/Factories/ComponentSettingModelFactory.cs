@@ -14,7 +14,6 @@ using Nop.Core.Domain.Gdpr;
 using Nop.Core.Domain.Localization;
 using Nop.Core.Domain.Media;
 using Nop.Core.Domain.Security;
-using Nop.Core.Domain.Seo;
 using Nop.Data;
 using Nop.Data.Configuration;
 using Nop.Services;
@@ -26,7 +25,6 @@ using Nop.Services.Helpers;
 using Nop.Services.Localization;
 using Nop.Services.Media;
 using Nop.Services.Stores;
-using Nop.Services.Themes;
 using Nop.Web.Areas.Admin.Infrastructure.Mapper.Extensions;
 using Nop.Web.Areas.Admin.Models.Settings;
 using Nop.Web.Areas.Admin.Models.Stores;
@@ -56,11 +54,9 @@ namespace Nop.Web.Areas.Admin.Factories
         private readonly ILocalizedModelFactory _localizedModelFactory;
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly ILocalizationService _localizationService;
-        private readonly IPictureService _pictureService;
         private readonly IComponentSettingService _settingService;
         private readonly IStoreContext _storeContext;
         private readonly IStoreService _storeService;
-        private readonly IThemeProvider _themeProvider;
         private readonly IWorkContext _workContext;
         private readonly IGdprService _gdprService;
 
@@ -82,11 +78,9 @@ namespace Nop.Web.Areas.Admin.Factories
             ILocalizedModelFactory localizedModelFactory,
             IGenericAttributeService genericAttributeService,
             ILocalizationService localizationService,
-            IPictureService pictureService,
             IComponentSettingService settingService,
             IStoreContext storeContext,
             IStoreService storeService,
-            IThemeProvider themeProvider,
             IWorkContext workContext)
         {
             _appSettings = appSettings;
@@ -103,11 +97,9 @@ namespace Nop.Web.Areas.Admin.Factories
             _localizedModelFactory = localizedModelFactory;
             _genericAttributeService = genericAttributeService;
             _localizationService = localizationService;
-            _pictureService = pictureService;
             _settingService = settingService;
             _storeContext = storeContext;
             _storeService = storeService;
-            _themeProvider = themeProvider;
             _workContext = workContext;
         }
 
@@ -129,20 +121,7 @@ namespace Nop.Web.Areas.Admin.Factories
             var storeId = await _storeContext.GetActiveStoreScopeConfigurationAsync();
             var storeInformationSettings = await _settingService.LoadSettingAsync<StoreInformationSettings>(storeId);
 
-            //get available themes
-            var availableThemes = await _themeProvider.GetThemesAsync();
-            foreach (var theme in availableThemes)
-            {
-                models.Add(new StoreInformationSettingsModel.ThemeModel
-                {
-                    FriendlyName = theme.FriendlyName,
-                    SystemName = theme.SystemName,
-                    PreviewImageUrl = theme.PreviewImageUrl,
-                    PreviewText = theme.PreviewText,
-                    SupportRtl = theme.SupportRtl,
-                    Selected = theme.SystemName.Equals(storeInformationSettings.DefaultStoreTheme, StringComparison.InvariantCultureIgnoreCase)
-                });
-            }
+            
         }
 
         /// <summary>
@@ -417,65 +396,7 @@ namespace Nop.Web.Areas.Admin.Factories
             return model;
         }
 
-        /// <summary>
-        /// Prepare SEO settings model
-        /// </summary>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the sEO settings model
-        /// </returns>
-        protected virtual async Task<SeoSettingsModel> PrepareSeoSettingsModelAsync()
-        {
-            //load settings for a chosen store scope
-            var storeId = await _storeContext.GetActiveStoreScopeConfigurationAsync();
-            var seoSettings = await _settingService.LoadSettingAsync<SeoSettings>(storeId);
-
-            //fill in model values from the entity
-            var model = new SeoSettingsModel
-            {
-                PageTitleSeparator = seoSettings.PageTitleSeparator,
-                PageTitleSeoAdjustment = (int)seoSettings.PageTitleSeoAdjustment,
-                PageTitleSeoAdjustmentValues = await seoSettings.PageTitleSeoAdjustment.ToSelectListAsync(),
-                HomepageTitle = seoSettings.HomepageTitle,
-                HomepageDescription = seoSettings.HomepageDescription,
-                DefaultTitle = seoSettings.DefaultTitle,
-                DefaultMetaKeywords = seoSettings.DefaultMetaKeywords,
-                DefaultMetaDescription = seoSettings.DefaultMetaDescription,
-                GenerateProductMetaDescription = seoSettings.GenerateProductMetaDescription,
-                ConvertNonWesternChars = seoSettings.ConvertNonWesternChars,
-                CanonicalUrlsEnabled = seoSettings.CanonicalUrlsEnabled,
-                WwwRequirement = (int)seoSettings.WwwRequirement,
-                WwwRequirementValues = await seoSettings.WwwRequirement.ToSelectListAsync(),
-
-                TwitterMetaTags = seoSettings.TwitterMetaTags,
-                OpenGraphMetaTags = seoSettings.OpenGraphMetaTags,
-                CustomHeadTags = seoSettings.CustomHeadTags,
-                MicrodataEnabled = seoSettings.MicrodataEnabled
-            };
-
-            if (storeId <= 0)
-                return model;
-
-            //fill in overridden values
-            model.PageTitleSeparator_OverrideForStore = await _settingService.SettingExistsAsync(seoSettings, x => x.PageTitleSeparator, storeId);
-            model.PageTitleSeoAdjustment_OverrideForStore = await _settingService.SettingExistsAsync(seoSettings, x => x.PageTitleSeoAdjustment, storeId);
-            model.DefaultTitle_OverrideForStore = await _settingService.SettingExistsAsync(seoSettings, x => x.DefaultTitle, storeId);
-            model.HomepageTitle_OverrideForStore = await _settingService.SettingExistsAsync(seoSettings, x => x.HomepageTitle, storeId);
-            model.HomepageDescription_OverrideForStore = await _settingService.SettingExistsAsync(seoSettings, x => x.HomepageDescription, storeId);
-            model.DefaultMetaKeywords_OverrideForStore = await _settingService.SettingExistsAsync(seoSettings, x => x.DefaultMetaKeywords, storeId);
-            model.DefaultMetaDescription_OverrideForStore = await _settingService.SettingExistsAsync(seoSettings, x => x.DefaultMetaDescription, storeId);
-            model.GenerateProductMetaDescription_OverrideForStore = await _settingService.SettingExistsAsync(seoSettings, x => x.GenerateProductMetaDescription, storeId);
-            model.ConvertNonWesternChars_OverrideForStore = await _settingService.SettingExistsAsync(seoSettings, x => x.ConvertNonWesternChars, storeId);
-            model.CanonicalUrlsEnabled_OverrideForStore = await _settingService.SettingExistsAsync(seoSettings, x => x.CanonicalUrlsEnabled, storeId);
-            model.WwwRequirement_OverrideForStore = await _settingService.SettingExistsAsync(seoSettings, x => x.WwwRequirement, storeId);
-            model.TwitterMetaTags_OverrideForStore = await _settingService.SettingExistsAsync(seoSettings, x => x.TwitterMetaTags, storeId);
-            model.OpenGraphMetaTags_OverrideForStore = await _settingService.SettingExistsAsync(seoSettings, x => x.OpenGraphMetaTags, storeId);
-            model.CustomHeadTags_OverrideForStore = await _settingService.SettingExistsAsync(seoSettings, x => x.CustomHeadTags, storeId);
-            model.MicrodataEnabled_OverrideForStore = await _settingService.SettingExistsAsync(seoSettings, x => x.MicrodataEnabled, storeId);
-
-            return model;
-        }
-
+       
         /// <summary>
         /// Prepare security settings model
         /// </summary>
@@ -764,35 +685,14 @@ namespace Nop.Web.Areas.Admin.Factories
         {
             //load settings for a chosen store scope
             var storeId = await _storeContext.GetActiveStoreScopeConfigurationAsync();
-            var mediaSettings = await _settingService.LoadSettingAsync<MediaSettings>(storeId);
-
-            //fill in model values from the entity
-            model ??= mediaSettings.ToSettingsModel<MediaSettingsModel>();
-
+      
             //fill in additional values (not existing in the entity)
             model.ActiveStoreScopeConfiguration = storeId;
-            model.PicturesStoredIntoDatabase = await _pictureService.IsStoreInDbAsync();
 
             if (storeId <= 0)
                 return model;
 
-            //fill in overridden values
-            model.AvatarPictureSize_OverrideForStore = await _settingService.SettingExistsAsync(mediaSettings, x => x.AvatarPictureSize, storeId);
-            model.ProductThumbPictureSize_OverrideForStore = await _settingService.SettingExistsAsync(mediaSettings, x => x.ProductThumbPictureSize, storeId);
-            model.ProductDetailsPictureSize_OverrideForStore = await _settingService.SettingExistsAsync(mediaSettings, x => x.ProductDetailsPictureSize, storeId);
-            model.ProductThumbPictureSizeOnProductDetailsPage_OverrideForStore = await _settingService.SettingExistsAsync(mediaSettings, x => x.ProductThumbPictureSizeOnProductDetailsPage, storeId);
-            model.AssociatedProductPictureSize_OverrideForStore = await _settingService.SettingExistsAsync(mediaSettings, x => x.AssociatedProductPictureSize, storeId);
-            model.CategoryThumbPictureSize_OverrideForStore = await _settingService.SettingExistsAsync(mediaSettings, x => x.CategoryThumbPictureSize, storeId);
-            model.ManufacturerThumbPictureSize_OverrideForStore = await _settingService.SettingExistsAsync(mediaSettings, x => x.ManufacturerThumbPictureSize, storeId);
-            model.VendorThumbPictureSize_OverrideForStore = await _settingService.SettingExistsAsync(mediaSettings, x => x.VendorThumbPictureSize, storeId);
-            model.CartThumbPictureSize_OverrideForStore = await _settingService.SettingExistsAsync(mediaSettings, x => x.CartThumbPictureSize, storeId);
-            model.MiniCartThumbPictureSize_OverrideForStore = await _settingService.SettingExistsAsync(mediaSettings, x => x.MiniCartThumbPictureSize, storeId);
-            model.MaximumImageSize_OverrideForStore = await _settingService.SettingExistsAsync(mediaSettings, x => x.MaximumImageSize, storeId);
-            model.MultipleThumbDirectories_OverrideForStore = await _settingService.SettingExistsAsync(mediaSettings, x => x.MultipleThumbDirectories, storeId);
-            model.DefaultImageQuality_OverrideForStore = await _settingService.SettingExistsAsync(mediaSettings, x => x.DefaultImageQuality, storeId);
-            model.ImportProductImagesUsingHash_OverrideForStore = await _settingService.SettingExistsAsync(mediaSettings, x => x.ImportProductImagesUsingHash, storeId);
-            model.DefaultPictureZoomEnabled_OverrideForStore = await _settingService.SettingExistsAsync(mediaSettings, x => x.DefaultPictureZoomEnabled, storeId);
-
+            
             return model;
         }
 
@@ -963,9 +863,6 @@ namespace Nop.Web.Areas.Admin.Factories
 
             //prepare Minification settings model
             model.MinificationSettings = await PrepareMinificationSettingsModelAsync();
-
-            //prepare SEO settings model
-            model.SeoSettings = await PrepareSeoSettingsModelAsync();
 
             //prepare security settings model
             model.SecuritySettings = await PrepareSecuritySettingsModelAsync();

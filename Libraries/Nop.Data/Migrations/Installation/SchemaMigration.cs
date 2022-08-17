@@ -7,14 +7,11 @@ using Nop.Core.Domain.Gdpr;
 using Nop.Core.Domain.HelpDesk;
 using Nop.Core.Domain.Localization;
 using Nop.Core.Domain.Logging;
-using Nop.Core.Domain.Media;
 using Nop.Core.Domain.Messages;
 using Nop.Core.Domain.SatRepositoryInfo;
 using Nop.Core.Domain.ScheduleTasks;
 using Nop.Core.Domain.Security;
-using Nop.Core.Domain.Seo;
 using Nop.Core.Domain.Stores;
-using Nop.Core.Domain.Topics;
 using Nop.Data.Extensions;
 
 
@@ -34,8 +31,6 @@ namespace Nop.Data.Migrations.Installation
         {
             Create.TableFor<AddressAttribute>();
             Create.TableFor<AddressAttributeValue>();
-            Create.TableFor<GenericAttribute>();
-            Create.TableFor<SearchTerm>();
             Create.TableFor<Country>();
             Create.TableFor<Currency>();
             Create.TableFor<MeasureDimension>();
@@ -55,9 +50,6 @@ namespace Nop.Data.Migrations.Installation
             Create.TableFor<Language>();
             Create.TableFor<LocaleStringResource>();
             Create.TableFor<LocalizedProperty>();
-            Create.TableFor<Download>();
-            Create.TableFor<Picture>();
-            Create.TableFor<PictureBinary>();
             Create.TableFor<Setting>();
             Create.TableFor<GdprConsent>();
             Create.TableFor<GdprLog>();
@@ -72,10 +64,7 @@ namespace Nop.Data.Migrations.Installation
             Create.TableFor<AclRecord>();
             Create.TableFor<PermissionRecord>();
             Create.TableFor<PermissionRecordCustomerRoleMapping>();
-            Create.TableFor<UrlRecord>();
             Create.TableFor<ScheduleTask>();
-            Create.TableFor<TopicTemplate>();
-            Create.TableFor<Topic>();
             Create.TableFor<SatRepositoryInfoDirectories>();
             Create.TableFor<SatRepositoryInfoFiles>();
             Create.TableFor<SatRepositoryInfoBinaryFiles>();

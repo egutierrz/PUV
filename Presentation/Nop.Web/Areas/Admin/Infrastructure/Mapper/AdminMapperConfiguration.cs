@@ -11,16 +11,9 @@ using Nop.Core.Domain.Media;
 using Nop.Core.Domain.Messages;
 using Nop.Core.Domain.ScheduleTasks;
 using Nop.Core.Domain.Security;
-using Nop.Core.Domain.Seo;
 using Nop.Core.Domain.Stores;
-using Nop.Core.Domain.Tax;
-using Nop.Core.Domain.Topics;
 using Nop.Core.Infrastructure.Mapper;
 using Nop.Data.Configuration;
-using Nop.Services.Authentication.External;
-using Nop.Services.Authentication.MultiFactor;
-using Nop.Services.Cms;
-using Nop.Services.Plugins;
 using Nop.Web.Areas.Admin.Models.Cms;
 using Nop.Web.Areas.Admin.Models.Common;
 using Nop.Web.Areas.Admin.Models.Customers;
@@ -30,12 +23,9 @@ using Nop.Web.Areas.Admin.Models.Localization;
 using Nop.Web.Areas.Admin.Models.Logging;
 using Nop.Web.Areas.Admin.Models.Messages;
 using Nop.Web.Areas.Admin.Models.MultiFactorAuthentication;
-using Nop.Web.Areas.Admin.Models.Plugins;
 using Nop.Web.Areas.Admin.Models.Settings;
 using Nop.Web.Areas.Admin.Models.Stores;
 using Nop.Web.Areas.Admin.Models.Tasks;
-using Nop.Web.Areas.Admin.Models.Templates;
-using Nop.Web.Areas.Admin.Models.Topics;
 using Nop.Web.Framework.Configuration;
 using Nop.Web.Framework.Models;
 
@@ -52,23 +42,16 @@ namespace Nop.Web.Areas.Admin.Infrastructure.Mapper
         {
             //create specific maps
             CreateConfigMaps();
-            CreateAuthenticationMaps();
-            CreateMultiFactorAuthenticationMaps();
-            CreateCmsMaps();
             CreateCommonMaps();
             CreateCustomersMaps();
             CreateDirectoryMaps();
             CreateGdprMaps();
             CreateLocalizationMaps();
             CreateLoggingMaps();
-            CreateMediaMaps();
             CreateMessagesMaps();
-            CreatePluginsMaps();
             CreateSecurityMaps();
-            CreateSeoMaps();
             CreateStoresMaps();
             CreateTasksMaps();
-            CreateTopicsMaps();
 
             //add some generic mapping rules
             ForAllMaps((mapConfiguration, map) =>
@@ -123,14 +106,6 @@ namespace Nop.Web.Areas.Admin.Infrastructure.Mapper
                     map.ForMember(nameof(IPluginModel.ConfigurationUrl), options => options.Ignore());
                     map.ForMember(nameof(IPluginModel.IsActive), options => options.Ignore());
                     map.ForMember(nameof(IPluginModel.LogoUrl), options => options.Ignore());
-
-                    //define specific rules for mapping plugin models
-                    if (typeof(IPlugin).IsAssignableFrom(mapConfiguration.SourceType))
-                    {
-                        map.ForMember(nameof(IPluginModel.DisplayOrder), options => options.MapFrom(plugin => ((IPlugin)plugin).PluginDescriptor.DisplayOrder));
-                        map.ForMember(nameof(IPluginModel.FriendlyName), options => options.MapFrom(plugin => ((IPlugin)plugin).PluginDescriptor.FriendlyName));
-                        map.ForMember(nameof(IPluginModel.SystemName), options => options.MapFrom(plugin => ((IPlugin)plugin).PluginDescriptor.SystemName));
-                    }
                 }
             });
         }
@@ -180,32 +155,6 @@ namespace Nop.Web.Areas.Admin.Infrastructure.Mapper
                 .ForMember(entity => entity.EnableTagHelperBundling, options => options.Ignore())
                 .ForMember(entity => entity.EnableCaching, options => options.Ignore())
                 .ForMember(entity => entity.EnableMemoryCache, options => options.Ignore());
-        }
-
-        /// <summary>
-        /// Create authentication maps 
-        /// </summary>
-        protected virtual void CreateAuthenticationMaps()
-        {
-            CreateMap<IExternalAuthenticationMethod, ExternalAuthenticationMethodModel>();
-        }
-
-        /// <summary>
-        /// Create multi-factor authentication maps 
-        /// </summary>
-        protected virtual void CreateMultiFactorAuthenticationMaps()
-        {
-            CreateMap<IMultiFactorAuthenticationMethod, MultiFactorAuthenticationMethodModel>();
-        }
-
-        /// <summary>
-        /// Create CMS maps 
-        /// </summary>
-        protected virtual void CreateCmsMaps()
-        {
-            CreateMap<IWidgetPlugin, WidgetModel>()
-                .ForMember(model => model.WidgetViewComponentArguments, options => options.Ignore())
-                .ForMember(model => model.WidgetViewComponentName, options => options.Ignore());
         }
 
         /// <summary>
@@ -499,35 +448,6 @@ namespace Nop.Web.Areas.Admin.Infrastructure.Mapper
         }
 
         /// <summary>
-        /// Create media maps 
-        /// </summary>
-        protected virtual void CreateMediaMaps()
-        {
-            CreateMap<MediaSettings, MediaSettingsModel>()
-                .ForMember(model => model.AssociatedProductPictureSize_OverrideForStore, options => options.Ignore())
-                .ForMember(model => model.AvatarPictureSize_OverrideForStore, options => options.Ignore())
-                .ForMember(model => model.CartThumbPictureSize_OverrideForStore, options => options.Ignore())
-                .ForMember(model => model.CategoryThumbPictureSize_OverrideForStore, options => options.Ignore())
-                .ForMember(model => model.DefaultImageQuality_OverrideForStore, options => options.Ignore())
-                .ForMember(model => model.DefaultPictureZoomEnabled_OverrideForStore, options => options.Ignore())
-                .ForMember(model => model.ImportProductImagesUsingHash_OverrideForStore, options => options.Ignore())
-                .ForMember(model => model.ManufacturerThumbPictureSize_OverrideForStore, options => options.Ignore())
-                .ForMember(model => model.MaximumImageSize_OverrideForStore, options => options.Ignore())
-                .ForMember(model => model.MiniCartThumbPictureSize_OverrideForStore, options => options.Ignore())
-                .ForMember(model => model.MultipleThumbDirectories_OverrideForStore, options => options.Ignore())
-                .ForMember(model => model.PicturesStoredIntoDatabase, options => options.Ignore())
-                .ForMember(model => model.ProductDetailsPictureSize_OverrideForStore, options => options.Ignore())
-                .ForMember(model => model.ProductThumbPictureSizeOnProductDetailsPage_OverrideForStore, options => options.Ignore())
-                .ForMember(model => model.ProductThumbPictureSize_OverrideForStore, options => options.Ignore())
-                .ForMember(model => model.VendorThumbPictureSize_OverrideForStore, options => options.Ignore());
-            CreateMap<MediaSettingsModel, MediaSettings>()
-                .ForMember(settings => settings.AutoCompleteSearchThumbPictureSize, options => options.Ignore())
-                .ForMember(settings => settings.AzureCacheControlHeader, options => options.Ignore())
-                .ForMember(settings => settings.UseAbsoluteImagePath, options => options.Ignore())
-                .ForMember(settings => settings.ImageSquarePictureSize, options => options.Ignore());
-        }
-
-        /// <summary>
         /// Create messages maps 
         /// </summary>
         protected virtual void CreateMessagesMaps()
@@ -587,16 +507,7 @@ namespace Nop.Web.Areas.Admin.Infrastructure.Mapper
                 .ForMember(entity => entity.SentOnUtc, options => options.Ignore());
         }
 
-        /// <summary>
-        /// Create plugins maps 
-        /// </summary>
-        protected virtual void CreatePluginsMaps()
-        {
-            CreateMap<PluginDescriptor, PluginModel>()
-                .ForMember(model => model.CanChangeEnabled, options => options.Ignore())
-                .ForMember(model => model.IsEnabled, options => options.Ignore());
-        }
-
+       
         /// <summary>
         /// Create security maps 
         /// </summary>
@@ -628,21 +539,7 @@ namespace Nop.Web.Areas.Admin.Infrastructure.Mapper
                 .ForMember(settings => settings.ReCaptchaApiUrl, options => options.Ignore());
         }
 
-        /// <summary>
-        /// Create SEO maps 
-        /// </summary>
-        protected virtual void CreateSeoMaps()
-        {
-            CreateMap<UrlRecord, UrlRecordModel>()
-                .ForMember(model => model.DetailsUrl, options => options.Ignore())
-                .ForMember(model => model.Language, options => options.Ignore())
-                .ForMember(model => model.Name, options => options.Ignore());
-            CreateMap<UrlRecordModel, UrlRecord>()
-                .ForMember(entity => entity.LanguageId, options => options.Ignore())
-                .ForMember(entity => entity.Slug, options => options.Ignore());
-        }
-
-        
+                
         /// <summary>
         /// Create stores maps 
         /// </summary>
@@ -666,26 +563,6 @@ namespace Nop.Web.Areas.Admin.Infrastructure.Mapper
                 .ForMember(entity => entity.LastSuccessUtc, options => options.Ignore())
                 .ForMember(entity => entity.LastEnabledUtc, options => options.Ignore());
         }
-
-        
-
-        /// <summary>
-        /// Create topics maps 
-        /// </summary>
-        protected virtual void CreateTopicsMaps()
-        {
-            CreateMap<Topic, TopicModel>()
-                .ForMember(model => model.AvailableTopicTemplates, options => options.Ignore())
-                .ForMember(model => model.SeName, options => options.Ignore())
-                .ForMember(model => model.TopicName, options => options.Ignore())
-                .ForMember(model => model.Url, options => options.Ignore());
-            CreateMap<TopicModel, Topic>();
-
-            CreateMap<TopicTemplate, TopicTemplateModel>();
-            CreateMap<TopicTemplateModel, TopicTemplate>();
-        }
-
-        
         #endregion
 
         #region Properties

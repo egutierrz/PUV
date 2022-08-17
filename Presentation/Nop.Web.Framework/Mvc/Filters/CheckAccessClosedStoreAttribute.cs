@@ -8,7 +8,6 @@ using Nop.Core;
 using Nop.Core.Domain;
 using Nop.Data;
 using Nop.Services.Security;
-using Nop.Services.Topics;
 
 namespace Nop.Web.Framework.Mvc.Filters
 {
@@ -52,7 +51,6 @@ namespace Nop.Web.Framework.Mvc.Filters
             private readonly bool _ignoreFilter;
             private readonly IPermissionService _permissionService;
             private readonly IStoreContext _storeContext;
-            private readonly ITopicService _topicService;
             private readonly StoreInformationSettings _storeInformationSettings;
 
             #endregion
@@ -62,13 +60,11 @@ namespace Nop.Web.Framework.Mvc.Filters
             public CheckAccessClosedStoreFilter(bool ignoreFilter,
                 IPermissionService permissionService,
                 IStoreContext storeContext,
-                ITopicService topicService,
                 StoreInformationSettings storeInformationSettings)
             {
                 _ignoreFilter = ignoreFilter;
                 _permissionService = permissionService;
                 _storeContext = storeContext;
-                _topicService = topicService;
                 _storeInformationSettings = storeInformationSettings;
             }
 
@@ -116,23 +112,7 @@ namespace Nop.Web.Framework.Mvc.Filters
                 if (controllerName.Equals("Customer", StringComparison.InvariantCultureIgnoreCase) &&
                     actionName.Equals("MultiFactorVerification", StringComparison.InvariantCultureIgnoreCase))
                     return;
-
-                //topics accessible when a store is closed
-                if (controllerName.Equals("Topic", StringComparison.InvariantCultureIgnoreCase) &&
-                    actionName.Equals("TopicDetails", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    //get identifiers of topics are accessible when a store is closed
-
-                    var store = await _storeContext.GetCurrentStoreAsync();
-                    var allowedTopicIds = (await _topicService.GetAllTopicsAsync(store.Id))
-                        .Where(topic => topic.AccessibleWhenStoreClosed)
-                        .Select(topic => topic.Id);
-
-                    //check whether requested topic is allowed
-                    var requestedTopicId = context.RouteData.Values["topicId"] as int?;
-                    if (requestedTopicId.HasValue && allowedTopicIds.Contains(requestedTopicId.Value))
-                        return;
-                }
+                
 
                 //check whether current customer has access to a closed store
                 //if (await _permissionService.AuthorizeAsync(StandardPermissionProvider.AccessClosedStore))

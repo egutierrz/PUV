@@ -100,16 +100,6 @@ namespace Nop.Web.Factories
         Task<ChangePasswordModel> PrepareChangePasswordModelAsync();
 
         /// <summary>
-        /// Prepare the customer avatar model
-        /// </summary>
-        /// <param name="model">Customer avatar model</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the customer avatar model
-        /// </returns>
-        Task<CustomerAvatarModel> PrepareCustomerAvatarModelAsync(CustomerAvatarModel model);
-
-        /// <summary>
         /// Prepare the GDPR tools model
         /// </summary>
         /// <returns>
@@ -117,28 +107,6 @@ namespace Nop.Web.Factories
         /// The task result contains the gDPR tools model
         /// </returns>
         Task<GdprToolsModel> PrepareGdprToolsModelAsync();
-
-        /// <summary>
-        /// Prepare the multi-factor authentication model
-        /// </summary>
-        /// <param name="model">Multi-factor authentication model</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the multi-factor authentication model
-        /// </returns>
-        Task<MultiFactorAuthenticationModel> PrepareMultiFactorAuthenticationModelAsync(MultiFactorAuthenticationModel model);
-
-        /// <summary>
-        /// Prepare the multi-factor provider model
-        /// </summary>
-        /// <param name="providerModel">Multi-factor provider model</param>
-        /// <param name="sysName">Multi-factor provider system name</param>
-        /// <param name="isLogin">Is login page</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the multi-factor authentication model
-        /// </returns>
-        Task<MultiFactorAuthenticationProviderModel> PrepareMultiFactorAuthenticationProviderModelAsync(MultiFactorAuthenticationProviderModel providerModel, string sysName, bool isLogin = false);
 
         /// <summary>
         /// Prepare the custom customer attribute models

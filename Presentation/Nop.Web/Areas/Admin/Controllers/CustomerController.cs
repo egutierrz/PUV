@@ -14,7 +14,6 @@ using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Gdpr;
 using Nop.Core.Domain.Logging;
 using Nop.Core.Domain.Messages;
-using Nop.Core.Domain.Tax;
 using Nop.Core.Events;
 using Nop.Services.Common;
 using Nop.Services.Customers;
@@ -660,44 +659,6 @@ namespace Nop.Web.Areas.Admin.Controllers
             else
                 foreach (var error in changePassResult.Errors)
                     _notificationService.ErrorNotification(error);
-
-            return RedirectToAction("Edit", new { id = customer.Id });
-        }
-
-        [HttpPost, ActionName("Edit")]
-        [FormValueRequired("markVatNumberAsValid")]
-        public virtual async Task<IActionResult> MarkVatNumberAsValid(CustomerModel model)
-        {
-            if (!await _permissionService.AuthorizeAsync(StandardPermissionProvider.ManageCustomers))
-                return AccessDeniedView();
-
-            //try to get a customer with the specified id
-            var customer = await _customerService.GetCustomerByIdAsync(model.Id);
-            if (customer == null)
-                return RedirectToAction("List");
-
-            await _genericAttributeService.SaveAttributeAsync(customer,
-                NopCustomerDefaults.VatNumberStatusIdAttribute,
-                (int)VatNumberStatus.Valid);
-
-            return RedirectToAction("Edit", new { id = customer.Id });
-        }
-
-        [HttpPost, ActionName("Edit")]
-        [FormValueRequired("markVatNumberAsInvalid")]
-        public virtual async Task<IActionResult> MarkVatNumberAsInvalid(CustomerModel model)
-        {
-            if (!await _permissionService.AuthorizeAsync(StandardPermissionProvider.ManageCustomers))
-                return AccessDeniedView();
-
-            //try to get a customer with the specified id
-            var customer = await _customerService.GetCustomerByIdAsync(model.Id);
-            if (customer == null)
-                return RedirectToAction("List");
-
-            await _genericAttributeService.SaveAttributeAsync(customer,
-                NopCustomerDefaults.VatNumberStatusIdAttribute,
-                (int)VatNumberStatus.Invalid);
 
             return RedirectToAction("Edit", new { id = customer.Id });
         }

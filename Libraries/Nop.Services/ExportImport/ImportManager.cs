@@ -21,7 +21,6 @@ using Nop.Services.Localization;
 using Nop.Services.Logging;
 using Nop.Services.Media;
 using Nop.Services.Messages;
-using Nop.Services.Seo;
 using Nop.Services.Stores;
 
 namespace Nop.Services.ExportImport
@@ -40,17 +39,13 @@ namespace Nop.Services.ExportImport
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly ILocalizationService _localizationService;
         private readonly ILogger _logger;
-        private readonly IMeasureService _measureService;
         private readonly INopFileProvider _fileProvider;
-        private readonly IPictureService _pictureService;
         private readonly IServiceScopeFactory _serviceScopeFactory;
         private readonly IStateProvinceService _stateProvinceService;
         private readonly IStoreContext _storeContext;
         private readonly IStoreMappingService _storeMappingService;
         private readonly IStoreService _storeService;
-        private readonly IUrlRecordService _urlRecordService;
         private readonly IWorkContext _workContext;
-        private readonly MediaSettings _mediaSettings;
 
         #endregion
 
@@ -63,17 +58,13 @@ namespace Nop.Services.ExportImport
             IHttpClientFactory httpClientFactory,
             ILocalizationService localizationService,
             ILogger logger,
-            IMeasureService measureService,
             INopFileProvider fileProvider,
-            IPictureService pictureService,
             IServiceScopeFactory serviceScopeFactory,
             IStateProvinceService stateProvinceService,
             IStoreContext storeContext,
             IStoreMappingService storeMappingService,
             IStoreService storeService,
-            IUrlRecordService urlRecordService,
-            IWorkContext workContext,
-            MediaSettings mediaSettings)
+            IWorkContext workContext)
         {
             _catalogSettings = catalogSettings;
             _countryService = countryService;
@@ -83,16 +74,12 @@ namespace Nop.Services.ExportImport
             _fileProvider = fileProvider;
             _localizationService = localizationService;
             _logger = logger;
-            _measureService = measureService;
-            _pictureService = pictureService;
             _serviceScopeFactory = serviceScopeFactory;
             _stateProvinceService = stateProvinceService;
             _storeContext = storeContext;
             _storeMappingService = storeMappingService;
             _storeService = storeService;
-            _urlRecordService = urlRecordService;
             _workContext = workContext;
-            _mediaSettings = mediaSettings;
         }
 
         #endregion
@@ -141,63 +128,7 @@ namespace Nop.Services.ExportImport
             //set to jpeg in case mime type cannot be found
             return mimeType ?? MimeTypes.ImageJpeg;
         }
-
-        /// <summary>
-        /// Creates or loads the image
-        /// </summary>
-        /// <param name="picturePath">The path to the image file</param>
-        /// <param name="name">The name of the object</param>
-        /// <param name="picId">Image identifier, may be null</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the image or null if the image has not changed
-        /// </returns>
-        protected virtual async Task<Picture> LoadPictureAsync(string picturePath, string name, int? picId = null)
-        {
-            if (string.IsNullOrEmpty(picturePath) || !_fileProvider.FileExists(picturePath))
-                return null;
-
-            var mimeType = GetMimeTypeFromFilePath(picturePath);
-            var newPictureBinary = await _fileProvider.ReadAllBytesAsync(picturePath);
-            var pictureAlreadyExists = false;
-            if (picId != null)
-            {
-                //compare with existing product pictures
-                var existingPicture = await _pictureService.GetPictureByIdAsync(picId.Value);
-                if (existingPicture != null)
-                {
-                    var existingBinary = await _pictureService.LoadPictureBinaryAsync(existingPicture);
-                    //picture binary after validation (like in database)
-                    var validatedPictureBinary = await _pictureService.ValidatePictureAsync(newPictureBinary, mimeType);
-                    if (existingBinary.SequenceEqual(validatedPictureBinary) ||
-                        existingBinary.SequenceEqual(newPictureBinary))
-                    {
-                        pictureAlreadyExists = true;
-                    }
-                }
-            }
-
-            if (pictureAlreadyExists)
-                return null;
-
-            var newPicture = await _pictureService.InsertPictureAsync(newPictureBinary, mimeType, await _pictureService.GetPictureSeNameAsync(name));
-            return newPicture;
-        }
-
-        /// <returns>A task that represents the asynchronous operation</returns>
-        private async Task LogPictureInsertErrorAsync(string picturePath, Exception ex)
-        {
-            var extension = _fileProvider.GetFileExtension(picturePath);
-            var name = _fileProvider.GetFileNameWithoutExtension(picturePath);
-
-            var point = string.IsNullOrEmpty(extension) ? string.Empty : ".";
-            var fileName = _fileProvider.FileExists(picturePath) ? $"{name}{point}{extension}" : string.Empty;
-            
-            await _logger.ErrorAsync($"Insert picture failed (file name: {fileName})", ex);
-        }
-
-
-        /// <returns>A task that represents the asynchronous operation</returns>
+       
         private async Task<string> DownloadFileAsync(string urlString, IList<string> downloadedFiles)
         {
             if (string.IsNullOrEmpty(urlString))

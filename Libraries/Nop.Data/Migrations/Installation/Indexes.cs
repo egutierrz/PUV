@@ -7,7 +7,6 @@ using Nop.Core.Domain.Localization;
 using Nop.Core.Domain.Logging;
 using Nop.Core.Domain.Messages;
 using Nop.Core.Domain.Security;
-using Nop.Core.Domain.Seo;
 using Nop.Core.Domain.Stores;
 using Nop.Data.Mapping;
 
@@ -20,20 +19,6 @@ namespace Nop.Data.Migrations.Installation
 
         public override void Up()
         {
-            Create.Index("IX_UrlRecord_Slug")
-                .OnTable(nameof(UrlRecord))
-                .OnColumn(nameof(UrlRecord.Slug))
-                .Ascending()
-                .WithOptions()
-                .NonClustered();
-
-            Create.Index("IX_UrlRecord_Custom_1").OnTable(nameof(UrlRecord))
-                .OnColumn(nameof(UrlRecord.EntityId)).Ascending()
-                .OnColumn(nameof(UrlRecord.EntityName)).Ascending()
-                .OnColumn(nameof(UrlRecord.LanguageId)).Ascending()
-                .OnColumn(nameof(UrlRecord.IsActive)).Ascending()
-                .WithOptions().NonClustered();
-
             Create.Index("IX_StoreMapping_EntityId_EntityName").OnTable(nameof(StoreMapping))
                 .OnColumn(nameof(StoreMapping.EntityId)).Ascending()
                 .OnColumn(nameof(StoreMapping.EntityName)).Ascending()
@@ -61,11 +46,6 @@ namespace Nop.Data.Migrations.Installation
 
             Create.Index("IX_Language_DisplayOrder").OnTable(nameof(Language))
                 .OnColumn(nameof(Language.DisplayOrder)).Ascending()
-                .WithOptions().NonClustered();
-
-            Create.Index("IX_GenericAttribute_EntityId_and_KeyGroup").OnTable(nameof(GenericAttribute))
-                .OnColumn(nameof(GenericAttribute.EntityId)).Ascending()
-                .OnColumn(nameof(GenericAttribute.KeyGroup)).Ascending()
                 .WithOptions().NonClustered();
             
             Create.Index("IX_Customer_Username").OnTable(nameof(Customer))

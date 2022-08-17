@@ -18,7 +18,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Net.Http.Headers;
 using Nop.Core;
 using Nop.Core.Configuration;
-using Nop.Core.Domain.Seo;
 using Nop.Services.Localization;
 using Nop.Web.Framework.Configuration;
 using Nop.Web.Framework.Mvc.Routing;
@@ -39,7 +38,6 @@ namespace Nop.Web.Framework.UI
         private readonly IAssetPipeline _assetPipeline;
         private readonly IUrlHelperFactory _urlHelperFactory;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        private readonly SeoSettings _seoSettings;
 
         private readonly Dictionary<ResourceLocation, List<ScriptReferenceMeta>> _scriptParts = new();
         private readonly Dictionary<ResourceLocation, List<string>> _inlineScriptParts = new();
@@ -64,8 +62,7 @@ namespace Nop.Web.Framework.UI
             HtmlEncoder htmlEncoder,
             IAssetPipeline assetPipeline,
             IUrlHelperFactory urlHelperFactory,
-            IWebHostEnvironment webHostEnvironment,
-            SeoSettings seoSettings)
+            IWebHostEnvironment webHostEnvironment)
         {
             _appSettings = appSettings;
             _actionContextAccessor = actionContextAccessor;
@@ -73,7 +70,6 @@ namespace Nop.Web.Framework.UI
             _assetPipeline = assetPipeline;
             _urlHelperFactory = urlHelperFactory;
             _webHostEnvironment = webHostEnvironment;
-            _seoSettings = seoSettings;
         }
 
         #endregion
@@ -165,40 +161,8 @@ namespace Nop.Web.Framework.UI
         {
             AppendTitleParts(part);
 
-            var specificTitle = string.Join(_seoSettings.PageTitleSeparator, _titleParts.AsEnumerable().Reverse().ToArray());
-            string result;
-            if (!string.IsNullOrEmpty(specificTitle))
-            {
-                if (addDefaultTitle)
-                {
-                    //store name + page title
-                    switch (_seoSettings.PageTitleSeoAdjustment)
-                    {
-                        case PageTitleSeoAdjustment.PagenameAfterStorename:
-                            {
-                                result = string.Join(_seoSettings.PageTitleSeparator, _seoSettings.DefaultTitle, specificTitle);
-                            }
-                            break;
-                        case PageTitleSeoAdjustment.StorenameAfterPagename:
-                        default:
-                            {
-                                result = string.Join(_seoSettings.PageTitleSeparator, specificTitle, _seoSettings.DefaultTitle);
-                            }
-                            break;
-                    }
-                }
-                else
-                {
-                    //page title only
-                    result = specificTitle;
-                }
-            }
-            else
-            {
-                //store name only
-                result = _seoSettings.DefaultTitle;
-            }
-            return new HtmlString(_htmlEncoder.Encode(result));
+            
+            return new HtmlString(_htmlEncoder.Encode("PUV"));
         }
 
         /// <summary>
@@ -235,7 +199,7 @@ namespace Nop.Web.Framework.UI
             AppendMetaDescriptionParts(part);
 
             var metaDescription = string.Join(", ", _metaDescriptionParts.AsEnumerable().Reverse().ToArray());
-            var result = !string.IsNullOrEmpty(metaDescription) ? metaDescription : _seoSettings.DefaultMetaDescription;
+            var result ="";
 
             return new HtmlString(_htmlEncoder.Encode(result));
         }
@@ -274,7 +238,7 @@ namespace Nop.Web.Framework.UI
             AppendMetaKeywordParts(part);
 
             var metaKeyword = string.Join(", ", _metaKeywordParts.AsEnumerable().Reverse().ToArray());
-            var result = !string.IsNullOrEmpty(metaKeyword) ? metaKeyword : _seoSettings.DefaultMetaKeywords;
+            var result = "";
 
             return new HtmlString(_htmlEncoder.Encode(result));
         }

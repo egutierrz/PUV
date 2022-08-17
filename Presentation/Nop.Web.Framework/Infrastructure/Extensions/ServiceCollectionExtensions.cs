@@ -22,7 +22,6 @@ using Nop.Core.Infrastructure;
 using Nop.Core.Security;
 using Nop.Data;
 using Nop.Services.Authentication;
-using Nop.Services.Authentication.External;
 using Nop.Services.Common;
 using Nop.Services.Security;
 using Nop.Web.Framework.Configuration;
@@ -60,13 +59,7 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
 
             //add accessor to HttpContext
             services.AddHttpContextAccessor();
-
-            //initialize plugins
-            var mvcCoreBuilder = services.AddMvcCore();
-            var pluginConfig = new PluginConfig();
-            builder.Configuration.GetSection(nameof(PluginConfig)).Bind(pluginConfig, options => options.BindNonPublicProperties = true);
-            mvcCoreBuilder.PartManager.InitializePlugins(pluginConfig);
-
+          
             //register type finder
             var typeFinder = new WebAppTypeFinder();
             Singleton<ITypeFinder>.Instance = typeFinder;
@@ -236,25 +229,6 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
                 options.LoginPath = NopAuthenticationDefaults.LoginPath;
                 options.AccessDeniedPath = NopAuthenticationDefaults.AccessDeniedPath;
             });
-
-            //add external authentication
-            authenticationBuilder.AddCookie(NopAuthenticationDefaults.ExternalAuthenticationScheme, options =>
-            {
-                options.Cookie.Name = $"{NopCookieDefaults.Prefix}{NopCookieDefaults.ExternalAuthenticationCookie}";
-                options.Cookie.HttpOnly = true;
-                options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-                options.LoginPath = NopAuthenticationDefaults.LoginPath;
-                options.AccessDeniedPath = NopAuthenticationDefaults.AccessDeniedPath;
-            });
-
-            //register and configure external authentication plugins now
-            var typeFinder = Singleton<ITypeFinder>.Instance;
-            var externalAuthConfigurations = typeFinder.FindClassesOfType<IExternalAuthenticationRegistrar>();
-            var externalAuthInstances = externalAuthConfigurations
-                .Select(x => (IExternalAuthenticationRegistrar)Activator.CreateInstance(x));
-
-            foreach (var instance in externalAuthInstances)
-                instance.Configure(authenticationBuilder);
         }
 
         /// <summary>

@@ -27,7 +27,6 @@ using Nop.Services.Directory;
 using Nop.Services.Helpers;
 using Nop.Services.Html;
 using Nop.Services.Localization;
-using Nop.Services.Seo;
 using Nop.Services.Stores;
 
 namespace Nop.Services.Messages
@@ -58,7 +57,6 @@ namespace Nop.Services.Messages
         private readonly IStoreContext _storeContext;
         private readonly IStoreService _storeService;
         private readonly IUrlHelperFactory _urlHelperFactory;
-        private readonly IUrlRecordService _urlRecordService;
         private readonly IWorkContext _workContext;
         private readonly MessageTemplatesSettings _templatesSettings;
         private readonly StoreInformationSettings _storeInformationSettings;
@@ -88,7 +86,6 @@ namespace Nop.Services.Messages
             IStoreContext storeContext,
             IStoreService storeService,
             IUrlHelperFactory urlHelperFactory,
-            IUrlRecordService urlRecordService,
             IWorkContext workContext,
             MessageTemplatesSettings templatesSettings,
             StoreInformationSettings storeInformationSettings)
@@ -112,7 +109,6 @@ namespace Nop.Services.Messages
             _storeContext = storeContext;
             _storeService = storeService;
             _urlHelperFactory = urlHelperFactory;
-            _urlRecordService = urlRecordService;
             _workContext = workContext;
             _templatesSettings = templatesSettings;
             _storeInformationSettings = storeInformationSettings;

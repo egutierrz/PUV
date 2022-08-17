@@ -13,7 +13,6 @@ namespace Nop.Web.Areas.Admin.Controllers
     [AutoValidateAntiforgeryToken]
     [ValidateIpAddress]
     [AuthorizeAdmin]
-    [ValidateVendor]
     [SaveSelectedTab]
     [NotNullValidationMessage]
     public abstract partial class BaseAdminController : BaseController

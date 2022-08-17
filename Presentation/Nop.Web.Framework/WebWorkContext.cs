@@ -7,7 +7,6 @@ using Nop.Core;
 using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Directory;
 using Nop.Core.Domain.Localization;
-using Nop.Core.Domain.Tax;
 using Nop.Core.Http;
 using Nop.Core.Security;
 using Nop.Services.Authentication;

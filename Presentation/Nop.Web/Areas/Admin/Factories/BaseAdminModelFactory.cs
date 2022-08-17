@@ -13,9 +13,7 @@ using Nop.Services.Helpers;
 using Nop.Services.Localization;
 using Nop.Services.Logging;
 using Nop.Services.Messages;
-using Nop.Services.Plugins;
 using Nop.Services.Stores;
-using Nop.Services.Topics;
 using Nop.Web.Areas.Admin.Infrastructure.Cache;
 
 namespace Nop.Web.Areas.Admin.Factories
@@ -35,11 +33,9 @@ namespace Nop.Web.Areas.Admin.Factories
         private readonly IEmailAccountService _emailAccountService;
         private readonly ILanguageService _languageService;
         private readonly ILocalizationService _localizationService;
-        private readonly IPluginService _pluginService;
         private readonly IStateProvinceService _stateProvinceService;
         private readonly IStaticCacheManager _staticCacheManager;
         private readonly IStoreService _storeService;
-        private readonly ITopicTemplateService _topicTemplateService;
 
         #endregion
 
@@ -54,11 +50,9 @@ namespace Nop.Web.Areas.Admin.Factories
             IEmailAccountService emailAccountService,
             ILanguageService languageService,
             ILocalizationService localizationService,
-            IPluginService pluginService,
             IStateProvinceService stateProvinceService,
             IStaticCacheManager staticCacheManager,
-            IStoreService storeService,
-            ITopicTemplateService topicTemplateService)
+            IStoreService storeService)
         {
             _countryService = countryService;
             _currencyService = currencyService;
@@ -68,11 +62,9 @@ namespace Nop.Web.Areas.Admin.Factories
             _emailAccountService = emailAccountService;
             _languageService = languageService;
             _localizationService = localizationService;
-            _pluginService = pluginService;
             _stateProvinceService = stateProvinceService;
             _staticCacheManager = staticCacheManager;
             _storeService = storeService;
-            _topicTemplateService = topicTemplateService;
         }
 
         #endregion
@@ -350,76 +342,6 @@ namespace Nop.Web.Areas.Admin.Factories
             foreach (var logLevelItem in availableLogLevelItems)
             {
                 items.Add(logLevelItem);
-            }
-
-            //insert special item for the default value
-            await PrepareDefaultItemAsync(items, withSpecialDefaultItem, defaultItemText);
-        }
-
-        
-        /// <summary>
-        /// Prepare available load plugin modes
-        /// </summary>
-        /// <param name="items">Load plugin mode items</param>
-        /// <param name="withSpecialDefaultItem">Whether to insert the first special item for the default value</param>
-        /// <param name="defaultItemText">Default item text; pass null to use default value of the default item text</param>
-        /// <returns>A task that represents the asynchronous operation</returns>
-        public virtual async Task PrepareLoadPluginModesAsync(IList<SelectListItem> items, bool withSpecialDefaultItem = true, string defaultItemText = null)
-        {
-            if (items == null)
-                throw new ArgumentNullException(nameof(items));
-
-            //prepare available load plugin modes
-            var availableLoadPluginModeItems = await LoadPluginsMode.All.ToSelectListAsync(false);
-            foreach (var loadPluginModeItem in availableLoadPluginModeItems)
-            {
-                items.Add(loadPluginModeItem);
-            }
-
-            //insert special item for the default value
-            await PrepareDefaultItemAsync(items, withSpecialDefaultItem, defaultItemText);
-        }
-
-        /// <summary>
-        /// Prepare available plugin groups
-        /// </summary>
-        /// <param name="items">Plugin group items</param>
-        /// <param name="withSpecialDefaultItem">Whether to insert the first special item for the default value</param>
-        /// <param name="defaultItemText">Default item text; pass null to use default value of the default item text</param>
-        /// <returns>A task that represents the asynchronous operation</returns>
-        public virtual async Task PreparePluginGroupsAsync(IList<SelectListItem> items, bool withSpecialDefaultItem = true, string defaultItemText = null)
-        {
-            if (items == null)
-                throw new ArgumentNullException(nameof(items));
-
-            //prepare available plugin groups
-            var availablePluginGroups = (await _pluginService.GetPluginDescriptorsAsync<IPlugin>(LoadPluginsMode.All))
-                .Select(plugin => plugin.Group).Distinct().OrderBy(groupName => groupName).ToList();
-            foreach (var group in availablePluginGroups)
-                items.Add(new SelectListItem { Value = @group, Text = @group });
-
-            //insert special item for the default value
-            await PrepareDefaultItemAsync(items, withSpecialDefaultItem, defaultItemText);
-        }
-
-        
-        /// <summary>
-        /// Prepare available topic templates
-        /// </summary>
-        /// <param name="items">Topic template items</param>
-        /// <param name="withSpecialDefaultItem">Whether to insert the first special item for the default value</param>
-        /// <param name="defaultItemText">Default item text; pass null to use default value of the default item text</param>
-        /// <returns>A task that represents the asynchronous operation</returns>
-        public virtual async Task PrepareTopicTemplatesAsync(IList<SelectListItem> items, bool withSpecialDefaultItem = true, string defaultItemText = null)
-        {
-            if (items == null)
-                throw new ArgumentNullException(nameof(items));
-
-            //prepare available topic templates
-            var availableTemplates = await _topicTemplateService.GetAllTopicTemplatesAsync();
-            foreach (var template in availableTemplates)
-            {
-                items.Add(new SelectListItem { Value = template.Id.ToString(), Text = template.Name });
             }
 
             //insert special item for the default value

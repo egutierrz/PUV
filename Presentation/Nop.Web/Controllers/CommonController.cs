@@ -207,19 +207,7 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
-        //SEO sitemap page
-        //available even when a store is closed
-        [CheckAccessClosedStore(true)]
-        //ignore SEO friendly URLs checks
-        [CheckLanguageSeoCode(true)]
-        public virtual async Task<IActionResult> SitemapXml(int? id)
-        {
-            var siteMap = _sitemapXmlSettings.SitemapXmlEnabled
-                ? await _commonModelFactory.PrepareSitemapXmlAsync(id) : string.Empty;
-
-            return Content(siteMap, "text/xml");
-        }
-
+        
         public virtual async Task<IActionResult> SetStoreTheme(string themeName, string returnUrl = "")
         {
             await _themeContext.SetWorkingThemeNameAsync(themeName);

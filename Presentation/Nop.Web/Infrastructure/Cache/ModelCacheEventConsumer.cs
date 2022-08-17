@@ -3,12 +3,8 @@ using Nop.Core.Caching;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Configuration;
 using Nop.Core.Domain.Localization;
-using Nop.Core.Domain.Media;
-using Nop.Core.Domain.Topics;
 using Nop.Core.Events;
-using Nop.Services.Cms;
 using Nop.Services.Events;
-using Nop.Services.Plugins;
 
 namespace Nop.Web.Infrastructure.Cache
 {
@@ -21,17 +17,8 @@ namespace Nop.Web.Infrastructure.Cache
         IConsumer<EntityUpdatedEvent<Language>>,
         IConsumer<EntityDeletedEvent<Language>>,
         //settings
-        IConsumer<EntityUpdatedEvent<Setting>>,
-        //Topics
-        IConsumer<EntityInsertedEvent<Topic>>,
-        IConsumer<EntityUpdatedEvent<Topic>>,
-        IConsumer<EntityDeletedEvent<Topic>>,
-        //Picture
-        IConsumer<EntityInsertedEvent<Picture>>,
-        IConsumer<EntityUpdatedEvent<Picture>>,
-        IConsumer<EntityDeletedEvent<Picture>>,
-        //plugins
-        IConsumer<PluginUpdatedEvent>
+        IConsumer<EntityUpdatedEvent<Setting>>
+        
     {
         #region Fields
 
@@ -100,78 +87,6 @@ namespace Nop.Web.Infrastructure.Cache
             await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.SitemapPrefixCacheKey); //depends on distinct sitemap settings
             await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.WidgetPrefixCacheKey); //depends on WidgetSettings and certain settings of widgets
             await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.StoreLogoPathPrefixCacheKey); //depends on StoreInformationSettings.LogoPictureId
-        }
-
-        #endregion
-
-        #region Topics
-
-        /// <returns>A task that represents the asynchronous operation</returns>
-        public async Task HandleEventAsync(EntityInsertedEvent<Topic> eventMessage)
-        {
-            await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.SitemapPrefixCacheKey);
-        }
-
-        /// <returns>A task that represents the asynchronous operation</returns>
-        public async Task HandleEventAsync(EntityUpdatedEvent<Topic> eventMessage)
-        {
-            await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.SitemapPrefixCacheKey);
-        }
-
-        /// <returns>A task that represents the asynchronous operation</returns>
-        public async Task HandleEventAsync(EntityDeletedEvent<Topic> eventMessage)
-        {
-            await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.SitemapPrefixCacheKey);
-        }
-
-        #endregion
-
-        #region Pictures
-
-        /// <returns>A task that represents the asynchronous operation</returns>
-        public async Task HandleEventAsync(EntityInsertedEvent<Picture> eventMessage)
-        {
-            await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.ProductAttributePicturePrefixCacheKey);
-            await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.CartPicturePrefixCacheKey);
-        }
-
-        /// <returns>A task that represents the asynchronous operation</returns>
-        public async Task HandleEventAsync(EntityUpdatedEvent<Picture> eventMessage)
-        {
-            await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.ProductAttributePicturePrefixCacheKey);
-            await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.CartPicturePrefixCacheKey);
-            await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.ProductDetailsPicturesPrefixCacheKey);
-            await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.ProductDefaultPicturePrefixCacheKey);
-            await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.CategoryPicturePrefixCacheKey);
-            await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.ManufacturerPicturePrefixCacheKey);
-            await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.VendorPicturePrefixCacheKey);
-        }
-
-        /// <returns>A task that represents the asynchronous operation</returns>
-        public async Task HandleEventAsync(EntityDeletedEvent<Picture> eventMessage)
-        {
-            await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.ProductAttributePicturePrefixCacheKey);
-            await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.CartPicturePrefixCacheKey);
-            await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.ProductDetailsPicturesPrefixCacheKey);
-            await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.ProductDefaultPicturePrefixCacheKey);
-            await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.CategoryPicturePrefixCacheKey);
-            await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.ManufacturerPicturePrefixCacheKey);
-            await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.VendorPicturePrefixCacheKey);
-        }
-
-        #endregion
-
-        #region Plugin
-
-        /// <summary>
-        /// Handle plugin updated event
-        /// </summary>
-        /// <param name="eventMessage">Event message</param>
-        /// <returns>A task that represents the asynchronous operation</returns>
-        public async Task HandleEventAsync(PluginUpdatedEvent eventMessage)
-        {
-            if (eventMessage?.Plugin?.Instance<IWidgetPlugin>() != null)
-                await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.WidgetPrefixCacheKey);
         }
 
         #endregion

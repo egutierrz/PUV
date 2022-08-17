@@ -9,7 +9,6 @@ using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Logging;
 using Nop.Core.Events;
 using Nop.Services.Authentication;
-using Nop.Services.Authentication.MultiFactor;
 using Nop.Services.Common;
 using Nop.Services.Localization;
 using Nop.Services.Logging;
@@ -35,7 +34,6 @@ namespace Nop.Services.Customers
         private readonly IEventPublisher _eventPublisher;
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly ILocalizationService _localizationService;
-        private readonly IMultiFactorAuthenticationPluginManager _multiFactorAuthenticationPluginManager;
         private readonly INotificationService _notificationService;
         private readonly IStoreContext _storeContext;
         private readonly IStoreService _storeService;
@@ -57,7 +55,6 @@ namespace Nop.Services.Customers
             IEventPublisher eventPublisher,
             IGenericAttributeService genericAttributeService,
             ILocalizationService localizationService,
-            IMultiFactorAuthenticationPluginManager multiFactorAuthenticationPluginManager,
             INotificationService notificationService,
             IStoreContext storeContext,
             IStoreService storeService,
@@ -75,7 +72,6 @@ namespace Nop.Services.Customers
             _eventPublisher = eventPublisher;
             _genericAttributeService = genericAttributeService;
             _localizationService = localizationService;
-            _multiFactorAuthenticationPluginManager = multiFactorAuthenticationPluginManager;
             _notificationService = notificationService;
             _storeContext = storeContext;
             _storeService = storeService;
@@ -172,12 +168,7 @@ namespace Nop.Services.Customers
 
             var selectedProvider = await _genericAttributeService.GetAttributeAsync<string>(customer, NopCustomerDefaults.SelectedMultiFactorAuthenticationProviderAttribute);
             var store = await _storeContext.GetCurrentStoreAsync();
-            var methodIsActive = await _multiFactorAuthenticationPluginManager.IsPluginActiveAsync(selectedProvider, customer, store.Id);
-            if (methodIsActive)
-                return CustomerLoginResults.MultiFactorAuthenticationRequired;
-            if (!string.IsNullOrEmpty(selectedProvider))
-                _notificationService.WarningNotification(await _localizationService.GetResourceAsync("MultiFactorAuthentication.Notification.SelectedMethodIsNotActive"));
-
+            
             //update login details
             customer.FailedLoginAttempts = 0;
             customer.CannotLoginUntilDateUtc = null;

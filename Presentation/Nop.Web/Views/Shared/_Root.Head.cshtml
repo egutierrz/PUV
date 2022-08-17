@@ -1,13 +1,11 @@
 ﻿@using Nop.Core.Configuration
 @using Nop.Core.Domain.Common
-@using Nop.Core.Domain.Seo
 @using Nop.Services.Security
 @using Nop.Core.Events
 
 @inject CommonSettings commonSettings
 @inject IEventPublisher eventPublisher
 @inject IPermissionService permissionService
-@inject SeoSettings seoSettings
 @inject AppSettings appSettings
 
 @{
@@ -29,11 +27,7 @@
     NopHtml.AppendScriptParts(ResourceLocation.Footer, "~/lib_npm/jquery-validation/jquery.validate.min.js");
     NopHtml.AppendScriptParts(ResourceLocation.Footer, "~/lib_npm/jquery/jquery.min.js");
 
-    //custom tag(s);
-    if (!string.IsNullOrEmpty(seoSettings.CustomHeadTags))
-    {
-        NopHtml.AppendHeadCustomParts(seoSettings.CustomHeadTags);
-    }
+  
 
     var displayMiniProfiler = appSettings.Get<CommonConfig>().MiniProfilerEnabled && await permissionService.AuthorizeAsync(StandardPermissionProvider.AccessProfiling);
 

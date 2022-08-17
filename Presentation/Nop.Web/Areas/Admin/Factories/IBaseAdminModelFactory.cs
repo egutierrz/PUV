@@ -102,34 +102,6 @@ namespace Nop.Web.Areas.Admin.Factories
         /// <returns>A task that represents the asynchronous operation</returns>
         Task PrepareLogLevelsAsync(IList<SelectListItem> items, bool withSpecialDefaultItem = true, string defaultItemText = null);
 
-        /// <summary>
-        /// Prepare available load plugin modes
-        /// </summary>
-        /// <param name="items">Load plugin mode items</param>
-        /// <param name="withSpecialDefaultItem">Whether to insert the first special item for the default value</param>
-        /// <param name="defaultItemText">Default item text; pass null to use default value of the default item text</param>
-        /// <returns>A task that represents the asynchronous operation</returns>
-        Task PrepareLoadPluginModesAsync(IList<SelectListItem> items, bool withSpecialDefaultItem = true, string defaultItemText = null);
-
-        /// <summary>
-        /// Prepare available plugin groups
-        /// </summary>
-        /// <param name="items">Plugin group items</param>
-        /// <param name="withSpecialDefaultItem">Whether to insert the first special item for the default value</param>
-        /// <param name="defaultItemText">Default item text; pass null to use default value of the default item text</param>
-        /// <returns>A task that represents the asynchronous operation</returns>
-        Task PreparePluginGroupsAsync(IList<SelectListItem> items, bool withSpecialDefaultItem = true, string defaultItemText = null);
-
-
-        /// <summary>
-        /// Prepare available topic templates
-        /// </summary>
-        /// <param name="items">Topic template items</param>
-        /// <param name="withSpecialDefaultItem">Whether to insert the first special item for the default value</param>
-        /// <param name="defaultItemText">Default item text; pass null to use default value of the default item text</param>
-        /// <returns>A task that represents the asynchronous operation</returns>
-        Task PrepareTopicTemplatesAsync(IList<SelectListItem> items, bool withSpecialDefaultItem = true, string defaultItemText = null);
-
         Task PrepareGdprRequestTypesAsync(IList<SelectListItem> items, bool withSpecialDefaultItem = true, string defaultItemText = null);
     }
 }

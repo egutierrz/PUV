@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Nop.Core;
 using Nop.Core.Domain.Customers;
 using Nop.Services.Customers;
-using Nop.Services.Seo;
 using Nop.Web.Areas.Admin.Infrastructure.Mapper.Extensions;
 using Nop.Web.Areas.Admin.Models.Customers;
 using Nop.Web.Framework.Models.Extensions;
@@ -21,7 +20,6 @@ namespace Nop.Web.Areas.Admin.Factories
 
         private readonly IBaseAdminModelFactory _baseAdminModelFactory;
         private readonly ICustomerService _customerService;
-        private readonly IUrlRecordService _urlRecordService;
         private readonly IWorkContext _workContext;
 
         #endregion
@@ -30,12 +28,10 @@ namespace Nop.Web.Areas.Admin.Factories
 
         public CustomerRoleModelFactory(IBaseAdminModelFactory baseAdminModelFactory,
             ICustomerService customerService,
-            IUrlRecordService urlRecordService,
             IWorkContext workContext)
         {
             _baseAdminModelFactory = baseAdminModelFactory;
             _customerService = customerService;
-            _urlRecordService = urlRecordService;
             _workContext = workContext;
         }
 

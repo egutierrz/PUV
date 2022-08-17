@@ -17,12 +17,9 @@ using Nop.Core.Domain.Gdpr;
 using Nop.Core.Domain.Localization;
 using Nop.Core.Domain.Media;
 using Nop.Core.Domain.Security;
-using Nop.Core.Domain.Seo;
 using Nop.Core.Events;
 using Nop.Core.Infrastructure;
 using Nop.Data;
-using Nop.Data.Configuration;
-using Nop.Services.Authentication.MultiFactor;
 using Nop.Services.Common;
 using Nop.Services.Configuration;
 using Nop.Services.Customers;
@@ -33,7 +30,6 @@ using Nop.Services.Logging;
 using Nop.Services.Media;
 using Nop.Services.Media.RoxyFileman;
 using Nop.Services.Messages;
-using Nop.Services.Plugins;
 using Nop.Services.Security;
 using Nop.Services.Stores;
 using Nop.Web.Areas.Admin.Factories;
@@ -62,11 +58,9 @@ namespace Nop.Web.Areas.Admin.Controllers
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly ILocalizedEntityService _localizedEntityService;
         private readonly ILocalizationService _localizationService;
-        private readonly IMultiFactorAuthenticationPluginManager _multiFactorAuthenticationPluginManager;
         private readonly INopFileProvider _fileProvider;
         private readonly INotificationService _notificationService;
         private readonly IPermissionService _permissionService;
-        private readonly IPictureService _pictureService;
         private readonly IRoxyFilemanService _roxyFilemanService;
         private readonly IServiceScopeFactory _serviceScopeFactory;
         private readonly IComponentSettingModelFactory _settingModelFactory;
@@ -74,7 +68,6 @@ namespace Nop.Web.Areas.Admin.Controllers
         private readonly IStoreContext _storeContext;
         private readonly IStoreService _storeService;
         private readonly IWorkContext _workContext;
-        private readonly IUploadService _uploadService;
         private readonly IGdprService _gdprService;
 
         #endregion
@@ -91,11 +84,9 @@ namespace Nop.Web.Areas.Admin.Controllers
             IGenericAttributeService genericAttributeService,
             ILocalizedEntityService localizedEntityService,
             ILocalizationService localizationService,
-            IMultiFactorAuthenticationPluginManager multiFactorAuthenticationPluginManager,
             INopFileProvider fileProvider,
             INotificationService notificationService,
             IPermissionService permissionService,
-            IPictureService pictureService,
             IRoxyFilemanService roxyFilemanService,
             IServiceScopeFactory serviceScopeFactory,
             IComponentSettingModelFactory settingModelFactory,
@@ -103,7 +94,6 @@ namespace Nop.Web.Areas.Admin.Controllers
             IStoreContext storeContext,
             IStoreService storeService,
             IWorkContext workContext,
-            IUploadService uploadService,
             IGdprService gdprService)
         {
             _appSettings = appSettings;
@@ -117,11 +107,9 @@ namespace Nop.Web.Areas.Admin.Controllers
             _gdprService = gdprService;
             _localizedEntityService = localizedEntityService;
             _localizationService = localizationService;
-            _multiFactorAuthenticationPluginManager = multiFactorAuthenticationPluginManager;
             _fileProvider = fileProvider;
             _notificationService = notificationService;
             _permissionService = permissionService;
-            _pictureService = pictureService;
             _roxyFilemanService = roxyFilemanService;
             _serviceScopeFactory = serviceScopeFactory;
             _settingModelFactory = settingModelFactory;
@@ -129,7 +117,6 @@ namespace Nop.Web.Areas.Admin.Controllers
             _storeContext = storeContext;
             _storeService = storeService;
             _workContext = workContext;
-            _uploadService = uploadService;
         }
 
         #endregion
@@ -274,22 +261,7 @@ namespace Nop.Web.Areas.Admin.Controllers
             return Json(new { Result = string.Empty });
         }
 
-        //Action that displays a notification (warning) to the store owner about the absence of active authentication providers
-        public async Task<IActionResult> ForceMultifactorAuthenticationWarning(bool forceMultifactorAuthentication)
-        {
-            //ForceMultifactorAuthentication is set and the store haven't active Authentication provider , so display warning
-            if (forceMultifactorAuthentication && !await _multiFactorAuthenticationPluginManager.HasActivePluginsAsync())
-            {
-                return Json(new
-                {
-                    Result = await _localizationService
-                        .GetResourceAsync("Admin.Configuration.Settings.CustomerUser.ForceMultifactorAuthentication.Warning")
-                });
-            }
-
-            return Json(new { Result = string.Empty });
-        }
-
+        
         //Action that displays a notification (warning) to the store owner about the need to restart the application after changing the setting
         public async Task<IActionResult> SeoFriendlyUrlsForLanguagesEnabledWarning(bool seoFriendlyUrlsForLanguagesEnabled)
         {

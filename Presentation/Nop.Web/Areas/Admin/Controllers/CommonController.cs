@@ -13,7 +13,6 @@ using Nop.Services.Helpers;
 using Nop.Services.Localization;
 using Nop.Services.Messages;
 using Nop.Services.Security;
-using Nop.Services.Seo;
 using Nop.Web.Areas.Admin.Factories;
 using Nop.Web.Areas.Admin.Models.Common;
 using Nop.Web.Framework;
@@ -43,7 +42,6 @@ namespace Nop.Web.Areas.Admin.Controllers
         private readonly IPermissionService _permissionService;
         private readonly IQueuedEmailService _queuedEmailService;
         private readonly IStaticCacheManager _staticCacheManager;
-        private readonly IUrlRecordService _urlRecordService;
         private readonly IWebHelper _webHelper;
         private readonly IWorkContext _workContext;
 
@@ -63,7 +61,6 @@ namespace Nop.Web.Areas.Admin.Controllers
             IPermissionService permissionService,
             IQueuedEmailService queuedEmailService,
             IStaticCacheManager staticCacheManager,
-            IUrlRecordService urlRecordService,
             IWebHelper webHelper,
             IWorkContext workContext)
         {
@@ -79,7 +76,6 @@ namespace Nop.Web.Areas.Admin.Controllers
             _permissionService = permissionService;
             _queuedEmailService = queuedEmailService;
             _staticCacheManager = staticCacheManager;
-            _urlRecordService = urlRecordService;
             _webHelper = webHelper;
             _workContext = workContext;
         }
@@ -364,59 +360,7 @@ namespace Nop.Web.Areas.Admin.Controllers
             return new EmptyResult();
         }
 
-        public virtual async Task<IActionResult> SeNames()
-        {
-            if (!await _permissionService.AuthorizeAsync(StandardPermissionProvider.ManageMaintenance))
-                return AccessDeniedView();
-
-            //prepare model
-            var model = await _commonModelFactory.PrepareUrlRecordSearchModelAsync(new UrlRecordSearchModel());
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public virtual async Task<IActionResult> SeNames(UrlRecordSearchModel searchModel)
-        {
-            if (!await _permissionService.AuthorizeAsync(StandardPermissionProvider.ManageMaintenance))
-                return await AccessDeniedDataTablesJson();
-
-            //prepare model
-            var model = await _commonModelFactory.PrepareUrlRecordListModelAsync(searchModel);
-
-            return Json(model);
-        }
-
-        [HttpPost]
-        public virtual async Task<IActionResult> DeleteSelectedSeNames(ICollection<int> selectedIds)
-        {
-            if (!await _permissionService.AuthorizeAsync(StandardPermissionProvider.ManageMaintenance))
-                return AccessDeniedView();
-
-            if (selectedIds == null || selectedIds.Count == 0)
-                return NoContent();
-
-            await _urlRecordService.DeleteUrlRecordsAsync(await _urlRecordService.GetUrlRecordsByIdsAsync(selectedIds.ToArray()));
-
-            return Json(new { Result = true });
-        }
-
-       
-        //action displaying notification (warning) to a store owner that entered SE URL already exists
-        public virtual async Task<IActionResult> UrlReservedWarning(string entityId, string entityName, string seName)
-        {
-            if (string.IsNullOrEmpty(seName))
-                return Json(new { Result = string.Empty });
-
-            _ = int.TryParse(entityId, out var parsedEntityId);
-            var validatedSeName = await _urlRecordService.ValidateSeNameAsync(parsedEntityId, entityName, seName, null, false);
-
-            if (seName.Equals(validatedSeName, StringComparison.InvariantCultureIgnoreCase))
-                return Json(new { Result = string.Empty });
-
-            return Json(new { Result = string.Format(await _localizationService.GetResourceAsync("Admin.System.Warnings.URL.Reserved"), validatedSeName) });
-        }
-
+            
         #endregion
     }
 }

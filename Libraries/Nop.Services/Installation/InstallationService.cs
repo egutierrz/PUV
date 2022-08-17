@@ -22,9 +22,7 @@ using Nop.Core.Domain.Media;
 using Nop.Core.Domain.Messages;
 using Nop.Core.Domain.ScheduleTasks;
 using Nop.Core.Domain.Security;
-using Nop.Core.Domain.Seo;
 using Nop.Core.Domain.Stores;
-using Nop.Core.Domain.Topics;
 using Nop.Core.Http;
 using Nop.Core.Infrastructure;
 using Nop.Core.Security;
@@ -36,7 +34,6 @@ using Nop.Services.ExportImport;
 using Nop.Services.Helpers;
 using Nop.Services.Localization;
 using Nop.Services.Media;
-using Nop.Services.Seo;
 
 namespace Nop.Services.Installation
 {
@@ -61,8 +58,6 @@ namespace Nop.Services.Installation
         private readonly IRepository<MeasureWeight> _measureWeightRepository;
         private readonly IRepository<StateProvince> _stateProvinceRepository;
         private readonly IRepository<Store> _storeRepository;
-        private readonly IRepository<TopicTemplate> _topicTemplateRepository;
-        private readonly IRepository<UrlRecord> _urlRecordRepository;
         private readonly IWebHelper _webHelper;
         private readonly ILocalizationService _localizationService;
 
@@ -84,8 +79,6 @@ namespace Nop.Services.Installation
             IRepository<MeasureWeight> measureWeightRepository,
             IRepository<StateProvince> stateProvinceRepository,
             IRepository<Store> storeRepository,
-            IRepository<TopicTemplate> topicTemplateRepository,
-            IRepository<UrlRecord> urlRecordRepository,
             IWebHelper webHelper,
             ILocalizationService localizationService)
         {
@@ -103,8 +96,6 @@ namespace Nop.Services.Installation
             _measureWeightRepository = measureWeightRepository;
             _stateProvinceRepository = stateProvinceRepository;
             _storeRepository = storeRepository;
-            _topicTemplateRepository = topicTemplateRepository;
-            _urlRecordRepository = urlRecordRepository;
             _webHelper = webHelper;
             _localizationService = localizationService;
         }
@@ -151,61 +142,6 @@ namespace Nop.Services.Installation
         }
 
         
-        /// <returns>A task that represents the asynchronous operation</returns>
-        protected virtual async Task<string> ValidateSeNameAsync<T>(T entity, string seName) where T : BaseEntity
-        {
-            //duplicate of ValidateSeName method of \Nop.Services\Seo\UrlRecordService.cs (we cannot inject it here)
-            if (entity == null)
-                throw new ArgumentNullException(nameof(entity));
-
-            //validation
-            var okChars = "abcdefghijklmnopqrstuvwxyz1234567890 _-";
-            seName = seName.Trim().ToLowerInvariant();
-
-            var sb = new StringBuilder();
-            foreach (var c in seName.ToCharArray())
-            {
-                var c2 = c.ToString();
-                if (okChars.Contains(c2))
-                    sb.Append(c2);
-            }
-
-            seName = sb.ToString();
-            seName = seName.Replace(" ", "-");
-            while (seName.Contains("--"))
-                seName = seName.Replace("--", "-");
-            while (seName.Contains("__"))
-                seName = seName.Replace("__", "_");
-
-            //max length
-            seName = CommonHelper.EnsureMaximumLength(seName, NopSeoDefaults.SearchEngineNameLength);
-
-            //ensure this sename is not reserved yet
-            var i = 2;
-            var tempSeName = seName;
-            while (true)
-            {
-                //check whether such slug already exists (and that is not the current entity)
-
-                var query = from ur in _urlRecordRepository.Table
-                            where tempSeName != null && ur.Slug == tempSeName
-                            select ur;
-                var urlRecord = await query.FirstOrDefaultAsync();
-
-                var entityName = entity.GetType().Name;
-                var reserved = urlRecord != null && !(urlRecord.EntityId == entity.Id && urlRecord.EntityName.Equals(entityName, StringComparison.InvariantCultureIgnoreCase));
-                if (!reserved)
-                    break;
-
-                tempSeName = $"{seName}-{i}";
-                i++;
-            }
-
-            seName = tempSeName;
-
-            return seName;
-        }
-
         protected virtual string GetSamplesPath()
         {
             return _fileProvider.GetAbsolutePath(NopInstallationDefaults.SampleImagesPath);
@@ -1153,59 +1089,7 @@ namespace Nop.Services.Installation
             await InsertInstallationDataAsync(messageTemplates);
         }
 
-        /// <returns>A task that represents the asynchronous operation</returns>
-        protected virtual async Task InstallTopicsAsync()
-        {
-            var defaultTopicTemplate =
-                _topicTemplateRepository.Table.FirstOrDefault(tt => tt.Name == "Default template");
-            if (defaultTopicTemplate == null)
-                throw new Exception("Topic template cannot be loaded");
-
-            var topics = new List<Topic>
-            {
-               
-                new Topic
-                {
-                    SystemName = "LoginRegistrationInfo",
-                    IncludeInSitemap = false,
-                    IsPasswordProtected = false,
-                    DisplayOrder = 1,
-                    Published = true,
-                    Title = "About login / registration",
-                    Body =
-                        "<p>Put your login / registration information here. You can edit this in the admin site.</p>",
-                    TopicTemplateId = defaultTopicTemplate.Id
-                },
-                new Topic
-                {
-                    SystemName = "PageNotFound",
-                    IncludeInSitemap = false,
-                    IsPasswordProtected = false,
-                    DisplayOrder = 1,
-                    Published = true,
-                    Title = string.Empty,
-                    Body =
-                        "<p><strong>The page you requested was not found, and we have a fine guess why.</strong></p><ul><li>If you typed the URL directly, please make sure the spelling is correct.</li><li>The page no longer exists. In this case, we profusely apologize for the inconvenience and for any damage this may cause.</li></ul>",
-                    TopicTemplateId = defaultTopicTemplate.Id
-                }
-            };
-
-            await InsertInstallationDataAsync(topics);
-
-            //search engine names
-            foreach (var topic in topics)
-            {
-                await InsertInstallationDataAsync(new UrlRecord
-                {
-                    EntityId = topic.Id,
-                    EntityName = nameof(Topic),
-                    LanguageId = 0,
-                    IsActive = true,
-                    Slug = await ValidateSeNameAsync(topic, !string.IsNullOrEmpty(topic.Title) ? topic.Title : topic.SystemName)
-                });
-            }
-        }
-
+        
         /// <returns>A task that represents the asynchronous operation</returns>
         protected virtual async Task InstallSettingsAsync(RegionInfo regionInfo)
         {
@@ -1253,28 +1137,6 @@ namespace Nop.Services.Installation
                 FaviconAndAppIconsHeadCode = "<link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/icons/icons_0/apple-touch-icon.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/icons/icons_0/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"192x192\" href=\"/icons/icons_0/android-chrome-192x192.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/icons/icons_0/favicon-16x16.png\"><link rel=\"manifest\" href=\"/icons/icons_0/site.webmanifest\"><link rel=\"mask-icon\" href=\"/icons/icons_0/safari-pinned-tab.svg\" color=\"#5bbad5\"><link rel=\"shortcut icon\" href=\"/icons/icons_0/favicon.ico\"><meta name=\"msapplication-TileColor\" content=\"#2d89ef\"><meta name=\"msapplication-TileImage\" content=\"/icons/icons_0/mstile-144x144.png\"><meta name=\"msapplication-config\" content=\"/icons/icons_0/browserconfig.xml\"><meta name=\"theme-color\" content=\"#ffffff\">",
                 EnableHtmlMinification = true,
                 RestartTimeout = NopCommonDefaults.RestartTimeout
-            });
-
-            await settingService.SaveSettingAsync(new SeoSettings
-            {
-                PageTitleSeparator = ". ",
-                PageTitleSeoAdjustment = PageTitleSeoAdjustment.PagenameAfterStorename,
-                HomepageTitle = "Portal Único de Visualización",
-                HomepageDescription = "SAT PUV",
-                DefaultTitle = "PUV",
-                DefaultMetaKeywords = string.Empty,
-                DefaultMetaDescription = string.Empty,
-                GenerateProductMetaDescription = true,
-                ConvertNonWesternChars = false,
-                AllowUnicodeCharsInUrls = true,
-                CanonicalUrlsEnabled = false,
-                QueryStringInCanonicalUrlsEnabled = false,
-                WwwRequirement = WwwRequirement.NoMatter,
-                TwitterMetaTags = true,
-                OpenGraphMetaTags = true,
-                MicrodataEnabled = true,
-                ReservedUrlRecordSlugs = NopSeoDefaults.ReservedUrlRecordSlugs,
-                CustomHeadTags = string.Empty
             });
 
             await settingService.SaveSettingAsync(new AdminAreaSettings
@@ -1687,22 +1549,6 @@ namespace Nop.Services.Installation
                 SdWan_User = "devnetuser",
                 SdWan_Url = "https://sandbox-sdwan-2.cisco.com"
             });
-        }
-
-        /// <returns>A task that represents the asynchronous operation</returns>
-        protected virtual async Task InstallTopicTemplatesAsync()
-        {
-            var topicTemplates = new List<TopicTemplate>
-            {
-                new TopicTemplate
-                {
-                    Name = "Default template",
-                    ViewPath = "TopicDetails",
-                    DisplayOrder = 1
-                }
-            };
-
-            await InsertInstallationDataAsync(topicTemplates);
         }
 
         /// <returns>A task that represents the asynchronous operation</returns>

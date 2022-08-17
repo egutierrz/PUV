@@ -25,7 +25,6 @@ namespace Nop.Services.Media.RoxyFileman
         protected readonly INopFileProvider _fileProvider;
         protected readonly IWebHelper _webHelper;
         protected readonly IWorkContext _workContext;
-        protected readonly MediaSettings _mediaSettings;
 
         #endregion
 
@@ -35,15 +34,13 @@ namespace Nop.Services.Media.RoxyFileman
             IHttpContextAccessor httpContextAccessor,
             INopFileProvider fileProvider,
             IWebHelper webHelper,
-            IWorkContext workContext,
-            MediaSettings mediaSettings)
+            IWorkContext workContext)
         {
             _webHostEnvironment = webHostEnvironment;
             _httpContextAccessor = httpContextAccessor;
             _fileProvider = fileProvider;
             _webHelper = webHelper;
             _workContext = workContext;
-            _mediaSettings = mediaSettings;
         }
 
         #endregion
@@ -403,13 +400,7 @@ namespace Nop.Services.Media.RoxyFileman
             var configuration = new
             {
                 FILES_ROOT = existingConfiguration?.FILES_ROOT ?? NopRoxyFilemanDefaults.DefaultRootDirectory,
-                SESSION_PATH_KEY = existingConfiguration?.SESSION_PATH_KEY ?? string.Empty,
-                THUMBS_VIEW_WIDTH = existingConfiguration?.THUMBS_VIEW_WIDTH ?? "140",
-                THUMBS_VIEW_HEIGHT = existingConfiguration?.THUMBS_VIEW_HEIGHT ?? "120",
-                PREVIEW_THUMB_WIDTH = existingConfiguration?.PREVIEW_THUMB_WIDTH ?? "300",
-                PREVIEW_THUMB_HEIGHT = existingConfiguration?.PREVIEW_THUMB_HEIGHT ?? "200",
-                MAX_IMAGE_WIDTH = existingConfiguration?.MAX_IMAGE_WIDTH ?? _mediaSettings.MaximumImageSize.ToString(),
-                MAX_IMAGE_HEIGHT = existingConfiguration?.MAX_IMAGE_HEIGHT ?? _mediaSettings.MaximumImageSize.ToString(),
+                SESSION_PATH_KEY = existingConfiguration?.SESSION_PATH_KEY ?? string.Empty,               
                 DEFAULTVIEW = existingConfiguration?.DEFAULTVIEW ?? "list",
                 FORBIDDEN_UPLOADS = existingConfiguration?.FORBIDDEN_UPLOADS ?? "zip js jsp jsb mhtml mht xhtml xht php phtml " +
                     "php3 php4 php5 phps shtml jhtml pl sh py cgi exe application gadget hta cpl msc jar vb jse ws wsf wsc wsh " +

@@ -10,9 +10,6 @@ using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Common;
 using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Gdpr;
-using Nop.Core.Domain.Media;
-using Nop.Core.Domain.Tax;
-using Nop.Services.Authentication.External;
 using Nop.Services.Common;
 using Nop.Services.Customers;
 using Nop.Services.Directory;
@@ -45,7 +42,6 @@ namespace Nop.Web.Areas.Admin.Factories
         private readonly IAclSupportedModelFactory _aclSupportedModelFactory;
         private readonly IAddressAttributeFormatter _addressAttributeFormatter;
         private readonly IAddressModelFactory _addressModelFactory;
-        private readonly IAuthenticationPluginManager _authenticationPluginManager;
         private readonly IBaseAdminModelFactory _baseAdminModelFactory;
         private readonly ICountryService _countryService;
         private readonly ICustomerActivityService _customerActivityService;
@@ -53,15 +49,12 @@ namespace Nop.Web.Areas.Admin.Factories
         private readonly ICustomerAttributeService _customerAttributeService;
         private readonly ICustomerService _customerService;
         private readonly IDateTimeHelper _dateTimeHelper;
-        private readonly IExternalAuthenticationService _externalAuthenticationService;
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly IGeoLookupService _geoLookupService;
         private readonly ILocalizationService _localizationService;
-        private readonly IPictureService _pictureService;
         private readonly IStateProvinceService _stateProvinceService;
         private readonly IStoreContext _storeContext;
         private readonly IStoreService _storeService;
-        private readonly MediaSettings _mediaSettings;
         private readonly RewardPointsSettings _rewardPointsSettings;
         private readonly IGdprService _gdprService;
 
@@ -76,7 +69,6 @@ namespace Nop.Web.Areas.Admin.Factories
             IAclSupportedModelFactory aclSupportedModelFactory,
             IAddressAttributeFormatter addressAttributeFormatter,
             IAddressModelFactory addressModelFactory,
-            IAuthenticationPluginManager authenticationPluginManager,
             IBaseAdminModelFactory baseAdminModelFactory,
             ICountryService countryService,
             ICustomerActivityService customerActivityService,
@@ -84,15 +76,12 @@ namespace Nop.Web.Areas.Admin.Factories
             ICustomerAttributeService customerAttributeService,
             ICustomerService customerService,
             IDateTimeHelper dateTimeHelper,
-            IExternalAuthenticationService externalAuthenticationService,
             IGenericAttributeService genericAttributeService,
             IGeoLookupService geoLookupService,
             ILocalizationService localizationService,
-            IPictureService pictureService,
             IStateProvinceService stateProvinceService,
             IStoreContext storeContext,
             IStoreService storeService,
-            MediaSettings mediaSettings,
             RewardPointsSettings rewardPointsSettings,
             IGdprService gdprService)
         {
@@ -103,7 +92,6 @@ namespace Nop.Web.Areas.Admin.Factories
             _aclSupportedModelFactory = aclSupportedModelFactory;
             _addressAttributeFormatter = addressAttributeFormatter;
             _addressModelFactory = addressModelFactory;
-            _authenticationPluginManager = authenticationPluginManager;
             _baseAdminModelFactory = baseAdminModelFactory;
             _countryService = countryService;
             _customerActivityService = customerActivityService;
@@ -111,15 +99,12 @@ namespace Nop.Web.Areas.Admin.Factories
             _customerAttributeService = customerAttributeService;
             _customerService = customerService;
             _dateTimeHelper = dateTimeHelper;
-            _externalAuthenticationService = externalAuthenticationService;
             _genericAttributeService = genericAttributeService;
             _geoLookupService = geoLookupService;
             _localizationService = localizationService;
-            _pictureService = pictureService;
             _stateProvinceService = stateProvinceService;
             _storeContext = storeContext;
             _storeService = storeService;
-            _mediaSettings = mediaSettings;
             _rewardPointsSettings = rewardPointsSettings;
             _gdprService = gdprService;
         }
@@ -128,38 +113,7 @@ namespace Nop.Web.Areas.Admin.Factories
 
         #region Utilities
 
-        
-        /// <summary>
-        /// Prepare customer associated external authorization models
-        /// </summary>
-        /// <param name="models">List of customer associated external authorization models</param>
-        /// <param name="customer">Customer</param>
-        /// <returns>A task that represents the asynchronous operation</returns>
-        protected virtual async Task PrepareAssociatedExternalAuthModelsAsync(IList<CustomerAssociatedExternalAuthModel> models, Customer customer)
-        {
-            if (models == null)
-                throw new ArgumentNullException(nameof(models));
-
-            if (customer == null)
-                throw new ArgumentNullException(nameof(customer));
-
-            foreach (var record in await _externalAuthenticationService.GetCustomerExternalAuthenticationRecordsAsync(customer))
-            {
-                var method = await _authenticationPluginManager.LoadPluginBySystemNameAsync(record.ProviderSystemName);
-                if (method == null)
-                    continue;
-
-                models.Add(new CustomerAssociatedExternalAuthModel
-                {
-                    Id = record.Id,
-                    Email = record.Email,
-                    ExternalIdentifier = !string.IsNullOrEmpty(record.ExternalDisplayIdentifier)
-                        ? record.ExternalDisplayIdentifier : record.ExternalIdentifier,
-                    AuthMethodName = method.PluginDescriptor.FriendlyName
-                });
-            }
-        }
-
+       
         /// <summary>
         /// Prepare customer attribute models
         /// </summary>
@@ -375,9 +329,7 @@ namespace Nop.Web.Areas.Admin.Factories
 
             //prepare page parameters
             searchModel.SetGridPageSize();
-            //prepare external authentication records
-            await PrepareAssociatedExternalAuthModelsAsync(searchModel.AssociatedExternalAuthRecords, customer);
-
+            
             return searchModel;
         }
 
@@ -479,8 +431,7 @@ namespace Nop.Web.Areas.Admin.Factories
                     if (_customerSettings.AllowCustomersToUploadAvatars)
                     {
                         var avatarPictureId = await _genericAttributeService.GetAttributeAsync<int>(customer, NopCustomerDefaults.AvatarPictureIdAttribute);
-                        customerModel.AvatarUrl = await _pictureService
-                            .GetPictureUrlAsync(avatarPictureId, _mediaSettings.AvatarPictureSize, _customerSettings.DefaultAvatarEnabled, defaultPictureType: PictureType.Avatar);
+                        customerModel.AvatarUrl = String.Empty;
                     }
 
                     return customerModel;
@@ -542,8 +493,6 @@ namespace Nop.Web.Areas.Admin.Factories
                     model.Fax = await _genericAttributeService.GetAttributeAsync<string>(customer, NopCustomerDefaults.FaxAttribute);
                     model.TimeZoneId = await _genericAttributeService.GetAttributeAsync<string>(customer, NopCustomerDefaults.TimeZoneIdAttribute);
                     model.VatNumber = await _genericAttributeService.GetAttributeAsync<string>(customer, NopCustomerDefaults.VatNumberAttribute);
-                    model.VatNumberStatusNote = await _localizationService.GetLocalizedEnumAsync((VatNumberStatus)await _genericAttributeService
-                        .GetAttributeAsync<int>(customer, NopCustomerDefaults.VatNumberStatusIdAttribute));
                     model.CreatedOn = await _dateTimeHelper.ConvertToUserTimeAsync(customer.CreatedOnUtc, DateTimeKind.Utc);
                     model.LastActivityDate = await _dateTimeHelper.ConvertToUserTimeAsync(customer.LastActivityDateUtc, DateTimeKind.Utc);
                     model.LastIpAddress = customer.LastIpAddress;
