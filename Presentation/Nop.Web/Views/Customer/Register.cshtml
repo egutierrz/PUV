@@ -370,24 +370,6 @@
                             <div class="inputs accept-consent">
                                 <input id="accept-consent" type="checkbox" name="accept-consent" />
                                 <label for="accept-consent">@T("Account.Fields.AcceptPrivacyPolicy")</label>
-                                @if (Model.AcceptPrivacyPolicyPopup)
-                                {
-                                    <span class="read" id="read-privacyinfo">@T("Account.Fields.AcceptPrivacyPolicy.Read")</span>
-                                    <script asp-location="Footer">
-                                    $(document).ready(function() {
-                                        $('#read-privacyinfo').on('click',
-                                            function(e) {
-                                                displayPopupContentFromUrl(
-                                                    '@Url.RouteUrl("TopicPopup", new {SystemName = "privacyinfo"})',
-                                                    '@T("Account.Fields.AcceptPrivacyPolicy")');
-                                            });
-                                    });
-                                    </script>
-                                }
-                                else
-                                {
-                                    <a class="read" id="read-privacyinfo" href="@Url.RouteUrl("Topic", new { SeName = await Html.GetTopicSeNameAsync("privacyinfo") })">@T("Account.Fields.AcceptPrivacyPolicy.Read")</a>
-                                }
                             </div>
                         }
 
