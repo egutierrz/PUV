@@ -218,7 +218,7 @@ namespace Nop.Services.Plugins
         public virtual async Task<IList<PluginDescriptor>> GetPluginDescriptorsAsync<TPlugin>(LoadPluginsMode loadMode = LoadPluginsMode.InstalledOnly,
             Customer customer = null, int storeId = 0, string group = null, string dependsOnSystemName = "", string friendlyName = null, string author = null) where TPlugin : class, IPlugin
         {
-            var pluginDescriptors = _pluginsInfo.PluginDescriptors;
+            var pluginDescriptors = new List<PluginDescriptor>();
 
             //filter plugins
             pluginDescriptors = await pluginDescriptors.WhereAwait(async descriptor =>

@@ -44,7 +44,6 @@ namespace Nop.Web.Factories
         private readonly CustomerSettings _customerSettings;
         private readonly DisplayDefaultFooterItemSettings _displayDefaultFooterItemSettings;
         private readonly IActionContextAccessor _actionContextAccessor;
-        private readonly ICurrencyService _currencyService;
         private readonly ICustomerService _customerService;
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -75,7 +74,6 @@ namespace Nop.Web.Factories
             CustomerSettings customerSettings,
             DisplayDefaultFooterItemSettings displayDefaultFooterItemSettings,
             IActionContextAccessor actionContextAccessor,
-            ICurrencyService currencyService,
             ICustomerService customerService,
             IGenericAttributeService genericAttributeService,
             IHttpContextAccessor httpContextAccessor,
@@ -101,7 +99,6 @@ namespace Nop.Web.Factories
             _customerSettings = customerSettings;
             _displayDefaultFooterItemSettings = displayDefaultFooterItemSettings;
             _actionContextAccessor = actionContextAccessor;
-            _currencyService = currencyService;
             _customerService = customerService;
             _genericAttributeService = genericAttributeService;
             _httpContextAccessor = httpContextAccessor;
@@ -182,45 +179,6 @@ namespace Nop.Web.Factories
 
             return model;
         }
-
-        /// <summary>
-        /// Prepare the currency selector model
-        /// </summary>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the currency selector model
-        /// </returns>
-        public virtual async Task<CurrencySelectorModel> PrepareCurrencySelectorModelAsync()
-        {
-            var store = await _storeContext.GetCurrentStoreAsync();
-            var availableCurrencies = await (await _currencyService
-                .GetAllCurrenciesAsync(storeId: store.Id))
-                .SelectAwait(async x =>
-                {
-                    //currency char
-                    var currencySymbol = !string.IsNullOrEmpty(x.DisplayLocale)
-                        ? new RegionInfo(x.DisplayLocale).CurrencySymbol
-                        : x.CurrencyCode;
-
-                    //model
-                    var currencyModel = new CurrencyModel
-                    {
-                        Id = x.Id,
-                        Name = await _localizationService.GetLocalizedAsync(x, y => y.Name),
-                        CurrencySymbol = currencySymbol
-                    };
-
-                    return currencyModel;
-                }).ToListAsync();
-
-            var model = new CurrencySelectorModel
-            {
-                CurrentCurrencyId = (await _workContext.GetWorkingCurrencyAsync()).Id,
-                AvailableCurrencies = availableCurrencies
-            };
-
-            return model;
-        }        
 
         /// <summary>
         /// Prepare the header links model

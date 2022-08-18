@@ -11,6 +11,7 @@ using Nop.Core.Events;
 using Nop.Core.Infrastructure;
 using Nop.Data;
 using Nop.Services.Authentication;
+using Nop.Services.Cms;
 using Nop.Services.Common;
 using Nop.Services.Configuration;
 using Nop.Services.Customers;
@@ -28,6 +29,7 @@ using Nop.Services.Localization;
 using Nop.Services.Logging;
 using Nop.Services.Media;
 using Nop.Services.Messages;
+using Nop.Services.Plugins;
 using Nop.Services.ScheduleTasks;
 using Nop.Services.Security;
 using Nop.Services.Stores;
@@ -66,6 +68,9 @@ namespace Nop.Web.Framework.Infrastructure
 
             //repositories
             services.AddScoped(typeof(IRepository<>), typeof(EntityRepository<>));
+
+            //plugins
+            services.AddScoped<IPluginService, PluginService>();
 
             //static cache manager
             var appSettings = Singleton<AppSettings>.Instance;
@@ -136,6 +141,7 @@ namespace Nop.Web.Framework.Infrastructure
             services.AddScoped<IHtmlFormatter, HtmlFormatter>();
             services.AddScoped<IGdprService, GdprService>();
             services.AddScoped<IHelpDeskService, HelpDeskService>();
+            services.AddScoped<IWidgetPluginManager, WidgetPluginManager>();
 
             services.AddScoped<IInformationRepositoryService, InformationRepositoryService>();
             services.AddScoped<IFilesRepositoryService, FilesRepositoryService>();

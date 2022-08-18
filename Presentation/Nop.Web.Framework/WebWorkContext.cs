@@ -29,9 +29,7 @@ namespace Nop.Web.Framework
         #region Fields
 
         private readonly CookieSettings _cookieSettings;
-        private readonly CurrencySettings _currencySettings;
         private readonly IAuthenticationService _authenticationService;
-        private readonly ICurrencyService _currencyService;
         private readonly ICustomerService _customerService;
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -45,16 +43,13 @@ namespace Nop.Web.Framework
         private Customer _cachedCustomer;
         private Customer _originalCustomerIfImpersonated;
         private Language _cachedLanguage;
-        private Currency _cachedCurrency;
 
         #endregion
 
         #region Ctor
 
         public WebWorkContext(CookieSettings cookieSettings,
-            CurrencySettings currencySettings,
             IAuthenticationService authenticationService,
-            ICurrencyService currencyService,
             ICustomerService customerService,
             IGenericAttributeService genericAttributeService,
             IHttpContextAccessor httpContextAccessor,
@@ -66,9 +61,7 @@ namespace Nop.Web.Framework
             LocalizationSettings localizationSettings)
         {
             _cookieSettings = cookieSettings;
-            _currencySettings = currencySettings;
             _authenticationService = authenticationService;
-            _currencyService = currencyService;
             _customerService = customerService;
             _genericAttributeService = genericAttributeService;
             _httpContextAccessor = httpContextAccessor;
@@ -354,78 +347,6 @@ namespace Nop.Web.Framework
             _cachedLanguage = detectedLanguage;
 
             return _cachedLanguage;
-        }
-
-        /// <summary>
-        /// Gets current user working currency
-        /// </summary>
-        /// <returns>A task that represents the asynchronous operation</returns>
-        public virtual async Task<Currency> GetWorkingCurrencyAsync()
-        {
-            //whether there is a cached value
-            if (_cachedCurrency != null)
-                return _cachedCurrency;
-
-            var adminAreaUrl = $"{_webHelper.GetStoreLocation()}admin";
-
-            //return primary store currency when we're in admin area/mode
-            if (_webHelper.GetThisPageUrl(false).StartsWith(adminAreaUrl, StringComparison.InvariantCultureIgnoreCase))
-            {
-                var primaryStoreCurrency = await _currencyService.GetCurrencyByIdAsync(_currencySettings.PrimaryStoreCurrencyId);
-                if (primaryStoreCurrency != null)
-                {
-                    _cachedCurrency = primaryStoreCurrency;
-                    return primaryStoreCurrency;
-                }
-            }
-
-            var customer = await GetCurrentCustomerAsync();
-            var store = await _storeContext.GetCurrentStoreAsync();
-
-            //find a currency previously selected by a customer
-            var customerCurrencyId = await _genericAttributeService
-                .GetAttributeAsync<int>(customer, NopCustomerDefaults.CurrencyIdAttribute, store.Id);
-
-            var allStoreCurrencies = await _currencyService.GetAllCurrenciesAsync(storeId: store.Id);
-
-            //check customer currency availability
-            var customerCurrency = allStoreCurrencies.FirstOrDefault(currency => currency.Id == customerCurrencyId);
-            if (customerCurrency == null)
-            {
-                //it not found, then try to get the default currency for the current language (if specified)
-                var language = await GetWorkingLanguageAsync();
-                customerCurrency = allStoreCurrencies
-                    .FirstOrDefault(currency => currency.Id == language.DefaultCurrencyId);
-            }
-
-            //if the default currency for the current store not found, then try to get the first one
-            if (customerCurrency == null)
-                customerCurrency = allStoreCurrencies.FirstOrDefault();
-
-            //if there are no currencies for the current store try to get the first one regardless of the store
-            if (customerCurrency == null)
-                customerCurrency = (await _currencyService.GetAllCurrenciesAsync()).FirstOrDefault();
-
-            //cache the found currency
-            _cachedCurrency = customerCurrency;
-
-            return _cachedCurrency;
-        }
-
-        /// <summary>
-        /// Sets current user working currency
-        /// </summary>
-        /// <param name="currency">Currency</param>
-        /// <returns>A task that represents the asynchronous operation</returns>
-        public virtual async Task SetWorkingCurrencyAsync(Currency currency)
-        {
-            //save passed currency identifier
-            var customer = await GetCurrentCustomerAsync();
-            var store = await _storeContext.GetCurrentStoreAsync();
-            await _genericAttributeService.SaveAttributeAsync(customer, NopCustomerDefaults.CurrencyIdAttribute, currency?.Id ?? 0, store.Id);
-
-            //then reset the cached value
-            _cachedCurrency = null;
         }
 
         /// <summary>

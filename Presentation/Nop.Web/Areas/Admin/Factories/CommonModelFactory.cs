@@ -50,7 +50,6 @@ namespace Nop.Web.Areas.Admin.Factories
         private readonly CurrencySettings _currencySettings;
         private readonly IActionContextAccessor _actionContextAccessor;
         private readonly IBaseAdminModelFactory _baseAdminModelFactory;
-        private readonly ICurrencyService _currencyService;
         private readonly ICustomerService _customerService;
         private readonly IEventPublisher _eventPublisher;
         private readonly INopDataProvider _dataProvider;
@@ -81,7 +80,6 @@ namespace Nop.Web.Areas.Admin.Factories
             CurrencySettings currencySettings,
             IActionContextAccessor actionContextAccessor,
             IBaseAdminModelFactory baseAdminModelFactory,
-            ICurrencyService currencyService,
             ICustomerService customerService,
             IEventPublisher eventPublisher,
             INopDataProvider dataProvider,
@@ -108,7 +106,6 @@ namespace Nop.Web.Areas.Admin.Factories
             _currencySettings = currencySettings;
             _actionContextAccessor = actionContextAccessor;
             _baseAdminModelFactory = baseAdminModelFactory;
-            _currencyService = currencyService;
             _customerService = customerService;
             _eventPublisher = eventPublisher;
             _dataProvider = dataProvider;
@@ -201,75 +198,6 @@ namespace Nop.Web.Areas.Admin.Factories
                 DontEncode = true //this text could contain links, so don't encode it
             });
         }
-
-        /// <summary>
-        /// Prepare primary exchange rate currency warning model
-        /// </summary>
-        /// <param name="models">List of system warning models</param>
-        /// <returns>A task that represents the asynchronous operation</returns>
-        protected virtual async Task PrepareExchangeRateCurrencyWarningModelAsync(IList<SystemWarningModel> models)
-        {
-            if (models == null)
-                throw new ArgumentNullException(nameof(models));
-
-            //check whether primary exchange rate currency set
-            var primaryExchangeRateCurrency = await _currencyService.GetCurrencyByIdAsync(_currencySettings.PrimaryExchangeRateCurrencyId);
-            if (primaryExchangeRateCurrency == null)
-            {
-                models.Add(new SystemWarningModel
-                {
-                    Level = SystemWarningLevel.Fail,
-                    Text = await _localizationService.GetResourceAsync("Admin.System.Warnings.ExchangeCurrency.NotSet")
-                });
-                return;
-            }
-
-            models.Add(new SystemWarningModel
-            {
-                Level = SystemWarningLevel.Pass,
-                Text = await _localizationService.GetResourceAsync("Admin.System.Warnings.ExchangeCurrency.Set")
-            });
-
-            //check whether primary exchange rate currency rate configured
-            if (primaryExchangeRateCurrency.Rate != 1)
-            {
-                models.Add(new SystemWarningModel
-                {
-                    Level = SystemWarningLevel.Fail,
-                    Text = await _localizationService.GetResourceAsync("Admin.System.Warnings.ExchangeCurrency.Rate1")
-                });
-            }
-        }
-
-        /// <summary>
-        /// Prepare primary store currency warning model
-        /// </summary>
-        /// <param name="models">List of system warning models</param>
-        /// <returns>A task that represents the asynchronous operation</returns>
-        protected virtual async Task PreparePrimaryStoreCurrencyWarningModelAsync(IList<SystemWarningModel> models)
-        {
-            if (models == null)
-                throw new ArgumentNullException(nameof(models));
-
-            //check whether primary store currency set
-            var primaryStoreCurrency = await _currencyService.GetCurrencyByIdAsync(_currencySettings.PrimaryStoreCurrencyId);
-            if (primaryStoreCurrency == null)
-            {
-                models.Add(new SystemWarningModel
-                {
-                    Level = SystemWarningLevel.Fail,
-                    Text = await _localizationService.GetResourceAsync("Admin.System.Warnings.PrimaryCurrency.NotSet")
-                });
-                return;
-            }
-
-            models.Add(new SystemWarningModel
-            {
-                Level = SystemWarningLevel.Pass,
-                Text = await _localizationService.GetResourceAsync("Admin.System.Warnings.PrimaryCurrency.Set")
-            });
-        }
-
         
         /// <summary>
         /// Prepare performance settings warning model
@@ -518,12 +446,6 @@ namespace Nop.Web.Areas.Admin.Factories
 
             //removal key
             await PrepareRemovalKeyWarningModelAsync(models);
-
-            //primary exchange rate currency
-            await PrepareExchangeRateCurrencyWarningModelAsync(models);
-
-            //primary store currency
-            await PreparePrimaryStoreCurrencyWarningModelAsync(models);
 
             //performance settings
             await PreparePerformanceSettingsWarningModelAsync(models);

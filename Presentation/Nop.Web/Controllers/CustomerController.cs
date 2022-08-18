@@ -57,7 +57,6 @@ namespace Nop.Web.Controllers
         private readonly IAddressService _addressService;
         private readonly IAuthenticationService _authenticationService;
         private readonly ICountryService _countryService;
-        private readonly ICurrencyService _currencyService;
         private readonly ICustomerActivityService _customerActivityService;
         private readonly ICustomerAttributeParser _customerAttributeParser;
         private readonly ICustomerAttributeService _customerAttributeService;
@@ -95,7 +94,6 @@ namespace Nop.Web.Controllers
             IAddressService addressService,
             IAuthenticationService authenticationService,
             ICountryService countryService,
-            ICurrencyService currencyService,
             ICustomerActivityService customerActivityService,
             ICustomerAttributeParser customerAttributeParser,
             ICustomerAttributeService customerAttributeService,
@@ -129,7 +127,6 @@ namespace Nop.Web.Controllers
             _addressService = addressService;
             _authenticationService = authenticationService;
             _countryService = countryService;
-            _currencyService = currencyService;
             _customerActivityService = customerActivityService;
             _customerAttributeParser = customerAttributeParser;
             _customerAttributeService = customerAttributeService;

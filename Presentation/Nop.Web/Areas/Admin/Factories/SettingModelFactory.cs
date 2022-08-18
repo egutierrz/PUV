@@ -47,7 +47,6 @@ namespace Nop.Web.Areas.Admin.Factories
         private readonly IAddressAttributeModelFactory _addressAttributeModelFactory;
         private readonly IAddressService _addressService;
         private readonly IBaseAdminModelFactory _baseAdminModelFactory;
-        private readonly ICurrencyService _currencyService;
         private readonly ICustomerAttributeModelFactory _customerAttributeModelFactory;
         private readonly INopDataProvider _dataProvider;
         private readonly IDateTimeHelper _dateTimeHelper;
@@ -70,7 +69,6 @@ namespace Nop.Web.Areas.Admin.Factories
             IAddressAttributeModelFactory addressAttributeModelFactory,
             IAddressService addressService,
             IBaseAdminModelFactory baseAdminModelFactory,
-            ICurrencyService currencyService,
             ICustomerAttributeModelFactory customerAttributeModelFactory,
             INopDataProvider dataProvider,
             IDateTimeHelper dateTimeHelper,
@@ -89,7 +87,6 @@ namespace Nop.Web.Areas.Admin.Factories
             _addressAttributeModelFactory = addressAttributeModelFactory;
             _addressService = addressService;
             _baseAdminModelFactory = baseAdminModelFactory;
-            _currencyService = currencyService;
             _customerAttributeModelFactory = customerAttributeModelFactory;
             _dataProvider = dataProvider;
             _dateTimeHelper = dateTimeHelper;

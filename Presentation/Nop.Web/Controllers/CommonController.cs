@@ -28,7 +28,6 @@ namespace Nop.Web.Controllers
         private readonly CaptchaSettings _captchaSettings;
         private readonly CommonSettings _commonSettings;
         private readonly ICommonModelFactory _commonModelFactory;
-        private readonly ICurrencyService _currencyService;
         private readonly ICustomerActivityService _customerActivityService;
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly IHtmlFormatter _htmlFormatter;
@@ -50,7 +49,6 @@ namespace Nop.Web.Controllers
         public CommonController(CaptchaSettings captchaSettings,
             CommonSettings commonSettings,
             ICommonModelFactory commonModelFactory,
-            ICurrencyService currencyService,
             ICustomerActivityService customerActivityService,
             IGenericAttributeService genericAttributeService,
             IHtmlFormatter htmlFormatter,
@@ -68,7 +66,6 @@ namespace Nop.Web.Controllers
             _captchaSettings = captchaSettings;
             _commonSettings = commonSettings;
             _commonModelFactory = commonModelFactory;
-            _currencyService = currencyService;
             _customerActivityService = customerActivityService;
             _genericAttributeService = genericAttributeService;
             _htmlFormatter = htmlFormatter;
@@ -131,25 +128,7 @@ namespace Nop.Web.Controllers
             return Redirect(returnUrl);
         }
 
-        //available even when navigation is not allowed
-        [CheckAccessPublicStore(true)]
-        public virtual async Task<IActionResult> SetCurrency(int customerCurrency, string returnUrl = "")
-        {
-            var currency = await _currencyService.GetCurrencyByIdAsync(customerCurrency);
-            if (currency != null)
-                await _workContext.SetWorkingCurrencyAsync(currency);
-
-            //home page
-            if (string.IsNullOrEmpty(returnUrl))
-                returnUrl = Url.RouteUrl("Homepage");
-
-            //prevent open redirection attack
-            if (!Url.IsLocalUrl(returnUrl))
-                returnUrl = Url.RouteUrl("Homepage");
-
-            return Redirect(returnUrl);
-        }
-
+        
         //contact us page
         //available even when a store is closed
         [CheckAccessClosedStore(true)]
