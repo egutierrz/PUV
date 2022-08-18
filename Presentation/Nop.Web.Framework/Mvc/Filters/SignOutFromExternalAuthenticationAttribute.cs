@@ -28,7 +28,7 @@ namespace Nop.Web.Framework.Mvc.Filters
         /// <summary>
         /// Represents a filter that sign out from the external authentication scheme
         /// </summary>
-        private class SignOutFromExternalAuthenticationFilter : IAsyncAuthorizationFilter
+        private sealed class SignOutFromExternalAuthenticationFilter : IAsyncAuthorizationFilter
         {
             #region Utilities
 

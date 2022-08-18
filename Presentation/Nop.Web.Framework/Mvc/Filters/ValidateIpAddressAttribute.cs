@@ -31,7 +31,7 @@ namespace Nop.Web.Framework.Mvc.Filters
         /// <summary>
         /// Represents a filter that validates IP address
         /// </summary>
-        private class ValidateIpAddressFilter : IAsyncActionFilter
+        private sealed class ValidateIpAddressFilter : IAsyncActionFilter
         {
             #region Fields
 

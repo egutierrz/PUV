@@ -23,7 +23,6 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
 
         private static readonly INopFileProvider _fileProvider;
         private static readonly List<string> _baseAppLibraries;
-        private static readonly ReaderWriterLockSlim _locker = new();
 
         #endregion
 

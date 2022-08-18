@@ -30,7 +30,7 @@ namespace Nop.Web.Framework.Mvc.Filters
         /// <summary>
         /// Represents a filter that validates customer password expiration
         /// </summary>
-        private class ValidatePasswordFilter : IAsyncActionFilter
+        private sealed class ValidatePasswordFilter : IAsyncActionFilter
         {
             #region Fields
 

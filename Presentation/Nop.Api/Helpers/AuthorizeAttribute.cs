@@ -27,7 +27,7 @@ namespace Nop.Api.Helpers
                     context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
                 }
             }
-            if (customer.Id == 0 || customer.Active == false)
+            if (customer.Id == 0 || !customer.Active)
             {
                 // not logged in
                 context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };

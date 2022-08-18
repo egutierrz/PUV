@@ -17,6 +17,7 @@ namespace Nop.Web.Framework.Infrastructure
         /// <param name="configuration">Configuration of the application</param>
         public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
+            // Do nothing because is null rules
         }
 
         /// <summary>

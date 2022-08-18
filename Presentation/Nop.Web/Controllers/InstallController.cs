@@ -73,9 +73,9 @@ namespace Nop.Web.Controllers
                 //This item was added in case it was not possible to automatically determine the country by culture
                 new SelectListItem { Value = string.Empty, Text = _locService.Value.GetResource("CountrySelect") }
             };
-            countries.AddRange(from country in ISO3166.GetCollection()
-                               from localization in ISO3166.GetLocalizationInfo(country.Alpha2)
-                               let lang = ISO3166.GetLocalizationInfo(country.Alpha2).Count() > 1 ? $" [{localization.Language} language]" : string.Empty
+            countries.AddRange(from country in Iso3166.GetCollection()
+                               from localization in Iso3166.GetLocalizationInfo(country.Alpha2)
+                               let lang = Iso3166.GetLocalizationInfo(country.Alpha2).Count() > 1 ? $" [{localization.Language} language]" : string.Empty
                                let item = new SelectListItem
                                {
                                    Value = $"{country.Alpha2}-{localization.Culture}",

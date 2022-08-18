@@ -391,11 +391,11 @@ namespace Nop.Services.Security
         /// </summary>
         /// <param name="CustomerRoleId">Role identifier</param>
         /// <returns>A task that represents the asynchronous operation</returns>
-        public virtual async Task<IList<PermissionRecordCustomerRoleMapping>> GetMappingByCustomerRoleIdAsync(int customerRoleId)
+        public virtual async Task<IList<PermissionRecordCustomerRoleMapping>> GetMappingByCustomerRoleIdAsync(int id)
         {
             var query = _permissionRecordCustomerRoleMappingRepository.Table;
 
-            query = query.Where(x => x.CustomerRoleId == customerRoleId);
+            query = query.Where(x => x.CustomerRoleId == id);
 
             return await query.ToListAsync();
         }

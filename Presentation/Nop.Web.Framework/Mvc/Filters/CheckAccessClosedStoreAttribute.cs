@@ -44,13 +44,11 @@ namespace Nop.Web.Framework.Mvc.Filters
         /// <summary>
         /// Represents a filter that confirms access to closed store
         /// </summary>
-        private class CheckAccessClosedStoreFilter : IAsyncActionFilter
+        private sealed class CheckAccessClosedStoreFilter : IAsyncActionFilter
         {
             #region Fields
 
             private readonly bool _ignoreFilter;
-            private readonly IPermissionService _permissionService;
-            private readonly IStoreContext _storeContext;
             private readonly StoreInformationSettings _storeInformationSettings;
 
             #endregion
@@ -58,13 +56,9 @@ namespace Nop.Web.Framework.Mvc.Filters
             #region Ctor
 
             public CheckAccessClosedStoreFilter(bool ignoreFilter,
-                IPermissionService permissionService,
-                IStoreContext storeContext,
                 StoreInformationSettings storeInformationSettings)
             {
                 _ignoreFilter = ignoreFilter;
-                _permissionService = permissionService;
-                _storeContext = storeContext;
                 _storeInformationSettings = storeInformationSettings;
             }
 
@@ -112,11 +106,6 @@ namespace Nop.Web.Framework.Mvc.Filters
                 if (controllerName.Equals("Customer", StringComparison.InvariantCultureIgnoreCase) &&
                     actionName.Equals("MultiFactorVerification", StringComparison.InvariantCultureIgnoreCase))
                     return;
-                
-
-                //check whether current customer has access to a closed store
-                //if (await _permissionService.AuthorizeAsync(StandardPermissionProvider.AccessClosedStore))
-                //    return;
 
                 //store is closed and no access, so redirect to 'StoreClosed' page
                 context.Result = new RedirectToRouteResult("StoreClosed", null);

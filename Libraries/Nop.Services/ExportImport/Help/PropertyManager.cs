@@ -61,7 +61,6 @@ namespace Nop.Services.ExportImport.Help
             using (var workbook = new XLWorkbook())
             {
                 // uncomment this line if you want the XML written out to the outputDir
-                //xlPackage.DebugMode = true; 
 
                 // get handles to the worksheets
                 var worksheet = workbook.Worksheets.Add(typeof(T).Name);

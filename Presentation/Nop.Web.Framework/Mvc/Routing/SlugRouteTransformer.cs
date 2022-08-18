@@ -18,7 +18,6 @@ namespace Nop.Web.Framework.Mvc.Routing
     {
         #region Fields
 
-        private readonly IEventPublisher _eventPublisher;
         private readonly ILanguageService _languageService;
         private readonly LocalizationSettings _localizationSettings;
 
@@ -26,11 +25,9 @@ namespace Nop.Web.Framework.Mvc.Routing
 
         #region Ctor
 
-        public SlugRouteTransformer(IEventPublisher eventPublisher,
-            ILanguageService languageService,
+        public SlugRouteTransformer(ILanguageService languageService,
             LocalizationSettings localizationSettings)
         {
-            _eventPublisher = eventPublisher;
             _languageService = languageService;
             _localizationSettings = localizationSettings;
         }
@@ -47,7 +44,7 @@ namespace Nop.Web.Framework.Mvc.Routing
             if (!values.TryGetValue("SeName", out var slugValue) || string.IsNullOrEmpty(slugValue as string))
                 return values;
 
-            var slug = slugValue as string;
+            //var slug = slugValue as string;
             var urlRecord = "";
 
             //no URL record found
@@ -55,7 +52,7 @@ namespace Nop.Web.Framework.Mvc.Routing
                 return values;
 
             //virtual directory path
-            var pathBase = httpContext.Request.PathBase;
+            //var pathBase = httpContext.Request.PathBase;
 
             //Ensure that the slug is the same for the current language, 
             //otherwise it can cause some issues when customers choose a new language but a slug stays the same

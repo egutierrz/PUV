@@ -30,7 +30,7 @@ namespace Nop.Web.Framework.Mvc.Filters
         /// <summary>
         /// Represents a filter that saves last IP address of customer
         /// </summary>
-        private class SaveIpAddressFilter : IAsyncActionFilter
+        private sealed class SaveIpAddressFilter : IAsyncActionFilter
         {
             #region Fields
 

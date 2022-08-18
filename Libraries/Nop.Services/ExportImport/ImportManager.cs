@@ -35,17 +35,11 @@ namespace Nop.Services.ExportImport
         private readonly CatalogSettings _catalogSettings;
         private readonly ICountryService _countryService;
         private readonly ICustomerActivityService _customerActivityService;
-        private readonly INopDataProvider _dataProvider;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly ILocalizationService _localizationService;
         private readonly ILogger _logger;
         private readonly INopFileProvider _fileProvider;
-        private readonly IServiceScopeFactory _serviceScopeFactory;
         private readonly IStateProvinceService _stateProvinceService;
-        private readonly IStoreContext _storeContext;
-        private readonly IStoreMappingService _storeMappingService;
-        private readonly IStoreService _storeService;
-        private readonly IWorkContext _workContext;
 
         #endregion
 
@@ -54,32 +48,20 @@ namespace Nop.Services.ExportImport
         public ImportManager(CatalogSettings catalogSettings,
             ICountryService countryService,
             ICustomerActivityService customerActivityService,
-            INopDataProvider dataProvider,
             IHttpClientFactory httpClientFactory,
             ILocalizationService localizationService,
             ILogger logger,
             INopFileProvider fileProvider,
-            IServiceScopeFactory serviceScopeFactory,
-            IStateProvinceService stateProvinceService,
-            IStoreContext storeContext,
-            IStoreMappingService storeMappingService,
-            IStoreService storeService,
-            IWorkContext workContext)
+            IStateProvinceService stateProvinceService)
         {
             _catalogSettings = catalogSettings;
             _countryService = countryService;
             _customerActivityService = customerActivityService;
-            _dataProvider = dataProvider;
             _httpClientFactory = httpClientFactory;
             _fileProvider = fileProvider;
             _localizationService = localizationService;
             _logger = logger;
-            _serviceScopeFactory = serviceScopeFactory;
             _stateProvinceService = stateProvinceService;
-            _storeContext = storeContext;
-            _storeMappingService = storeMappingService;
-            _storeService = storeService;
-            _workContext = workContext;
         }
 
         #endregion

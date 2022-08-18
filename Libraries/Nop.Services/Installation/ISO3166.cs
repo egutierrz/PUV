@@ -7,7 +7,7 @@ namespace Nop.Services.Installation
     /// Represents the implementation of ISO3166-1
     /// </summary>
     /// <remarks>https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes</remarks>
-    public static class ISO3166
+    public static class Iso3166
     {
         /// <summary>
         /// Obtain ISO3166-1 Country based on its ISO code.

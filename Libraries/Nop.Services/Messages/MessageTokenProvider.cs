@@ -38,27 +38,15 @@ namespace Nop.Services.Messages
     {
         #region Fields
 
-        private readonly CatalogSettings _catalogSettings;
-        private readonly CurrencySettings _currencySettings;
         private readonly IActionContextAccessor _actionContextAccessor;
-        private readonly IAddressAttributeFormatter _addressAttributeFormatter;
-        private readonly IAddressService _addressService;
-        private readonly ICountryService _countryService;
-        private readonly ICurrencyService _currencyService;
         private readonly ICustomerAttributeFormatter _customerAttributeFormatter;
         private readonly ICustomerService _customerService;
-        private readonly IDateTimeHelper _dateTimeHelper;
         private readonly IEventPublisher _eventPublisher;
         private readonly IGenericAttributeService _genericAttributeService;
-        private readonly IHtmlFormatter _htmlFormatter;
-        private readonly ILanguageService _languageService;
         private readonly ILocalizationService _localizationService;
-        private readonly IStateProvinceService _stateProvinceService;
         private readonly IStoreContext _storeContext;
         private readonly IStoreService _storeService;
         private readonly IUrlHelperFactory _urlHelperFactory;
-        private readonly IWorkContext _workContext;
-        private readonly MessageTemplatesSettings _templatesSettings;
         private readonly StoreInformationSettings _storeInformationSettings;
 
         private Dictionary<string, IEnumerable<string>> _allowedTokens;
@@ -67,50 +55,26 @@ namespace Nop.Services.Messages
 
         #region Ctor
 
-        public MessageTokenProvider(CatalogSettings catalogSettings,
-            CurrencySettings currencySettings,
-            IActionContextAccessor actionContextAccessor,
-            IAddressAttributeFormatter addressAttributeFormatter,
-            IAddressService addressService,
-            ICountryService countryService,
-            ICurrencyService currencyService,
+        public MessageTokenProvider(IActionContextAccessor actionContextAccessor,
             ICustomerAttributeFormatter customerAttributeFormatter,
             ICustomerService customerService,
-            IDateTimeHelper dateTimeHelper,
             IEventPublisher eventPublisher,
             IGenericAttributeService genericAttributeService,
-            IHtmlFormatter htmlFormatter,
-            ILanguageService languageService,
             ILocalizationService localizationService,
-            IStateProvinceService stateProvinceService,
             IStoreContext storeContext,
             IStoreService storeService,
             IUrlHelperFactory urlHelperFactory,
-            IWorkContext workContext,
-            MessageTemplatesSettings templatesSettings,
             StoreInformationSettings storeInformationSettings)
         {
-            _catalogSettings = catalogSettings;
-            _currencySettings = currencySettings;
             _actionContextAccessor = actionContextAccessor;
-            _addressAttributeFormatter = addressAttributeFormatter;
-            _addressService = addressService;
-            _countryService = countryService;
-            _currencyService = currencyService;
             _customerAttributeFormatter = customerAttributeFormatter;
             _customerService = customerService;
-            _dateTimeHelper = dateTimeHelper;
             _eventPublisher = eventPublisher;
             _genericAttributeService = genericAttributeService;
-            _htmlFormatter = htmlFormatter;
-            _languageService = languageService;
             _localizationService = localizationService;
-            _stateProvinceService = stateProvinceService;
             _storeContext = storeContext;
             _storeService = storeService;
             _urlHelperFactory = urlHelperFactory;
-            _workContext = workContext;
-            _templatesSettings = templatesSettings;
             _storeInformationSettings = storeInformationSettings;
         }
 

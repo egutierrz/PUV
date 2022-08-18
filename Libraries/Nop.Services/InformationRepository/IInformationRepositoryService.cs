@@ -19,7 +19,7 @@ namespace Nop.Services.InformationRepositoryService
         /// A task that represents the asynchronous operation
         /// The task result contains directory information
         /// </returns>
-        Task<SatRepositoryInfoDirectories> GetDirectoryByIdAsync(int folderId);
+        Task<SatRepositoryInfoDirectories> GetDirectoryByIdAsync(int folderId = 0);
 
         /// <summary>
         /// Gets all DirectoriesA
@@ -29,7 +29,7 @@ namespace Nop.Services.InformationRepositoryService
         /// A task that represents the asynchronous operation
         /// The task result contains the directories
         /// </returns>
-        Task<IList<SatRepositoryInfoDirectories>> GetAllDirectoriesAsync(int parentId);
+        Task<IList<SatRepositoryInfoDirectories>> GetAllDirectoriesAsync(int parentId = 0);
 
 
         /// <summary>

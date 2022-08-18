@@ -24,7 +24,6 @@ namespace Nop.Services.Customers
 
         private readonly CustomerSettings _customerSettings;
         private readonly IGenericAttributeService _genericAttributeService;
-        private readonly INopDataProvider _dataProvider;
         private readonly IRepository<Address> _customerAddressRepository;
         private readonly IRepository<Customer> _customerRepository;
         private readonly IRepository<CustomerAddressMapping> _customerAddressMappingRepository;
@@ -41,7 +40,6 @@ namespace Nop.Services.Customers
 
         public CustomerService(CustomerSettings customerSettings,
             IGenericAttributeService genericAttributeService,
-            INopDataProvider dataProvider,
             IRepository<Address> customerAddressRepository,
             IRepository<Customer> customerRepository,
             IRepository<CustomerAddressMapping> customerAddressMappingRepository,
@@ -54,7 +52,6 @@ namespace Nop.Services.Customers
         {
             _customerSettings = customerSettings;
             _genericAttributeService = genericAttributeService;
-            _dataProvider = dataProvider;
             _customerAddressRepository = customerAddressRepository;
             _customerRepository = customerRepository;
             _customerAddressMappingRepository = customerAddressMappingRepository;

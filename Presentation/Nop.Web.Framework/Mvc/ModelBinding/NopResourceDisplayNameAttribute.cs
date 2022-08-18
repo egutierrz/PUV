@@ -10,11 +10,6 @@ namespace Nop.Web.Framework.Mvc.ModelBinding
     /// </summary>
     public sealed class NopResourceDisplayNameAttribute : DisplayNameAttribute, IModelAttribute
     {
-        #region Fields
-
-        private string _resourceValue = string.Empty;
-
-        #endregion
 
         #region Ctor
 
@@ -45,9 +40,8 @@ namespace Nop.Web.Framework.Mvc.ModelBinding
             {
                 //get working language identifier
                 var workingLanguageId = EngineContext.Current.Resolve<IWorkContext>().GetWorkingLanguageAsync().Result.Id;
-
                 //get locale resource value
-                _resourceValue = EngineContext.Current.Resolve<ILocalizationService>().GetResourceAsync(ResourceKey, workingLanguageId, true, ResourceKey).Result;
+                string _resourceValue = EngineContext.Current.Resolve<ILocalizationService>().GetResourceAsync(ResourceKey, workingLanguageId, true, ResourceKey).Result;
 
                 return _resourceValue;
             }

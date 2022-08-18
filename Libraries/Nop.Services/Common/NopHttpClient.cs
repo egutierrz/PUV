@@ -17,7 +17,6 @@ namespace Nop.Services.Common
     {
         #region Fields
 
-        private readonly AdminAreaSettings _adminAreaSettings;
         private readonly HttpClient _httpClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILanguageService _languageService;
@@ -29,8 +28,7 @@ namespace Nop.Services.Common
 
         #region Ctor
 
-        public NopHttpClient(AdminAreaSettings adminAreaSettings,
-            HttpClient client,
+        public NopHttpClient(HttpClient client,
             IHttpContextAccessor httpContextAccessor,
             ILanguageService languageService,
             IStoreContext storeContext,
@@ -42,7 +40,6 @@ namespace Nop.Services.Common
             client.Timeout = TimeSpan.FromSeconds(5);
             client.DefaultRequestHeaders.Add(HeaderNames.UserAgent, $"nopCommerce-{NopVersion.CURRENT_VERSION}");
 
-            _adminAreaSettings = adminAreaSettings;
             _httpClient = client;
             _httpContextAccessor = httpContextAccessor;
             _languageService = languageService;

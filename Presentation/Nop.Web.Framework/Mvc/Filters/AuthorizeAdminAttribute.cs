@@ -41,7 +41,7 @@ namespace Nop.Web.Framework.Mvc.Filters
         /// <summary>
         /// Represents a filter that confirms access to the admin panel
         /// </summary>
-        private class AuthorizeAdminFilter : IAsyncAuthorizationFilter
+        private sealed class AuthorizeAdminFilter : IAsyncAuthorizationFilter
         {
             #region Fields
 

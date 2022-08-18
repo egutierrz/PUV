@@ -34,13 +34,9 @@ namespace Nop.Services.Customers
         private readonly IEventPublisher _eventPublisher;
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly ILocalizationService _localizationService;
-        private readonly INotificationService _notificationService;
-        private readonly IStoreContext _storeContext;
-        private readonly IStoreService _storeService;
         private readonly IUrlHelperFactory _urlHelperFactory;
         private readonly IWorkContext _workContext;
         private readonly IWorkflowMessageService _workflowMessageService;
-        private readonly RewardPointsSettings _rewardPointsSettings;
 
         #endregion
 
@@ -55,13 +51,9 @@ namespace Nop.Services.Customers
             IEventPublisher eventPublisher,
             IGenericAttributeService genericAttributeService,
             ILocalizationService localizationService,
-            INotificationService notificationService,
-            IStoreContext storeContext,
-            IStoreService storeService,
             IUrlHelperFactory urlHelperFactory,
             IWorkContext workContext,
-            IWorkflowMessageService workflowMessageService,
-            RewardPointsSettings rewardPointsSettings)
+            IWorkflowMessageService workflowMessageService)
         {
             _customerSettings = customerSettings;
             _actionContextAccessor = actionContextAccessor;
@@ -72,13 +64,9 @@ namespace Nop.Services.Customers
             _eventPublisher = eventPublisher;
             _genericAttributeService = genericAttributeService;
             _localizationService = localizationService;
-            _notificationService = notificationService;
-            _storeContext = storeContext;
-            _storeService = storeService;
             _urlHelperFactory = urlHelperFactory;
             _workContext = workContext;
             _workflowMessageService = workflowMessageService;
-            _rewardPointsSettings = rewardPointsSettings;
         }
 
         #endregion
@@ -165,9 +153,6 @@ namespace Nop.Services.Customers
 
                 return CustomerLoginResults.WrongPassword;
             }
-
-            var selectedProvider = await _genericAttributeService.GetAttributeAsync<string>(customer, NopCustomerDefaults.SelectedMultiFactorAuthenticationProviderAttribute);
-            var store = await _storeContext.GetCurrentStoreAsync();
             
             //update login details
             customer.FailedLoginAttempts = 0;

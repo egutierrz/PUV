@@ -198,7 +198,7 @@ namespace Nop.Web.Framework.UI
         {
             AppendMetaDescriptionParts(part);
 
-            var metaDescription = string.Join(", ", _metaDescriptionParts.AsEnumerable().Reverse().ToArray());
+            //var metaDescription = string.Join(", ", _metaDescriptionParts.AsEnumerable().Reverse().ToArray());
             var result ="";
 
             return new HtmlString(_htmlEncoder.Encode(result));
@@ -237,7 +237,7 @@ namespace Nop.Web.Framework.UI
         {
             AppendMetaKeywordParts(part);
 
-            var metaKeyword = string.Join(", ", _metaKeywordParts.AsEnumerable().Reverse().ToArray());
+            //var metaKeyword = string.Join(", ", _metaKeywordParts.AsEnumerable().Reverse().ToArray());
             var result = "";
 
             return new HtmlString(_htmlEncoder.Encode(result));
@@ -474,7 +474,7 @@ namespace Nop.Web.Framework.UI
             if (_cssParts.Count == 0)
                 return HtmlString.Empty;
 
-            var debugModel = _webHostEnvironment.IsDevelopment();
+            //var debugModel = _webHostEnvironment.IsDevelopment();
 
             var result = new StringBuilder();
 

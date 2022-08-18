@@ -45,14 +45,17 @@ namespace Nop.Services.Events
 
                             await logger.ErrorAsync(exception.Message, exception);
                         }
-                        catch
+                        catch (Exception ex)
                         {
-                            // ignored
+                            Console.WriteLine(ex.Message);
                         }
                     }
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         #endregion

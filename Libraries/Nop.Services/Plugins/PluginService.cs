@@ -25,12 +25,10 @@ namespace Nop.Services.Plugins
 
         private readonly CatalogSettings _catalogSettings;
         private readonly ICustomerService _customerService;
-        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMigrationManager _migrationManager;
         private readonly ILogger _logger;
         private readonly INopFileProvider _fileProvider;
         private readonly IPluginsInfo _pluginsInfo;
-        private readonly IWebHelper _webHelper;
 
         #endregion
 
@@ -38,20 +36,16 @@ namespace Nop.Services.Plugins
 
         public PluginService(CatalogSettings catalogSettings,
             ICustomerService customerService,
-            IHttpContextAccessor httpContextAccessor,
             IMigrationManager migrationManager,
             ILogger logger,
-            INopFileProvider fileProvider,
-            IWebHelper webHelper)
+            INopFileProvider fileProvider)
         {
             _catalogSettings = catalogSettings;
             _customerService = customerService;
-            _httpContextAccessor = httpContextAccessor;
             _migrationManager = migrationManager;
             _logger = logger;
             _fileProvider = fileProvider;
             _pluginsInfo = Singleton<IPluginsInfo>.Instance;
-            _webHelper = webHelper;
         }
 
         #endregion

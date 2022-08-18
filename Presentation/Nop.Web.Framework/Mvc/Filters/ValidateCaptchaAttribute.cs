@@ -34,7 +34,7 @@ namespace Nop.Web.Framework.Mvc.Filters
         /// <summary>
         /// Represents a filter enabling CAPTCHA validation
         /// </summary>
-        private class ValidateCaptchaFilter : IAsyncActionFilter
+        private sealed class ValidateCaptchaFilter : IAsyncActionFilter
         {
             #region Constants
 

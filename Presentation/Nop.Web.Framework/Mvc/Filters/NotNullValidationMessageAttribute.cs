@@ -34,7 +34,7 @@ namespace Nop.Web.Framework.Mvc.Filters
         /// <summary>
         /// Represents a filter that adds a detailed validation message that a value cannot be empty
         /// </summary>
-        private class NotNullValidationMessageFilter : IAsyncActionFilter
+        private sealed class NotNullValidationMessageFilter : IAsyncActionFilter
         {
             #region Fields
 

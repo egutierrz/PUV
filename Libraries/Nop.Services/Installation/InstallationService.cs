@@ -46,16 +46,10 @@ namespace Nop.Services.Installation
 
         private readonly INopDataProvider _dataProvider;
         private readonly INopFileProvider _fileProvider;
-        private readonly IRepository<ActivityLogType> _activityLogTypeRepository;
-        private readonly IRepository<Address> _addressRepository;
         private readonly IRepository<Country> _countryRepository;
-        private readonly IRepository<Currency> _currencyRepository;
-        private readonly IRepository<Customer> _customerRepository;
         private readonly IRepository<CustomerRole> _customerRoleRepository;
         private readonly IRepository<EmailAccount> _emailAccountRepository;
         private readonly IRepository<Language> _languageRepository;
-        private readonly IRepository<MeasureDimension> _measureDimensionRepository;
-        private readonly IRepository<MeasureWeight> _measureWeightRepository;
         private readonly IRepository<StateProvince> _stateProvinceRepository;
         private readonly IRepository<Store> _storeRepository;
         private readonly IWebHelper _webHelper;
@@ -67,16 +61,10 @@ namespace Nop.Services.Installation
 
         public InstallationService(INopDataProvider dataProvider,
             INopFileProvider fileProvider,
-            IRepository<ActivityLogType> activityLogTypeRepository,
-            IRepository<Address> addressRepository,
             IRepository<Country> countryRepository,
-            IRepository<Currency> currencyRepository,
-            IRepository<Customer> customerRepository,
             IRepository<CustomerRole> customerRoleRepository,
             IRepository<EmailAccount> emailAccountRepository,
             IRepository<Language> languageRepository,
-            IRepository<MeasureDimension> measureDimensionRepository,
-            IRepository<MeasureWeight> measureWeightRepository,
             IRepository<StateProvince> stateProvinceRepository,
             IRepository<Store> storeRepository,
             IWebHelper webHelper,
@@ -84,16 +72,10 @@ namespace Nop.Services.Installation
         {
             _dataProvider = dataProvider;
             _fileProvider = fileProvider;
-            _activityLogTypeRepository = activityLogTypeRepository;
-            _addressRepository = addressRepository;
             _countryRepository = countryRepository;
-            _currencyRepository = currencyRepository;
-            _customerRepository = customerRepository;
             _customerRoleRepository = customerRoleRepository;
             _emailAccountRepository = emailAccountRepository;
             _languageRepository = languageRepository;
-            _measureDimensionRepository = measureDimensionRepository;
-            _measureWeightRepository = measureWeightRepository;
             _stateProvinceRepository = stateProvinceRepository;
             _storeRepository = storeRepository;
             _webHelper = webHelper;
@@ -259,7 +241,10 @@ namespace Nop.Services.Installation
                     CreatedOrUpdatedDateUTC = DateTime.UtcNow
                 });
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
 
         /// <returns>A task that represents the asynchronous operation</returns>
@@ -448,7 +433,7 @@ namespace Nop.Services.Installation
         /// <returns>A task that represents the asynchronous operation</returns>
         protected virtual async Task InstallCountriesAndStatesAsync()
         {
-            var countries = ISO3166.GetCollection().Select(country => new Country
+            var countries = Iso3166.GetCollection().Select(country => new Country
             {
                 Name = country.Name,
                 AllowsBilling = true,
@@ -1093,10 +1078,9 @@ namespace Nop.Services.Installation
         /// <returns>A task that represents the asynchronous operation</returns>
         protected virtual async Task InstallSettingsAsync(RegionInfo regionInfo)
         {
-            var isMetric = regionInfo?.IsMetric ?? false;
             var country = regionInfo?.TwoLetterISORegionName ?? string.Empty;
-            var isGermany = country == "DE";
-            var isEurope = ISO3166.FromCountryCode(country)?.SubjectToVat ?? false;
+            //var isGermany = country == "DE";
+            var isEurope = Iso3166.FromCountryCode(country)?.SubjectToVat ?? false;
 
             var settingService = EngineContext.Current.Resolve<ISettingService>();
             await settingService.SaveSettingAsync(new PdfSettings
@@ -1161,101 +1145,6 @@ namespace Nop.Services.Installation
                 LogNewsletterConsent = true,
                 LogUserProfileChanges = true
             });
-
-            //await settingService.SaveSettingAsync(new CatalogSettings
-            //{
-            //    AllowViewUnpublishedProductPage = true,
-            //    DisplayDiscontinuedMessageForUnpublishedProducts = true,
-            //    PublishBackProductWhenCancellingOrders = false,
-            //    ShowSkuOnProductDetailsPage = true,
-            //    ShowSkuOnCatalogPages = false,
-            //    ShowManufacturerPartNumber = false,
-            //    ShowGtin = false,
-            //    ShowFreeShippingNotification = true,
-            //    AllowProductSorting = true,
-            //    AllowProductViewModeChanging = true,
-            //    DefaultViewMode = "grid",
-            //    ShowProductsFromSubcategories = false,
-            //    ShowCategoryProductNumber = false,
-            //    ShowCategoryProductNumberIncludingSubcategories = false,
-            //    CategoryBreadcrumbEnabled = true,
-            //    ShowShareButton = true,
-            //    PageShareCode = "<!-- AddThis Button BEGIN --><div class=\"addthis_toolbox addthis_default_style \"><a class=\"addthis_button_preferred_1\"></a><a class=\"addthis_button_preferred_2\"></a><a class=\"addthis_button_preferred_3\"></a><a class=\"addthis_button_preferred_4\"></a><a class=\"addthis_button_compact\"></a><a class=\"addthis_counter addthis_bubble_style\"></a></div><script src=\"http://s7.addthis.com/js/250/addthis_widget.js#pubid=nopsolutions\"></script><!-- AddThis Button END -->",
-            //    ProductReviewsMustBeApproved = false,
-            //    OneReviewPerProductFromCustomer = false,
-            //    DefaultProductRatingValue = 5,
-            //    AllowAnonymousUsersToReviewProduct = false,
-            //    ProductReviewPossibleOnlyAfterPurchasing = false,
-            //    NotifyStoreOwnerAboutNewProductReviews = false,
-            //    NotifyCustomerAboutProductReviewReply = false,
-            //    EmailAFriendEnabled = true,
-            //    AllowAnonymousUsersToEmailAFriend = false,
-            //    RecentlyViewedProductsNumber = 3,
-            //    RecentlyViewedProductsEnabled = true,
-            //    NewProductsNumber = 6,
-            //    NewProductsEnabled = true,
-            //    CompareProductsEnabled = true,
-            //    CompareProductsNumber = 4,
-            //    ProductSearchAutoCompleteEnabled = true,
-            //    ProductSearchEnabled = true,
-            //    ProductSearchAutoCompleteNumberOfProducts = 10,
-            //    ShowLinkToAllResultInSearchAutoComplete = false,
-            //    ProductSearchTermMinimumLength = 3,
-            //    ShowProductImagesInSearchAutoComplete = false,
-            //    ShowBestsellersOnHomepage = false,
-            //    NumberOfBestsellersOnHomepage = 4,
-            //    SearchPageProductsPerPage = 6,
-            //    SearchPageAllowCustomersToSelectPageSize = true,
-            //    SearchPagePageSizeOptions = "6, 3, 9, 18",
-            //    SearchPagePriceRangeFiltering = true,
-            //    SearchPageManuallyPriceRange = true,
-            //    ProductsAlsoPurchasedEnabled = true,
-            //    ProductsAlsoPurchasedNumber = 4,
-            //    AjaxProcessAttributeChange = true,
-            //    NumberOfProductTags = 15,
-            //    ProductsByTagPageSize = 6,
-            //    IncludeShortDescriptionInCompareProducts = false,
-            //    IncludeFullDescriptionInCompareProducts = false,
-            //    IncludeFeaturedProductsInNormalLists = false,
-            //    UseLinksInRequiredProductWarnings = true,
-            //    DisplayTierPricesWithDiscounts = true,
-            //    IgnoreDiscounts = false,
-            //    IgnoreFeaturedProducts = false,
-            //    IgnoreAcl = true,
-            //    IgnoreStoreLimitations = true,
-            //    CacheProductPrices = false,
-            //    ProductsByTagAllowCustomersToSelectPageSize = true,
-            //    ProductsByTagPageSizeOptions = "6, 3, 9, 18",
-            //    ProductsByTagPriceRangeFiltering = true,
-            //    ProductsByTagManuallyPriceRange = true,
-            //    MaximumBackInStockSubscriptions = 200,
-            //    ManufacturersBlockItemsToDisplay = 2,
-            //    DisplayTaxShippingInfoFooter = isGermany,
-            //    DisplayTaxShippingInfoProductDetailsPage = isGermany,
-            //    DisplayTaxShippingInfoProductBoxes = isGermany,
-            //    DisplayTaxShippingInfoShoppingCart = isGermany,
-            //    DisplayTaxShippingInfoWishlist = isGermany,
-            //    DisplayTaxShippingInfoOrderDetailsPage = isGermany,
-            //    DefaultCategoryPageSizeOptions = "6, 3, 9",
-            //    DefaultCategoryPageSize = 6,
-            //    DefaultManufacturerPageSizeOptions = "6, 3, 9",
-            //    DefaultManufacturerPageSize = 6,
-            //    ShowProductReviewsTabOnAccountPage = true,
-            //    ProductReviewsPageSizeOnAccountPage = 10,
-            //    ProductReviewsSortByCreatedDateAscending = false,
-            //    ExportImportProductAttributes = true,
-            //    ExportImportProductSpecificationAttributes = true,
-            //    ExportImportUseDropdownlistsForAssociatedEntities = true,
-            //    ExportImportProductsCountInOneFile = 500,
-            //    ExportImportSplitProductsFile = false,
-            //    ExportImportRelatedEntitiesByName = true,
-            //    CountDisplayedYearsDatePicker = 1,
-            //    UseAjaxLoadMenu = false,
-            //    UseAjaxCatalogProductsLoading = true,
-            //    EnableManufacturerFiltering = true,
-            //    EnablePriceRangeFiltering = true,
-            //    EnableSpecificationAttributeFiltering = true,
-            //});
 
             await settingService.SaveSettingAsync(new LocalizationSettings
             {
@@ -1343,48 +1232,6 @@ namespace Nop.Services.Installation
                 ForceMultifactorAuthentication = false
             });
 
-            //await settingService.SaveSettingAsync(new AddressSettings
-            //{
-            //    CompanyEnabled = false,
-            //    StreetAddressEnabled = true,
-            //    StreetAddressRequired = true,
-            //    StreetAddress2Enabled = true,
-            //    ZipPostalCodeEnabled = true,
-            //    ZipPostalCodeRequired = true,
-            //    CityEnabled = true,
-            //    CityRequired = true,
-            //    CountyEnabled = false,
-            //    CountyRequired = false,
-            //    CountryEnabled = true,
-            //    StateProvinceEnabled = true,
-            //    PhoneEnabled = true,
-            //    PhoneRequired = true,
-            //    FaxEnabled = true
-            //});
-
-            //await settingService.SaveSettingAsync(new MediaSettings
-            //{
-            //    AvatarPictureSize = 120,
-            //    ProductThumbPictureSize = 415,
-            //    ProductDetailsPictureSize = 550,
-            //    ProductThumbPictureSizeOnProductDetailsPage = 100,
-            //    AssociatedProductPictureSize = 220,
-            //    CategoryThumbPictureSize = 450,
-            //    ManufacturerThumbPictureSize = 420,
-            //    VendorThumbPictureSize = 450,
-            //    CartThumbPictureSize = 80,
-            //    MiniCartThumbPictureSize = 70,
-            //    AutoCompleteSearchThumbPictureSize = 20,
-            //    ImageSquarePictureSize = 32,
-            //    MaximumImageSize = 1980,
-            //    DefaultPictureZoomEnabled = false,
-            //    DefaultImageQuality = 80,
-            //    MultipleThumbDirectories = false,
-            //    ImportProductImagesUsingHash = true,
-            //    AzureCacheControlHeader = string.Empty,
-            //    UseAbsoluteImagePath = true
-            //});
-
             await settingService.SaveSettingAsync(new StoreInformationSettings
             {
                 StoreClosed = false,
@@ -1403,25 +1250,6 @@ namespace Nop.Services.Installation
                 LogErrors = false,
                 AllowCustomersToRemoveAssociations = true
             });
-
-            //await settingService.SaveSettingAsync(new RewardPointsSettings
-            //{
-            //    Enabled = true,
-            //    ExchangeRate = 1,
-            //    PointsForRegistration = 0,
-            //    RegistrationPointsValidity = 30,
-            //    PointsForPurchases_Amount = 10,
-            //    PointsForPurchases_Points = 1,
-            //    MinOrderTotalToAwardPoints = 0,
-            //    MaximumRewardPointsToUsePerOrder = 0,
-            //    MaximumRedeemedRate = 0,
-            //    PurchasesPointsValidity = 45,
-            //    ActivationDelay = 0,
-            //    ActivationDelayPeriodId = 0,
-            //    DisplayHowMuchWillBeEarned = true,
-            //    PointsAccumulatedForAllStores = true,
-            //    PageSize = 10
-            //});
 
             await settingService.SaveSettingAsync(new MessageTemplatesSettings
             {
@@ -1461,36 +1289,6 @@ namespace Nop.Services.Installation
             {
                 ActiveWidgetSystemNames = new List<string> { "Widgets.NivoSlider" }
             });
-
-            //await settingService.SaveSettingAsync(new DisplayDefaultMenuItemSettings
-            //{
-            //    DisplayHomepageMenuItem = true,
-            //    DisplayNewProductsMenuItem = true,
-            //    DisplayProductSearchMenuItem = true,
-            //    DisplayCustomerInfoMenuItem = true,
-            //    DisplayBlogMenuItem = true,
-            //    DisplayForumsMenuItem = true,
-            //    DisplayContactUsMenuItem = true
-            //});
-
-            //await settingService.SaveSettingAsync(new DisplayDefaultFooterItemSettings
-            //{
-            //    DisplaySitemapFooterItem = true,
-            //    DisplayContactUsFooterItem = true,
-            //    DisplayProductSearchFooterItem = true,
-            //    DisplayNewsFooterItem = true,
-            //    DisplayBlogFooterItem = true,
-            //    DisplayForumsFooterItem = true,
-            //    DisplayRecentlyViewedProductsFooterItem = true,
-            //    DisplayCompareProductsFooterItem = true,
-            //    DisplayNewProductsFooterItem = true,
-            //    DisplayCustomerInfoFooterItem = true,
-            //    DisplayCustomerOrdersFooterItem = true,
-            //    DisplayCustomerAddressesFooterItem = true,
-            //    DisplayShoppingCartFooterItem = true,
-            //    DisplayWishlistFooterItem = true,
-            //    DisplayApplyVendorAccountFooterItem = true
-            //});
 
             await settingService.SaveSettingAsync(new CaptchaSettings
             {
@@ -1765,14 +1563,11 @@ namespace Nop.Services.Installation
         {
             await InstallStoresAsync();
             await InstallLanguagesAsync(languagePackInfo, cultureInfo, regionInfo);
-            //await InstallCurrenciesAsync(cultureInfo, regionInfo);
             await InstallCountriesAndStatesAsync();
             await InstallEmailAccountsAsync();
             await InstallMessageTemplatesAsync();
-            //await InstallTopicTemplatesAsync();
             await InstallSettingsAsync(regionInfo);
             await InstallCustomersAndUsersAsync(defaultUserEmail, defaultUserPassword);
-            //await InstallTopicsAsync();
             await InstallScheduleTasksAsync();
             await InstallLanguageSpanishAsync();
             await InstallComponentSettingsAsync();

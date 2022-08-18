@@ -34,54 +34,26 @@ namespace Nop.Services.ExportImport
     {
         #region Fields
 
-        private readonly AddressSettings _addressSettings;
-        private readonly CustomerSettings _customerSettings;
-        private readonly DateTimeSettings _dateTimeSettings;
-        private readonly IAddressService _addressService;
         private readonly ICountryService _countryService;
-        private readonly ICurrencyService _currencyService;
+
         private readonly ICustomerAttributeFormatter _customerAttributeFormatter;
         private readonly ICustomerService _customerService;
-        private readonly IDateTimeHelper _dateTimeHelper;
         private readonly IGenericAttributeService _genericAttributeService;
-        private readonly IStateProvinceService _stateProvinceService;
-        private readonly IStoreMappingService _storeMappingService;
-        private readonly IStoreService _storeService;
-        private readonly IWorkContext _workContext;
 
         #endregion
 
         #region Ctor
 
-        public ExportManager(AddressSettings addressSettings,
-            CustomerSettings customerSettings,
-            DateTimeSettings dateTimeSettings,
-            IAddressService addressService,
+        public ExportManager(
             ICountryService countryService,
-            ICurrencyService currencyService,
             ICustomerAttributeFormatter customerAttributeFormatter,
             ICustomerService customerService,
-            IDateTimeHelper dateTimeHelper,
-            IGenericAttributeService genericAttributeService,
-            IStateProvinceService stateProvinceService,
-            IStoreMappingService storeMappingService,
-            IStoreService storeService,
-            IWorkContext workContext)
+            IGenericAttributeService genericAttributeService)
         {
-            _addressSettings = addressSettings;
-            _customerSettings = customerSettings;
-            _dateTimeSettings = dateTimeSettings;
-            _addressService = addressService;
             _countryService = countryService;
-            _currencyService = currencyService;
             _customerAttributeFormatter = customerAttributeFormatter;
             _customerService = customerService;
-            _dateTimeHelper = dateTimeHelper;
             _genericAttributeService = genericAttributeService;
-            _stateProvinceService = stateProvinceService;
-            _storeMappingService = storeMappingService;
-            _storeService = storeService;
-            _workContext = workContext;
         }
 
         #endregion

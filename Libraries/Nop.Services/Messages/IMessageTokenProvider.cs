@@ -49,14 +49,6 @@ namespace Nop.Services.Messages
         Task AddRiFileChangesTokensAsync(IList<Token> tokens, Customer modifier, SatRepositoryInfoFiles file);
 
         /// <summary>
-        /// Add private message tokens
-        /// </summary>
-        /// <param name="tokens">List of already added tokens</param>
-        /// <param name="privateMessage">Private message</param>
-        /// <returns>A task that represents the asynchronous operation</returns>
-        //Task AddPrivateMessageTokensAsync(IList<Token> tokens, PrivateMessage privateMessage);
-
-        /// <summary>
         /// Get collection of allowed (supported) message tokens
         /// </summary>
         /// <param name="tokenGroups">Collection of token groups; pass null to get all available tokens</param>

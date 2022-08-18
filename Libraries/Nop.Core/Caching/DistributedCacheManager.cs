@@ -22,18 +22,12 @@ namespace Nop.Core.Caching
 
         private readonly IDistributedCache _distributedCache;
         private readonly PerRequestCache _perRequestCache;
-        private static readonly List<string> _keys;
-        private static readonly AsyncLock _locker;
+        private static readonly List<string> _keys = new();
+        private static readonly AsyncLock _locker = new();
 
         #endregion
 
         #region Ctor
-
-        static DistributedCacheManager()
-        {
-            _locker = new AsyncLock();
-            _keys = new List<string>();
-        }
 
         public DistributedCacheManager(AppSettings appSettings, IDistributedCache distributedCache, IHttpContextAccessor httpContextAccessor) :base(appSettings)
         {
@@ -129,6 +123,7 @@ namespace Nop.Core.Caching
         /// </summary>
         public void Dispose()
         {
+            // Do nothing because is a null rules
         }
 
         /// <summary>
@@ -250,19 +245,19 @@ namespace Nop.Core.Caching
         /// <summary>
         /// Add the specified cky and object to the cache
         /// </summary>
-        /// <param name="cky">Key of cached item</param>
+        /// <param name="key">Key of cached item</param>
         /// <param name="data">Value for caching</param>
         /// <returns>A task that represents the asynchronous operation</returns>
-        public async Task SetAsync(CacheKey cky, object data)
+        public async Task SetAsync(CacheKey key, object data)
         {
-            if (cky == null || (cky?.CacheTime ?? 0) <= 0 || data == null)
+            if (key == null || (key?.CacheTime ?? 0) <= 0 || data == null)
                 return;
 
-            await _distributedCache.SetStringAsync(cky.Key, JsonConvert.SerializeObject(data), PrepareEntryOptions(cky));
-            _perRequestCache.Set(cky.Key, data);
+            await _distributedCache.SetStringAsync(key.Key, JsonConvert.SerializeObject(data), PrepareEntryOptions(key));
+            _perRequestCache.Set(key.Key, data);
 
             using var _ = await _locker.LockAsync();
-            _keys.Add(cky.Key);
+            _keys.Add(key.Key);
         }
 
         /// <summary>

@@ -30,7 +30,7 @@ namespace Nop.Web.Framework.Mvc.Filters
         /// <summary>
         /// Represents a filter that check existence of passed form key and return result as an action parameter
         /// </summary>
-        private class ParameterBasedOnFormNameFilter : IAsyncActionFilter
+        private sealed class ParameterBasedOnFormNameFilter : IAsyncActionFilter
         {
             #region Fields
 
@@ -66,10 +66,6 @@ namespace Nop.Web.Framework.Mvc.Filters
 
                 //if form key with '_formKeyName' exists, then set specified '_actionParameterName' to true
                 context.ActionArguments[_actionParameterName] = context.HttpContext.Request.Form.Keys.Any(key => key.Equals(_formKeyName));
-
-                //we check whether form key with '_formKeyName' exists only
-                //uncomment the code below if you want to check whether form value is specified
-                //context.ActionArguments[_actionParameterName] = !string.IsNullOrEmpty(context.HttpContext.Request.Form[_formKeyName]);
 
                 return Task.CompletedTask;
             }

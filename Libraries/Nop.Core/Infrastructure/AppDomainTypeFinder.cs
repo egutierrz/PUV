@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Nop.Core.Infrastructure
@@ -16,7 +17,7 @@ namespace Nop.Core.Infrastructure
     {
         #region Fields
 
-        private bool _ignoreReflectionErrors = true;
+        private readonly bool _ignoreReflectionErrors = true;
         protected INopFileProvider _fileProvider;
 
         #endregion
@@ -133,7 +134,6 @@ namespace Nop.Core.Infrastructure
                     }
 
                     //old loading stuff
-                    //Assembly a = Assembly.ReflectionOnlyLoadFrom(dllPath);
                     //if (Matches(a.FullName) && !loadedAssemblyNames.Contains(a.FullName))
                     //{
                     //    App.Load(a.FullName);
@@ -229,11 +229,11 @@ namespace Nop.Core.Infrastructure
             }
             catch (ReflectionTypeLoadException ex)
             {
-                var msg = string.Empty;
+                StringBuilder msg = new StringBuilder(string.Empty);
                 foreach (var e in ex.LoaderExceptions)
-                    msg += e.Message + Environment.NewLine;
+                    msg.Append(e.Message).Append(Environment.NewLine);
 
-                var fail = new Exception(msg, ex);
+                var fail = new Exception(msg.ToString(), ex);
                 Debug.WriteLine(fail.Message, fail);
 
                 throw fail;

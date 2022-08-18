@@ -12,17 +12,12 @@ namespace Nop.Services.Media.RoxyFileman
     /// </summary>
     public class RoxyFilemanFormFile : IFormFile
     {
-        #region Fields
-
-        private readonly string _fileExtension;
-
-        #endregion
 
         #region Ctor
 
-        public RoxyFilemanFormFile(string fileExtension)
+        public RoxyFilemanFormFile()
         {
-            _fileExtension = fileExtension;
+            // No execute code because null rules
         }
 
         #endregion

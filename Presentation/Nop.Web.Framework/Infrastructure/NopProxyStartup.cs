@@ -16,7 +16,10 @@ namespace Nop.Web.Framework.Infrastructure
         /// </summary>
         /// <param name="services">Collection of service descriptors</param>
         /// <param name="configuration">Configuration of the application</param>
-        public void ConfigureServices(IServiceCollection services, IConfiguration configuration) { }
+        public void ConfigureServices(IServiceCollection services, IConfiguration configuration) 
+        {
+            // Do nothing because is null rules
+        }
 
         /// <summary>
         /// Configure the using of added middleware

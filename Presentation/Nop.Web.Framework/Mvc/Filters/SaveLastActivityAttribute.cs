@@ -30,7 +30,7 @@ namespace Nop.Web.Framework.Mvc.Filters
         /// <summary>
         /// Represents a filter that saves last customer activity date
         /// </summary>
-        private class SaveLastActivityFilter : IAsyncActionFilter
+        private sealed class SaveLastActivityFilter : IAsyncActionFilter
         {
             #region Fields
 

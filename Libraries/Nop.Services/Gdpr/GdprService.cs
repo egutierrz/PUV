@@ -26,7 +26,6 @@ namespace Nop.Services.Gdpr
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly IRepository<GdprConsent> _gdprConsentRepository;
         private readonly IRepository<GdprLog> _gdprLogRepository;
-        private readonly IStoreService _storeService;
 
         #endregion
 
@@ -37,8 +36,7 @@ namespace Nop.Services.Gdpr
             IEventPublisher eventPublisher,
             IGenericAttributeService genericAttributeService,
             IRepository<GdprConsent> gdprConsentRepository,
-            IRepository<GdprLog> gdprLogRepository,
-            IStoreService storeService)
+            IRepository<GdprLog> gdprLogRepository)
         {
             _addressService = addressService;
             _customerService = customerService;
@@ -46,7 +44,6 @@ namespace Nop.Services.Gdpr
             _genericAttributeService = genericAttributeService;
             _gdprConsentRepository = gdprConsentRepository;
             _gdprLogRepository = gdprLogRepository;
-            _storeService = storeService;
         }
 
         #endregion

@@ -98,10 +98,6 @@ namespace Nop.Services.Localization
             if (language == null)
                 throw new ArgumentNullException(nameof(language));
 
-            //null validation is not required
-            //if (string.IsNullOrEmpty(url))
-            //    return url;
-
             //remove application path from raw URL
             if (isRawPath && !string.IsNullOrEmpty(url))
                 url = url.RemoveApplicationPathFromRawUrl(pathBase);

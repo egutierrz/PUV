@@ -31,7 +31,7 @@ namespace Nop.Web.Framework.Mvc.Filters
         /// <summary>
         /// Represents a filter enabling honeypot validation
         /// </summary>
-        private class ValidateHoneypotFilter : IAsyncAuthorizationFilter
+        private sealed class ValidateHoneypotFilter : IAsyncAuthorizationFilter
         {
             #region Fields
 

@@ -253,13 +253,6 @@ namespace Nop.Services.InformationRepositoryService
                         where i.GuidFile == guid
                         orderby i.Version descending
                         select i;
-            //var actualFileVersion = await query.FirstOrDefaultAsync();
-
-            //query = from e in _infoRepRepository.Table
-            //        where e.Name == actualFileVersion.Name
-            //        where e.DirectoryId == actualFileVersion.DirectoryId
-            //        orderby e.Version descending
-            //        select e;
 
             var lastFileVersion = await query.FirstOrDefaultAsync();
 
@@ -339,7 +332,6 @@ namespace Nop.Services.InformationRepositoryService
             {
                 case ActivityLogTypeEnum.RI_NewFileVersion:
                     messageTemplate = MessageTemplateSystemNames.RI_UPDATE_VERSION;
-                    //file = await GetLastFileVersion(guid);
                     break;
                 case ActivityLogTypeEnum.RI_FileDeletion:
                     messageTemplate = MessageTemplateSystemNames.RI_DELETE_FILE;

@@ -26,7 +26,6 @@ namespace Nop.Services.Messages
 
         private readonly CommonSettings _commonSettings;
         private readonly EmailAccountSettings _emailAccountSettings;
-        private readonly IAddressService _addressService;
         private readonly ICustomerService _customerService;
         private readonly IEmailAccountService _emailAccountService;
         private readonly IEventPublisher _eventPublisher;
@@ -36,7 +35,6 @@ namespace Nop.Services.Messages
         private readonly IMessageTokenProvider _messageTokenProvider;
         private readonly IQueuedEmailService _queuedEmailService;
         private readonly IStoreContext _storeContext;
-        private readonly IStoreService _storeService;
         private readonly ITokenizer _tokenizer;
 
         #endregion
@@ -45,7 +43,6 @@ namespace Nop.Services.Messages
 
         public WorkflowMessageService(CommonSettings commonSettings,
             EmailAccountSettings emailAccountSettings,
-            IAddressService addressService,
             ICustomerService customerService,
             IEmailAccountService emailAccountService,
             IEventPublisher eventPublisher,
@@ -55,12 +52,10 @@ namespace Nop.Services.Messages
             IMessageTokenProvider messageTokenProvider,
             IQueuedEmailService queuedEmailService,
             IStoreContext storeContext,
-            IStoreService storeService,
             ITokenizer tokenizer)
         {
             _commonSettings = commonSettings;
             _emailAccountSettings = emailAccountSettings;
-            _addressService = addressService;
             _customerService = customerService;
             _emailAccountService = emailAccountService;
             _eventPublisher = eventPublisher;
@@ -70,7 +65,6 @@ namespace Nop.Services.Messages
             _messageTokenProvider = messageTokenProvider;
             _queuedEmailService = queuedEmailService;
             _storeContext = storeContext;
-            _storeService = storeService;
             _tokenizer = tokenizer;
         }
 

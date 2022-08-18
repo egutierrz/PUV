@@ -50,12 +50,12 @@ namespace Nop.Web.Framework.Mvc.Filters
         /// <summary>
         /// Represents a filter confirming that checks whether current connection is secured and properly redirect if necessary
         /// </summary>
-        private class SaveSelectedTabFilter : IAsyncActionFilter
+        private sealed class SaveSelectedTabFilter : IAsyncActionFilter
         {
             #region Fields
 
             private readonly bool _ignoreFilter;
-            private bool _persistForTheNextRequest;
+            private readonly bool _persistForTheNextRequest;
             private readonly IWebHelper _webHelper;
 
             #endregion
