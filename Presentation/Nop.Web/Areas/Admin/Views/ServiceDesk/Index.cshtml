@@ -21,7 +21,7 @@
     <div class="float-right">
         <div class="btn-group">
             <button type="button" class="btn btn-success">
-                <i class="fas fa-download"></i>
+                <em class="fas fa-download"></em>
                 @T("Admin.Common.Export")
             </button>
             <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -32,14 +32,14 @@
                 <li class="dropdown-item">
                     <form asp-controller="ServiceDesk" asp-action="ExportXML" method="post">
                         <button type="submit" name="exportxml-all">
-                            <i class="far fa-file-code"></i>
+                            <em class="far fa-file-code"></em>
                             @T("Admin.Common.ExportToXml.All")
                         </button>
                     </form>
                 </li>
                 <li class="dropdown-item">
                     <button type="button" id="exportxml-selected">
-                        <i class="far fa-file-code"></i>
+                        <em class="far fa-file-code"></em>
                         @T("Admin.Common.ExportToXml.Selected")
                     </button>
                 </li>
@@ -135,7 +135,7 @@
                             <div class="row">
                                 <div class="text-center col-12">
                                     <button type="button" id="search-ServiceDesk" class="btn btn-primary btn-search">
-                                        <i class="fas fa-search"></i>
+                                        <em class="fas fa-search"></em>
                                         @T("Admin.Common.Search")
                                     </button>
                                 </div>

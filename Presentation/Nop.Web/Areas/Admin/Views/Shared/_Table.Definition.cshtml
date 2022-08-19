@@ -205,7 +205,7 @@ ordering: @Model.Ordering.ToString().ToLowerInvariant(),
     <text>
     buttons: [{
         name: 'refresh',
-        text: '<i class="fas fa-sync-alt" style="padding-left: 5px"></i>',
+        text: '<em class="fas fa-sync-alt" style="padding-left: 5px"></em>',
         action: function() {
             @if (Model.ServerSide)
             {
@@ -377,13 +377,13 @@ columns: [
                         @if (!string.IsNullOrEmpty(picture.Src))
                         {
                             <text>
-                            return '<img src="@(picture.SrcPrefix)@(picture.Src)" @(widthAttr) />';
+                            return '<img src="@(picture.SrcPrefix)@(picture.Src)" @(widthAttr) alt="Picture"/>';
                             </text>
                         }
                         else
                         {
                             <text>
-                            return '<img src="@(picture.SrcPrefix)' + data + '" @(widthAttr) />';
+                            return '<img src="@(picture.SrcPrefix)' + data + '" @(widthAttr) alt="Picture"/>';
                             </text>
                         }
                     },
@@ -402,8 +402,8 @@ columns: [
                     <text>
                     render: function (data, type, row) {
                         return data
-                            ? '<i class="fas fa-check true-icon" nop-value="true"></i>'
-                            : '<i class="fas fa-times false-icon" nop-value="false"></i>';
+                            ? '<em class="fas fa-check true-icon" nop-value="true"></em>'
+                            : '<em class="fas fa-times false-icon" nop-value="false"></em>';
                     },
                     </text>
                     break;

@@ -52,7 +52,7 @@
                 detail.header.columns.forEach(e =>  {
             
                     titles.push({ title:  e.title });
-                    if(e.title=='Hostname'){ list.push("<img src='/images/serviceMonitoring/"+detail.data[0]["device-type"]+"_table.png'>" + e.property ); }
+                    if(e.title=='Hostname'){ list.push("<img src='/images/serviceMonitoring/"+detail.data[0]["device-type"]+"_table.png' alt='Device Type'>" + e.property ); }
                     else
                     list.push( e.property );
                 })

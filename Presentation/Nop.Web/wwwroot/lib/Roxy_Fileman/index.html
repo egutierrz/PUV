@@ -43,7 +43,7 @@
     </div>
     <div id="pnlLoadingDirs">
        <span>Loading directories...</span><br>
-       <img src="images/loading.gif" title="Loading directory tree, please wait...">
+       <img src="images/loading.gif" title="Loading directory tree, please wait..." alt="Loading">
     </div>
     <div class="scrollPane">
       <ul id="pnlDirList"></ul>
@@ -77,7 +77,7 @@
        <div class="scrollPane">
          <div id="pnlLoading">
           <span data-lang="LoadingFiles">Loading files...</span><br>
-          <img src="images/loading.gif" title="Loading files, please wait...">
+          <img src="images/loading.gif" title="Loading files, please wait..." alt="Loading">
           </div>
           <div id="pnlEmptyDir" data-lang="DirIsEmpty">
           This folder is empty
@@ -101,7 +101,7 @@
 </table>
 
 <!-- Forms and other components -->
-<iframe name="frmUploadFile" width="0" height="0" style="display:none;border:0;"></iframe>
+<iframe name="frmUploadFile" width="0" height="0" style="display:none;border:0;" title="Upload File"></iframe>
 <div id="dlgAddFile">
   <form name="addfile" id="frmUpload" method="post" target="frmUploadFile" enctype="multipart/form-data">
     <input type="hidden" name="d" id="hdDir" />

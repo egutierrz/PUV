@@ -192,17 +192,17 @@
                     <div id="@(clientId + "downloadurl")" class="float-left my-1">
                         @if (download != null)
                         {
-                            <a class='btn btn-default' href="@(Url.Action("DownloadFile", "Download", new { downloadGuid = download.DownloadGuid, area = AreaNames.Admin }))"><i class='fas fa-download'></i>@T("Admin.Download.DownloadUploadedFile")</a>
+                            <a class='btn btn-default' href="@(Url.Action("DownloadFile", "Download", new { downloadGuid = download.DownloadGuid, area = AreaNames.Admin }))"><em class='fas fa-download'></em>@T("Admin.Download.DownloadUploadedFile")</a>
                         }
                     </div>
                     <div class="float-left my-1">
                         @if (download != null)
                         {
-                            <span id="@(clientId + "remove")" class="btn btn-default ml-2"><i class="far fa-trash-alt"></i>@T("Admin.Download.RemoveDownload")</span>
+                            <span id="@(clientId + "remove")" class="btn btn-default ml-2"><em class="far fa-trash-alt"></em>@T("Admin.Download.RemoveDownload")</span>
                         }
                         else
                         {
-                            <span id="@(clientId + "remove")" class="btn btn-default ml-2" style="display:none;"><i class="far fa-trash-alt"></i>@T("Admin.Download.RemoveDownload")</span>
+                            <span id="@(clientId + "remove")" class="btn btn-default ml-2" style="display:none;"><em class="far fa-trash-alt"></em>@T("Admin.Download.RemoveDownload")</span>
                         }
                     </div>
                 </div>
