@@ -130,7 +130,10 @@ namespace Nop.Web.Framework
             else
                 _cachedActiveStoreScopeConfiguration = 0;
 
-            return _cachedActiveStoreScopeConfiguration ?? 0;
+            if (_cachedActiveStoreScopeConfiguration == null)
+                return 0;
+            else
+                return _cachedActiveStoreScopeConfiguration.Value;
         }
 
         #endregion

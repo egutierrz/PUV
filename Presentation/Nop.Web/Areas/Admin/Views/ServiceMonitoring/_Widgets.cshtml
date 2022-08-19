@@ -26,17 +26,15 @@
 @await Html.PartialAsync("_WidgetsModal")
 
 <script type="text/javascript">
-
-    
     function checkWidgetDetail(url){
-       console.log(url);
+        console.log(url);
         var session = '@Model.JSessionId';
         console.log(session);
 
 
 		$('#widgetModal').modal("show");
   
-         $.ajax({
+        $.ajax({
             cache: false,
             type: "GET",
             data : {
@@ -71,9 +69,5 @@
                console.log(textStatus +' '+errorThrown);
             }
         });
-
-
-
-        
 	}
 </script>

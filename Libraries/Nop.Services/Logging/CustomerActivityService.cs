@@ -119,17 +119,21 @@ namespace Nop.Services.Logging
                 return null;
 
             //insert log item
-            var logItem = new ActivityLog
-            {
-                ActivityLogTypeId = activityLogType.Id,
-                EntityId = entity?.Id,
-                EntityName = entity?.GetType().Name,
-                CustomerId = customer.Id,
-                Comment = CommonHelper.EnsureMaximumLength(comment ?? string.Empty, 4000),
-                CreatedOnUtc = DateTime.UtcNow,
-                IpAddress = _webHelper.GetCurrentIpAddress()
-            };
-            await _activityLogRepository.InsertAsync(logItem);
+            ActivityLog logItem = null;
+            if (activityLogType != null)
+            { 
+                logItem= new ActivityLog
+                {
+                    ActivityLogTypeId = activityLogType.Id,
+                    EntityId = entity?.Id,
+                    EntityName = entity?.GetType().Name,
+                    CustomerId = customer.Id,
+                    Comment = CommonHelper.EnsureMaximumLength(comment ?? string.Empty, 4000),
+                    CreatedOnUtc = DateTime.UtcNow,
+                    IpAddress = _webHelper.GetCurrentIpAddress()
+                };
+                await _activityLogRepository.InsertAsync(logItem);
+            }
 
             return logItem;
         }

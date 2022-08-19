@@ -1031,7 +1031,7 @@ td.k-state-focused.k-state-selected {
   position: relative;
   top: 0px;
   display: inline-block;
-  font-family: 'Glyphicons Halflings';
+  font-family: 'Glyphicons Halflings sans-serif';
   font-style: normal;
   font-weight: 400;
   line-height: 1;
@@ -1043,7 +1043,7 @@ td.k-state-focused.k-state-selected {
 .k-numerictextbox .k-select .k-i-arrow-n:before,
 .k-numerictextbox .k-select .k-i-arrow-s:before {
   color: #444;
-  font-family: 'Glyphicons Halflings';
+  font-family: 'Glyphicons Halflings sans-serif';
   height: 17px;
   line-height: 17px;
   font-size: 9px;
@@ -1059,7 +1059,7 @@ td.k-state-focused.k-state-selected {
 
 .k-picker-wrap .k-select .k-i-calendar:before,
 .k-picker-wrap .k-select .k-i-clock:before {
-  font: normal normal normal 14px/1 "Font Awesome 5 Free";
+  font: normal normal normal 14px/1 "Font Awesome 5 Free sans-serif";
   height: 17px;
   line-height: 17px;
 }

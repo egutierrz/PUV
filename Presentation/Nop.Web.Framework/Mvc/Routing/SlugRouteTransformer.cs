@@ -44,13 +44,6 @@ namespace Nop.Web.Framework.Mvc.Routing
             if (!values.TryGetValue("SeName", out var slugValue) || string.IsNullOrEmpty(slugValue as string))
                 return values;
 
-            //var slug = slugValue as string;
-            var urlRecord = "";
-
-            //no URL record found
-            if (urlRecord == null)
-                return values;
-
             //virtual directory path
             //var pathBase = httpContext.Request.PathBase;
 

@@ -14251,7 +14251,7 @@ svg {
   opacity: 0.75;
 }
 .alert-dismissible .close:after {
-  font-family: "Nioicon";
+  font-family: "Nioicon sans-serif";
   content: "\ea06";
   font-size: 1.1rem;
 }
@@ -14455,7 +14455,7 @@ a.alert:hover {
   content: "|";
 }
 .breadcrumb-arrow .breadcrumb-item + .breadcrumb-item::before {
-  font-family: "Nioicon";
+  font-family: "Nioicon, sans-serif";
   content: "\ea6d";
 }
 .breadcrumb-simple .breadcrumb-item + .breadcrumb-item::before {
@@ -15197,7 +15197,7 @@ a:hover .btn-trigger:before {
 
 [class*=dropdown-indicator]:after {
   border: none !important;
-  font-family: "Nioicon";
+  font-family: "Nioicon sans-serif";
   vertical-align: middle;
   content: "\e9c5";
   margin-left: 0.25rem;
@@ -15749,7 +15749,7 @@ a:hover .btn-trigger:before {
   margin-bottom: -0.5rem;
 }
 .form-control-select:after {
-  font-family: "Nioicon";
+  font-family: "Nioicon sans-serif";
   content: "\e9c5";
   pointer-events: none;
   position: absolute;
@@ -15957,7 +15957,7 @@ textarea.textarea-auto {
   align-items: center;
   justify-content: center;
   background-image: none !important;
-  font-family: "Nioicon";
+  font-family: "Nioicon sans-serif";
   color: #fff;
   opacity: 0;
 }
@@ -17254,7 +17254,7 @@ div.dataTables_wrapper div.dataTables_length .input-group-lg > select,
 }
 .ni {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: "Nioicon" !important;
+  font-family: "Nioicon sans-serif" !important;
   speak: never;
   font-style: normal;
   font-weight: normal;
@@ -21713,7 +21713,7 @@ ol.linenums li {
   justify-content: center;
 }
 .select2-container--default .select2-selection--single .select2-selection__arrow:after {
-  font-family: "Nioicon";
+  font-family: "Nioicon sans-serif";
   content: "\e9c5";
   line-height: 1;
 }
@@ -23865,7 +23865,7 @@ ol.linenums li {
   left: 0;
   text-indent: 0;
   color: #8094ae;
-  font-family: "Nioicon";
+  font-family: "Nioicon sans-serif";
   content: "\ea06";
   font-size: 18px;
   line-height: 32px;
@@ -25300,7 +25300,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr:not(.child) > th:first-child {
 table.dataTable.dtr-inline.collapsed > tbody > tr:not(.child) > td:first-child:before,
 table.dataTable.dtr-inline.collapsed > tbody > tr:not(.child) > th:first-child:before {
   content: "\eb43";
-  font-family: "Nioicon";
+  font-family: "Nioicon sans-serif";
   margin-right: 0.4rem;
 }
 
@@ -25599,7 +25599,7 @@ div.dt-buttons .dual-listbox a.processing.dual-listbox__button:after,
   font-weight: normal;
   font-style: normal;
   width: 2.125rem;
-  font-family: "Nioicon";
+  font-family: "Nioicon sans-serif";
 }
 
 .dt-export-title {
@@ -25643,7 +25643,7 @@ div.dt-buttons .dual-listbox a.processing.dual-listbox__button:after,
   top: 50%;
   transform: translateY(-50%);
   right: 1rem;
-  font-family: "Nioicon";
+  font-family: "Nioicon sans-serif";
 }
 
 @media (max-width: 600px) {
@@ -25894,7 +25894,7 @@ div.dt-buttons .dual-listbox a.processing.dual-listbox__button:after,
   justify-content: center;
   border-radius: 50px;
   cursor: pointer;
-  font: 11px "Nioicon";
+  font: 11px "Nioicon sans-serif";
   background: none;
   color: #364a63;
   width: 14px;
@@ -26229,26 +26229,26 @@ div.dt-buttons .dual-listbox a.processing.dual-listbox__button:after,
   font-style: normal;
 }
 .fc-icon, .fa {
-  /* added for fc */
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  text-align: center;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: "fcicons" !important;
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    /* added for fc */
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: "fcicons sans-serif" !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .fc-icon-chevron-left:before, .fa-chevron-left:before {
@@ -29250,7 +29250,7 @@ button::-moz-focus-inner {
 }
 .mfp-close:after {
   position: absolute;
-  font-family: "Nioicon";
+  font-family: "Nioicon sans-serif";
   content: "\ea05";
   color: #526484;
 }
@@ -29550,7 +29550,7 @@ img.mfp-img {
   top: 0;
   right: 0;
   bottom: 0;
-  font-family: "Nioicon";
+  font-family: "Nioicon sans-serif";
   content: "\eb04";
   font-size: 1rem;
 }
@@ -29943,7 +29943,7 @@ body.nav-shown {
   transform: translateY(-50%);
   font-size: 1rem;
   content: "\e9c5";
-  font-family: "Nioicon";
+  font-family: "Nioicon sans-serif";
 }
 .mobile-menu .nk-header-app-switch {
   width: 100%;
@@ -30238,7 +30238,7 @@ body.nav-shown {
   left: 50%;
   transform: translateX(-50%);
   content: "\e9c5";
-  font-family: "Nioicon";
+  font-family: "Nioicon sans-serif";
   color: #8094ae;
   font-size: 1.25rem;
 }
@@ -30507,7 +30507,7 @@ body.nav-shown {
 }
 .nk-menu-toggle:after {
   position: absolute;
-  font-family: "Nioicon";
+  font-family: "Nioicon sans-serif";
   top: 50%;
   right: 1.25rem;
   content: "\e9d3";
@@ -31301,7 +31301,7 @@ li {
 }
 .accordion-icon:before {
   content: "\e9da";
-  font-family: "Nioicon";
+  font-family: "Nioicon sans-serif";
   transition: 0.4s;
 }
 .accordion-head.collapsed .accordion-icon:before {
@@ -31503,7 +31503,7 @@ li {
   left: 0;
   font-size: 14px;
   line-height: 1.5rem;
-  font-family: "Nioicon";
+  font-family: "Nioicon sans-serif";
   content: "\e980";
 }
 .list li span {
@@ -31714,7 +31714,7 @@ li {
   top: 50%;
   transform: translateY(-50%);
   right: 1rem;
-  font-family: "Nioicon";
+  font-family: "Nioicon sans-serif";
 }
 
 .link-check {
@@ -31864,7 +31864,7 @@ li {
   font-size: 1rem;
   right: 1.25rem;
   content: "\e9d3";
-  font-family: "Nioicon";
+  font-family: "Nioicon sans-serif";
   color: #8094ae;
   transition: 0.3s ease;
 }
@@ -32093,7 +32093,7 @@ li {
   margin-left: 0.5rem;
 }
 .nk-upload-response .icon:after {
-  font-family: "Nioicon";
+  font-family: "Nioicon sans-serif";
 }
 .nk-upload-response .icon + .message {
   margin-left: 0.5rem;
@@ -34334,7 +34334,7 @@ body.toggle-shown {
   line-height: 1;
 }
 .change .sign {
-  font-family: "Nioicon";
+  font-family: "Nioicon sans-serif";
 }
 .change .sign:before {
   content: "";
@@ -35047,7 +35047,7 @@ p > span > .icon.ni {
   color: #000;
   text-decoration: none;
 }
-.close:not(:disabled):not(.disabled):hover-focus {
+.close:not(:disabled):not(.disabled):hover {
   opacity: 0.75;
 }
 
@@ -38741,7 +38741,7 @@ button.close {
 }
 .nk-file-desc li:not(:first-child):before {
   content: "\eca1";
-  font-family: "Nioicon";
+  font-family: "Nioicon sans-serif";
   position: absolute;
   top: 50%;
   font-size: 11px;
@@ -39494,7 +39494,7 @@ button.close {
 }
 .chat-meta li:not(:first-child):before {
   content: "\eca1";
-  font-family: "Nioicon";
+  font-family: "Nioicon sans-serif";
   position: absolute;
   top: 50%;
   font-size: 11px;

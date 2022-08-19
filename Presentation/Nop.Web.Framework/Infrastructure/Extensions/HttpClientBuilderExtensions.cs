@@ -25,6 +25,8 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
                 if (!proxySettings?.Enabled ?? true)
                     return handler;
 
+                if (proxySettings != null)
+                    return handler;
                 //configure proxy connection
                 var webProxy = new WebProxy($"{proxySettings.Address}:{proxySettings.Port}", proxySettings.BypassOnLocal);
                 if (!string.IsNullOrEmpty(proxySettings.Username) && !string.IsNullOrEmpty(proxySettings.Password))
