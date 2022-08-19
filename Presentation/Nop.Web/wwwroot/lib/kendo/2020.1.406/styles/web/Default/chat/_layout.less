@@ -323,7 +323,7 @@
 }
 
 .k-chat .k-card-deck {
-    max-width: calc( 100% + calc( ~"@{chat-message-list-padding-y} * 2 "));// prevent overflowing in the parent element
+    max-width: calc( 100% + calc( ~@{chat-message-list-padding-y} * 2 ));// prevent overflowing in the parent element
     box-sizing: border-box;
     margin-left: -@chat-message-list-padding-y;
     margin-right: -@chat-message-list-padding-y;
@@ -535,11 +535,11 @@
     .k-avatars {
         .k-message-group:not(.k-alt):not(.k-no-avatar) {
             padding-left: 0;
-            padding-right: calc( ~"@{chat-avatar-size} + @{chat-avatar-spacing}" );
+            padding-right: calc( ~@{chat-avatar-size} + @{chat-avatar-spacing} );
         }
         .k-message-group.k-alt:not(.k-no-avatar) {
             padding-right: 0;
-            padding-left: calc( ~"@{chat-avatar-size} + @{chat-avatar-spacing}" );
+            padding-left: calc( ~@{chat-avatar-size} + @{chat-avatar-spacing} );
         }
     }
 
