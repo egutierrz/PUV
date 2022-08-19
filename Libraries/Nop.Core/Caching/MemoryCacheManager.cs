@@ -81,8 +81,8 @@ namespace Nop.Core.Caching
         {
             if ((key?.CacheTime ?? 0) <= 0 || data == null)
                 return;
-
-            _memoryCache.Set(key.Key, data, PrepareEntryOptions(key));
+            if (key != null)
+                _memoryCache.Set(key.Key, data, PrepareEntryOptions(key));
         }
 
         #endregion
@@ -117,7 +117,7 @@ namespace Nop.Core.Caching
             if ((key?.CacheTime ?? 0) <= 0)
                 return await acquire();
 
-            if (_memoryCache.TryGetValue(key.Key, out T result))
+            if (key != null && _memoryCache.TryGetValue(key.Key, out T result))
                 return result;
 
             result = await acquire();
@@ -169,7 +169,7 @@ namespace Nop.Core.Caching
             if ((key?.CacheTime ?? 0) <= 0)
                 return acquire();
 
-            if (_memoryCache.TryGetValue(key.Key, out T result))
+            if (key != null && _memoryCache.TryGetValue(key.Key, out T result))
                 return result;
 
             result = acquire();
